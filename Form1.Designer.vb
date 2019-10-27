@@ -29,22 +29,32 @@ Partial Class frmYachtsEntry
         Me.mnuDisplayYachtCount = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuExit = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuEdit = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuHelp = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClearForNext = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuAddYachtType = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuRemoveYachtType = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuHelp = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuAbout = New System.Windows.Forms.ToolStripMenuItem()
         Me.grpParty = New System.Windows.Forms.GroupBox()
-        Me.lblPartyName = New System.Windows.Forms.Label()
-        Me.lblHoursChartered = New System.Windows.Forms.Label()
-        Me.lblCalculatedPrice = New System.Windows.Forms.Label()
-        Me.lblCalculatedPriceOutput = New System.Windows.Forms.Label()
-        Me.txtHoursChartered = New System.Windows.Forms.TextBox()
         Me.txtResponsibleParty = New System.Windows.Forms.TextBox()
+        Me.txtHoursChartered = New System.Windows.Forms.TextBox()
+        Me.lblCalculatedPriceOutput = New System.Windows.Forms.Label()
+        Me.lblCalculatedPrice = New System.Windows.Forms.Label()
+        Me.lblHoursChartered = New System.Windows.Forms.Label()
+        Me.lblPartyName = New System.Windows.Forms.Label()
         Me.grpYachts = New System.Windows.Forms.GroupBox()
+        Me.lblAvailibleLength = New System.Windows.Forms.Label()
+        Me.lblYachType = New System.Windows.Forms.Label()
+        Me.cboYachtType = New System.Windows.Forms.ComboBox()
+        Me.lstAvailibleYachtLength = New System.Windows.Forms.ListBox()
+        Me.btnOK = New System.Windows.Forms.Button()
+        Me.btnClear = New System.Windows.Forms.Button()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.picYachtParty = New System.Windows.Forms.PictureBox()
         Me.mnuStripYachtEntry.SuspendLayout()
         Me.grpParty.SuspendLayout()
+        Me.grpYachts.SuspendLayout()
+        CType(Me.picYachtParty, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'mnuStripYachtEntry
@@ -53,7 +63,7 @@ Partial Class frmYachtsEntry
         Me.mnuStripYachtEntry.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFile, Me.mnuEdit, Me.mnuHelp})
         Me.mnuStripYachtEntry.Location = New System.Drawing.Point(0, 0)
         Me.mnuStripYachtEntry.Name = "mnuStripYachtEntry"
-        Me.mnuStripYachtEntry.Size = New System.Drawing.Size(800, 27)
+        Me.mnuStripYachtEntry.Size = New System.Drawing.Size(662, 27)
         Me.mnuStripYachtEntry.TabIndex = 0
         Me.mnuStripYachtEntry.Text = "MenuStrip1"
         '
@@ -98,14 +108,6 @@ Partial Class frmYachtsEntry
         Me.mnuEdit.Size = New System.Drawing.Size(44, 23)
         Me.mnuEdit.Text = "&Edit"
         '
-        'mnuHelp
-        '
-        Me.mnuHelp.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuAbout})
-        Me.mnuHelp.ForeColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(72, Byte), Integer))
-        Me.mnuHelp.Name = "mnuHelp"
-        Me.mnuHelp.Size = New System.Drawing.Size(51, 23)
-        Me.mnuHelp.Text = "&Help"
-        '
         'mnuClearForNext
         '
         Me.mnuClearForNext.Font = New System.Drawing.Font("Tw Cen MT", 11.0!)
@@ -132,11 +134,19 @@ Partial Class frmYachtsEntry
         Me.mnuRemoveYachtType.Size = New System.Drawing.Size(191, 22)
         Me.mnuRemoveYachtType.Text = "&Remove Yact Type"
         '
+        'mnuHelp
+        '
+        Me.mnuHelp.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuAbout})
+        Me.mnuHelp.ForeColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(72, Byte), Integer))
+        Me.mnuHelp.Name = "mnuHelp"
+        Me.mnuHelp.Size = New System.Drawing.Size(51, 23)
+        Me.mnuHelp.Text = "&Help"
+        '
         'mnuAbout
         '
         Me.mnuAbout.Font = New System.Drawing.Font("Tw Cen MT", 11.0!)
         Me.mnuAbout.Name = "mnuAbout"
-        Me.mnuAbout.Size = New System.Drawing.Size(180, 22)
+        Me.mnuAbout.Size = New System.Drawing.Size(113, 22)
         Me.mnuAbout.Text = "&About"
         '
         'grpParty
@@ -152,43 +162,32 @@ Partial Class frmYachtsEntry
         Me.grpParty.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(204, Byte), Integer))
         Me.grpParty.Location = New System.Drawing.Point(15, 38)
         Me.grpParty.Name = "grpParty"
-        Me.grpParty.Size = New System.Drawing.Size(370, 143)
+        Me.grpParty.Size = New System.Drawing.Size(387, 143)
         Me.grpParty.TabIndex = 1
         Me.grpParty.TabStop = False
         Me.grpParty.Text = "Party"
         '
-        'lblPartyName
+        'txtResponsibleParty
         '
-        Me.lblPartyName.AutoSize = True
-        Me.lblPartyName.Font = New System.Drawing.Font("Roboto", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblPartyName.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(204, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.lblPartyName.Location = New System.Drawing.Point(16, 38)
-        Me.lblPartyName.Name = "lblPartyName"
-        Me.lblPartyName.Size = New System.Drawing.Size(139, 20)
-        Me.lblPartyName.TabIndex = 0
-        Me.lblPartyName.Text = "Responsible Party"
+        Me.txtResponsibleParty.BackColor = System.Drawing.Color.Gainsboro
+        Me.txtResponsibleParty.Font = New System.Drawing.Font("Roboto", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtResponsibleParty.Location = New System.Drawing.Point(187, 35)
+        Me.txtResponsibleParty.Name = "txtResponsibleParty"
+        Me.txtResponsibleParty.Size = New System.Drawing.Size(178, 23)
+        Me.txtResponsibleParty.TabIndex = 0
+        Me.txtResponsibleParty.Text = "XXXXResponsible PartyXXXX"
+        Me.txtResponsibleParty.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
-        'lblHoursChartered
+        'txtHoursChartered
         '
-        Me.lblHoursChartered.AutoSize = True
-        Me.lblHoursChartered.Font = New System.Drawing.Font("Roboto", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblHoursChartered.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(204, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.lblHoursChartered.Location = New System.Drawing.Point(16, 70)
-        Me.lblHoursChartered.Name = "lblHoursChartered"
-        Me.lblHoursChartered.Size = New System.Drawing.Size(128, 20)
-        Me.lblHoursChartered.TabIndex = 1
-        Me.lblHoursChartered.Text = "Hours Chartered"
-        '
-        'lblCalculatedPrice
-        '
-        Me.lblCalculatedPrice.AutoSize = True
-        Me.lblCalculatedPrice.Font = New System.Drawing.Font("Roboto", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblCalculatedPrice.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(204, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.lblCalculatedPrice.Location = New System.Drawing.Point(16, 102)
-        Me.lblCalculatedPrice.Name = "lblCalculatedPrice"
-        Me.lblCalculatedPrice.Size = New System.Drawing.Size(126, 20)
-        Me.lblCalculatedPrice.TabIndex = 2
-        Me.lblCalculatedPrice.Text = "Calculated Price"
+        Me.txtHoursChartered.BackColor = System.Drawing.Color.Gainsboro
+        Me.txtHoursChartered.Font = New System.Drawing.Font("Roboto", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtHoursChartered.Location = New System.Drawing.Point(306, 67)
+        Me.txtHoursChartered.Name = "txtHoursChartered"
+        Me.txtHoursChartered.Size = New System.Drawing.Size(59, 23)
+        Me.txtHoursChartered.TabIndex = 1
+        Me.txtHoursChartered.Text = "000"
+        Me.txtHoursChartered.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'lblCalculatedPriceOutput
         '
@@ -203,46 +202,165 @@ Partial Class frmYachtsEntry
         Me.lblCalculatedPriceOutput.TextAlign = System.Drawing.ContentAlignment.BottomRight
         Me.lblCalculatedPriceOutput.Visible = False
         '
-        'txtHoursChartered
+        'lblCalculatedPrice
         '
-        Me.txtHoursChartered.BackColor = System.Drawing.Color.Gainsboro
-        Me.txtHoursChartered.Font = New System.Drawing.Font("Roboto", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtHoursChartered.Location = New System.Drawing.Point(306, 67)
-        Me.txtHoursChartered.Name = "txtHoursChartered"
-        Me.txtHoursChartered.Size = New System.Drawing.Size(59, 23)
-        Me.txtHoursChartered.TabIndex = 4
-        Me.txtHoursChartered.Text = "000"
-        Me.txtHoursChartered.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.lblCalculatedPrice.AutoSize = True
+        Me.lblCalculatedPrice.Font = New System.Drawing.Font("Roboto", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblCalculatedPrice.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(204, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.lblCalculatedPrice.Location = New System.Drawing.Point(16, 102)
+        Me.lblCalculatedPrice.Name = "lblCalculatedPrice"
+        Me.lblCalculatedPrice.Size = New System.Drawing.Size(131, 20)
+        Me.lblCalculatedPrice.TabIndex = 2
+        Me.lblCalculatedPrice.Text = "Calculated Price:"
+        Me.lblCalculatedPrice.TextAlign = System.Drawing.ContentAlignment.BottomLeft
         '
-        'txtResponsibleParty
+        'lblHoursChartered
         '
-        Me.txtResponsibleParty.BackColor = System.Drawing.Color.Gainsboro
-        Me.txtResponsibleParty.Font = New System.Drawing.Font("Roboto", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtResponsibleParty.Location = New System.Drawing.Point(187, 35)
-        Me.txtResponsibleParty.Name = "txtResponsibleParty"
-        Me.txtResponsibleParty.Size = New System.Drawing.Size(178, 23)
-        Me.txtResponsibleParty.TabIndex = 5
-        Me.txtResponsibleParty.Text = "XXXXResponsible PartyXXXX"
-        Me.txtResponsibleParty.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.lblHoursChartered.AutoSize = True
+        Me.lblHoursChartered.Font = New System.Drawing.Font("Roboto", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblHoursChartered.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(204, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.lblHoursChartered.Location = New System.Drawing.Point(16, 70)
+        Me.lblHoursChartered.Name = "lblHoursChartered"
+        Me.lblHoursChartered.Size = New System.Drawing.Size(133, 20)
+        Me.lblHoursChartered.TabIndex = 1
+        Me.lblHoursChartered.Text = "Hours Chartered:"
+        Me.lblHoursChartered.TextAlign = System.Drawing.ContentAlignment.BottomLeft
+        '
+        'lblPartyName
+        '
+        Me.lblPartyName.AutoSize = True
+        Me.lblPartyName.Font = New System.Drawing.Font("Roboto", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblPartyName.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(204, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.lblPartyName.Location = New System.Drawing.Point(16, 38)
+        Me.lblPartyName.Name = "lblPartyName"
+        Me.lblPartyName.Size = New System.Drawing.Size(144, 20)
+        Me.lblPartyName.TabIndex = 0
+        Me.lblPartyName.Text = "Responsible Party:"
+        Me.lblPartyName.TextAlign = System.Drawing.ContentAlignment.BottomLeft
         '
         'grpYachts
         '
         Me.grpYachts.BackColor = System.Drawing.Color.Transparent
+        Me.grpYachts.Controls.Add(Me.lstAvailibleYachtLength)
+        Me.grpYachts.Controls.Add(Me.cboYachtType)
+        Me.grpYachts.Controls.Add(Me.lblAvailibleLength)
+        Me.grpYachts.Controls.Add(Me.lblYachType)
         Me.grpYachts.Font = New System.Drawing.Font("Roboto", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.grpYachts.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(204, Byte), Integer))
         Me.grpYachts.Location = New System.Drawing.Point(15, 187)
         Me.grpYachts.Name = "grpYachts"
-        Me.grpYachts.Size = New System.Drawing.Size(370, 251)
+        Me.grpYachts.Size = New System.Drawing.Size(387, 251)
         Me.grpYachts.TabIndex = 6
         Me.grpYachts.TabStop = False
         Me.grpYachts.Text = "Yachts"
+        '
+        'lblAvailibleLength
+        '
+        Me.lblAvailibleLength.AutoSize = True
+        Me.lblAvailibleLength.Font = New System.Drawing.Font("Roboto", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblAvailibleLength.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(204, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.lblAvailibleLength.Location = New System.Drawing.Point(16, 95)
+        Me.lblAvailibleLength.Name = "lblAvailibleLength"
+        Me.lblAvailibleLength.Size = New System.Drawing.Size(130, 20)
+        Me.lblAvailibleLength.TabIndex = 2
+        Me.lblAvailibleLength.Text = "Availible Length:"
+        Me.lblAvailibleLength.TextAlign = System.Drawing.ContentAlignment.BottomLeft
+        '
+        'lblYachType
+        '
+        Me.lblYachType.AutoSize = True
+        Me.lblYachType.Font = New System.Drawing.Font("Roboto", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblYachType.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(204, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.lblYachType.Location = New System.Drawing.Point(16, 44)
+        Me.lblYachType.Name = "lblYachType"
+        Me.lblYachType.Size = New System.Drawing.Size(95, 20)
+        Me.lblYachType.TabIndex = 1
+        Me.lblYachType.Text = "Yacht Type:"
+        Me.lblYachType.TextAlign = System.Drawing.ContentAlignment.BottomLeft
+        '
+        'cboYachtType
+        '
+        Me.cboYachtType.AccessibleRole = System.Windows.Forms.AccessibleRole.None
+        Me.cboYachtType.BackColor = System.Drawing.Color.Gainsboro
+        Me.cboYachtType.Font = New System.Drawing.Font("Roboto", 9.75!, System.Drawing.FontStyle.Bold)
+        Me.cboYachtType.FormattingEnabled = True
+        Me.cboYachtType.Location = New System.Drawing.Point(187, 44)
+        Me.cboYachtType.Name = "cboYachtType"
+        Me.cboYachtType.Size = New System.Drawing.Size(177, 25)
+        Me.cboYachtType.TabIndex = 3
+        '
+        'lstAvailibleYachtLength
+        '
+        Me.lstAvailibleYachtLength.BackColor = System.Drawing.Color.Gainsboro
+        Me.lstAvailibleYachtLength.Font = New System.Drawing.Font("Roboto", 9.75!, System.Drawing.FontStyle.Bold)
+        Me.lstAvailibleYachtLength.FormattingEnabled = True
+        Me.lstAvailibleYachtLength.ItemHeight = 17
+        Me.lstAvailibleYachtLength.Location = New System.Drawing.Point(187, 95)
+        Me.lstAvailibleYachtLength.Name = "lstAvailibleYachtLength"
+        Me.lstAvailibleYachtLength.Size = New System.Drawing.Size(178, 123)
+        Me.lstAvailibleYachtLength.TabIndex = 4
+        '
+        'btnOK
+        '
+        Me.btnOK.BackColor = System.Drawing.Color.Gainsboro
+        Me.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnOK.Font = New System.Drawing.Font("Tw Cen MT", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnOK.ForeColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(72, Byte), Integer))
+        Me.btnOK.Location = New System.Drawing.Point(470, 64)
+        Me.btnOK.Name = "btnOK"
+        Me.btnOK.Size = New System.Drawing.Size(110, 32)
+        Me.btnOK.TabIndex = 5
+        Me.btnOK.Text = "&OK"
+        Me.btnOK.UseVisualStyleBackColor = False
+        '
+        'btnClear
+        '
+        Me.btnClear.BackColor = System.Drawing.Color.Gainsboro
+        Me.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnClear.Font = New System.Drawing.Font("Tw Cen MT", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnClear.ForeColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(72, Byte), Integer))
+        Me.btnClear.Location = New System.Drawing.Point(470, 122)
+        Me.btnClear.Name = "btnClear"
+        Me.btnClear.Size = New System.Drawing.Size(110, 32)
+        Me.btnClear.TabIndex = 6
+        Me.btnClear.Text = "&Clear"
+        Me.btnClear.UseVisualStyleBackColor = False
+        '
+        'Button2
+        '
+        Me.Button2.BackColor = System.Drawing.Color.Gainsboro
+        Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.Button2.Font = New System.Drawing.Font("Tw Cen MT", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(72, Byte), Integer))
+        Me.Button2.Location = New System.Drawing.Point(470, 180)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(110, 32)
+        Me.Button2.TabIndex = 7
+        Me.Button2.TabStop = False
+        Me.Button2.Text = "E&xit"
+        Me.Button2.UseVisualStyleBackColor = False
+        '
+        'picYachtParty
+        '
+        Me.picYachtParty.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.picYachtParty.Image = Global.Yachts.My.Resources.Resources.Yacht_Party
+        Me.picYachtParty.Location = New System.Drawing.Point(470, 238)
+        Me.picYachtParty.Name = "picYachtParty"
+        Me.picYachtParty.Size = New System.Drawing.Size(175, 175)
+        Me.picYachtParty.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.picYachtParty.TabIndex = 8
+        Me.picYachtParty.TabStop = False
         '
         'frmYachtsEntry
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.Black
-        Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.ClientSize = New System.Drawing.Size(662, 450)
+        Me.Controls.Add(Me.picYachtParty)
+        Me.Controls.Add(Me.Button2)
+        Me.Controls.Add(Me.btnClear)
+        Me.Controls.Add(Me.btnOK)
         Me.Controls.Add(Me.grpYachts)
         Me.Controls.Add(Me.grpParty)
         Me.Controls.Add(Me.mnuStripYachtEntry)
@@ -254,6 +372,9 @@ Partial Class frmYachtsEntry
         Me.mnuStripYachtEntry.PerformLayout()
         Me.grpParty.ResumeLayout(False)
         Me.grpParty.PerformLayout()
+        Me.grpYachts.ResumeLayout(False)
+        Me.grpYachts.PerformLayout()
+        CType(Me.picYachtParty, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -280,4 +401,12 @@ Partial Class frmYachtsEntry
     Friend WithEvents txtHoursChartered As TextBox
     Friend WithEvents txtResponsibleParty As TextBox
     Friend WithEvents grpYachts As GroupBox
+    Friend WithEvents lblAvailibleLength As Label
+    Friend WithEvents lblYachType As Label
+    Friend WithEvents lstAvailibleYachtLength As ListBox
+    Friend WithEvents cboYachtType As ComboBox
+    Friend WithEvents btnOK As Button
+    Friend WithEvents btnClear As Button
+    Friend WithEvents Button2 As Button
+    Friend WithEvents picYachtParty As PictureBox
 End Class

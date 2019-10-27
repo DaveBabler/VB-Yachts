@@ -16,5 +16,7 @@
 '                         Yacht Type Report will list the yacht types in the combo box with programmer name and title at top.
 
 Public Class frmYachtsEntry
+    Private Sub frmYachtsEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+    End Sub
 End Class
