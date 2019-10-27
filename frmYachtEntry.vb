@@ -15,7 +15,7 @@
 '                         Summary Report includes: # charters, total revenue, average hours chartered, and programmer name.
 '                         Yacht Type Report will list the yacht types in the combo box with programmer name and title at top.
 
-Public Class frmYachtsEntry
+Public Class frmYachtEntryMain
     Private Sub frmYachtsEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
     End Sub

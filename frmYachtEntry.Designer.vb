@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class frmYachtsEntry
+Partial Class frmYachtEntryMain
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -43,10 +43,10 @@ Partial Class frmYachtsEntry
         Me.lblHoursChartered = New System.Windows.Forms.Label()
         Me.lblPartyName = New System.Windows.Forms.Label()
         Me.grpYachts = New System.Windows.Forms.GroupBox()
+        Me.lstAvailibleYachtLength = New System.Windows.Forms.ListBox()
+        Me.cboYachtType = New System.Windows.Forms.ComboBox()
         Me.lblAvailibleLength = New System.Windows.Forms.Label()
         Me.lblYachType = New System.Windows.Forms.Label()
-        Me.cboYachtType = New System.Windows.Forms.ComboBox()
-        Me.lstAvailibleYachtLength = New System.Windows.Forms.ListBox()
         Me.btnOK = New System.Windows.Forms.Button()
         Me.btnClear = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
@@ -254,6 +254,28 @@ Partial Class frmYachtsEntry
         Me.grpYachts.TabStop = False
         Me.grpYachts.Text = "Yachts"
         '
+        'lstAvailibleYachtLength
+        '
+        Me.lstAvailibleYachtLength.BackColor = System.Drawing.Color.Gainsboro
+        Me.lstAvailibleYachtLength.Font = New System.Drawing.Font("Roboto", 9.75!, System.Drawing.FontStyle.Bold)
+        Me.lstAvailibleYachtLength.FormattingEnabled = True
+        Me.lstAvailibleYachtLength.ItemHeight = 17
+        Me.lstAvailibleYachtLength.Location = New System.Drawing.Point(187, 95)
+        Me.lstAvailibleYachtLength.Name = "lstAvailibleYachtLength"
+        Me.lstAvailibleYachtLength.Size = New System.Drawing.Size(178, 123)
+        Me.lstAvailibleYachtLength.TabIndex = 4
+        '
+        'cboYachtType
+        '
+        Me.cboYachtType.AccessibleRole = System.Windows.Forms.AccessibleRole.None
+        Me.cboYachtType.BackColor = System.Drawing.Color.Gainsboro
+        Me.cboYachtType.Font = New System.Drawing.Font("Roboto", 9.75!, System.Drawing.FontStyle.Bold)
+        Me.cboYachtType.FormattingEnabled = True
+        Me.cboYachtType.Location = New System.Drawing.Point(187, 44)
+        Me.cboYachtType.Name = "cboYachtType"
+        Me.cboYachtType.Size = New System.Drawing.Size(177, 25)
+        Me.cboYachtType.TabIndex = 3
+        '
         'lblAvailibleLength
         '
         Me.lblAvailibleLength.AutoSize = True
@@ -277,28 +299,6 @@ Partial Class frmYachtsEntry
         Me.lblYachType.TabIndex = 1
         Me.lblYachType.Text = "Yacht Type:"
         Me.lblYachType.TextAlign = System.Drawing.ContentAlignment.BottomLeft
-        '
-        'cboYachtType
-        '
-        Me.cboYachtType.AccessibleRole = System.Windows.Forms.AccessibleRole.None
-        Me.cboYachtType.BackColor = System.Drawing.Color.Gainsboro
-        Me.cboYachtType.Font = New System.Drawing.Font("Roboto", 9.75!, System.Drawing.FontStyle.Bold)
-        Me.cboYachtType.FormattingEnabled = True
-        Me.cboYachtType.Location = New System.Drawing.Point(187, 44)
-        Me.cboYachtType.Name = "cboYachtType"
-        Me.cboYachtType.Size = New System.Drawing.Size(177, 25)
-        Me.cboYachtType.TabIndex = 3
-        '
-        'lstAvailibleYachtLength
-        '
-        Me.lstAvailibleYachtLength.BackColor = System.Drawing.Color.Gainsboro
-        Me.lstAvailibleYachtLength.Font = New System.Drawing.Font("Roboto", 9.75!, System.Drawing.FontStyle.Bold)
-        Me.lstAvailibleYachtLength.FormattingEnabled = True
-        Me.lstAvailibleYachtLength.ItemHeight = 17
-        Me.lstAvailibleYachtLength.Location = New System.Drawing.Point(187, 95)
-        Me.lstAvailibleYachtLength.Name = "lstAvailibleYachtLength"
-        Me.lstAvailibleYachtLength.Size = New System.Drawing.Size(178, 123)
-        Me.lstAvailibleYachtLength.TabIndex = 4
         '
         'btnOK
         '
@@ -351,7 +351,7 @@ Partial Class frmYachtsEntry
         Me.picYachtParty.TabIndex = 8
         Me.picYachtParty.TabStop = False
         '
-        'frmYachtsEntry
+        'frmYachtEntryMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -366,7 +366,7 @@ Partial Class frmYachtsEntry
         Me.Controls.Add(Me.mnuStripYachtEntry)
         Me.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(204, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.MainMenuStrip = Me.mnuStripYachtEntry
-        Me.Name = "frmYachtsEntry"
+        Me.Name = "frmYachtEntryMain"
         Me.Text = "Yacht Entry"
         Me.mnuStripYachtEntry.ResumeLayout(False)
         Me.mnuStripYachtEntry.PerformLayout()
