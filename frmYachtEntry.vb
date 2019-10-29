@@ -90,16 +90,21 @@ Public Class frmYachtEntryMain
         Me.Close()
 
     End Sub
+    Sub ClearTextBoxes()
+        'clears textboxes in bulk and focuses on first point of user entered data
+        txtHoursChartered.Clear()
+        txtResponsibleParty.Clear()
+        txtResponsibleParty.Focus()
+    End Sub
 
     Sub ClearFormData()
         ' This clears the temporary form data after entry and is user event driven thus will be called by appropriate events
         lblCalculatedPriceOutput.Text = ""
         lblCalculatedPriceOutput.Visible = False
-        txtHoursChartered.Clear()
         lstAvailibleYachtLength.ClearSelected() 'unselects the selection in the box
         cboYachtType.SelectedIndex = -1 'sets the combo box back to default
-        txtResponsibleParty.Clear()
-        txtResponsibleParty.Focus()
+        ClearTextBoxes()
+
     End Sub
 
     Sub UserErrorMessage(ByVal strMessage As String, ByVal strTitle As String)
@@ -142,7 +147,7 @@ Public Class frmYachtEntryMain
         'The rest of the forms will only show up upon print.
         'Some logic for those forms may appear here, the rest will be user event driven instead of
         'program load event.
-
+        ClearTextBoxes()
         YachtTypeListPopulate()
         YachtSizePriceDictionaryPopulate()
 
@@ -244,7 +249,7 @@ Public Class frmYachtEntryMain
         Dim intUserHours As Integer
         Dim strYachtLength As String = lstAvailibleYachtLength.SelectedItem
 
-        Dim decIndividualRentalCost As Decimal = 0D
+        Dim decIndividualRentalCost As Decimal
 
         If cboYachtType.SelectedIndex < 0 Then
             UserErrorMessage("You forgot to select a model", "Pick a Yacht")
@@ -260,24 +265,25 @@ Public Class frmYachtEntryMain
 
         Try
             decIndividualRentalCost = GetRentalPrice(strYachtLength, intUserHours)
+            Console.WriteLine("DecIndCost = " & decIndividualRentalCost.ToString())
 
         Catch nullRef As NullReferenceException
-
-            Console.WriteLine("We have a null reference " & nullRef.ToString())
+            UserErrorMessage("You need to select a length by clicking the length of the Yacht you wish to rent!", "Choose yacht length!")
+            'Console.WriteLine("We have a null reference " & nullRef.ToString())
         Catch nullArgEx As ArgumentNullException
-
-            Console.WriteLine("We have a null argument exception which is not a null reference? " & nullArgEx.ToString())
+            UserErrorMessage("You need to select a length by clicking the length of the Yacht you wish to rent!", "Choose yacht length!")
+            'Console.WriteLine("We have a null argument exception which is not a null reference? " & nullArgEx.ToString())
         Catch argEx As ArgumentException
+            UserErrorMessage("You need to select a length by clicking the length of the Yacht you wish to rent!", "Choose yacht length!")
 
-            Console.WriteLine("We have an ArgumentException " & argEx.ToString())
 
-        Catch ex As Exception
-
-            Console.WriteLine("Generic Exception Alert! " & ex.ToString())
         End Try
 
 
-
+        If decIndividualRentalCost <> 0 Then
+            lblCalculatedPriceOutput.Text = decIndividualRentalCost.ToString("C")
+            lblCalculatedPriceOutput.Visible = True
+        End If
 
     End Sub
 
