@@ -22,6 +22,7 @@ Partial Class frmYachtEntryMain
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmYachtEntryMain))
         Me.mnuStripYachtEntry = New System.Windows.Forms.MenuStrip()
         Me.mnuFile = New System.Windows.Forms.ToolStripMenuItem()
@@ -55,7 +56,8 @@ Partial Class frmYachtEntryMain
         Me.btnClear = New System.Windows.Forms.Button()
         Me.btnExit = New System.Windows.Forms.Button()
         Me.picYachtParty = New System.Windows.Forms.PictureBox()
-        Me.PrintPreviewDialog1 = New System.Windows.Forms.PrintPreviewDialog()
+        Me.diaPrintPreview = New System.Windows.Forms.PrintPreviewDialog()
+        Me.ttYachtEntry = New System.Windows.Forms.ToolTip(Me.components)
         Me.mnuStripYachtEntry.SuspendLayout()
         Me.grpParty.SuspendLayout()
         Me.grpYachts.SuspendLayout()
@@ -104,6 +106,7 @@ Partial Class frmYachtEntryMain
         Me.mnuExit.Name = "mnuExit"
         Me.mnuExit.Size = New System.Drawing.Size(204, 24)
         Me.mnuExit.Text = "&Exit"
+        Me.mnuExit.ToolTipText = "WARNING!" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "This completely closes the program."
         '
         'mnuEdit
         '
@@ -151,7 +154,7 @@ Partial Class frmYachtEntryMain
         '
         Me.mnuAbout.Font = New System.Drawing.Font("Tw Cen MT", 11.0!)
         Me.mnuAbout.Name = "mnuAbout"
-        Me.mnuAbout.Size = New System.Drawing.Size(113, 22)
+        Me.mnuAbout.Size = New System.Drawing.Size(180, 22)
         Me.mnuAbout.Text = "&About"
         '
         'DebuggingToolStripMenuItem
@@ -335,6 +338,7 @@ Partial Class frmYachtEntryMain
         Me.btnOK.Size = New System.Drawing.Size(110, 32)
         Me.btnOK.TabIndex = 5
         Me.btnOK.Text = "&OK"
+        Me.ttYachtEntry.SetToolTip(Me.btnOK, "Tabulate results based on selection")
         Me.btnOK.UseVisualStyleBackColor = False
         '
         'btnClear
@@ -348,6 +352,7 @@ Partial Class frmYachtEntryMain
         Me.btnClear.Size = New System.Drawing.Size(110, 32)
         Me.btnClear.TabIndex = 6
         Me.btnClear.Text = "&Clear"
+        Me.ttYachtEntry.SetToolTip(Me.btnClear, "Clear current entry from form")
         Me.btnClear.UseVisualStyleBackColor = False
         '
         'btnExit
@@ -362,6 +367,7 @@ Partial Class frmYachtEntryMain
         Me.btnExit.TabIndex = 7
         Me.btnExit.TabStop = False
         Me.btnExit.Text = "E&xit"
+        Me.ttYachtEntry.SetToolTip(Me.btnExit, "WARNING!" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "This completely closes the program." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10))
         Me.btnExit.UseVisualStyleBackColor = False
         '
         'picYachtParty
@@ -375,16 +381,16 @@ Partial Class frmYachtEntryMain
         Me.picYachtParty.TabIndex = 8
         Me.picYachtParty.TabStop = False
         '
-        'PrintPreviewDialog1
+        'diaPrintPreview
         '
-        Me.PrintPreviewDialog1.AutoScrollMargin = New System.Drawing.Size(0, 0)
-        Me.PrintPreviewDialog1.AutoScrollMinSize = New System.Drawing.Size(0, 0)
-        Me.PrintPreviewDialog1.ClientSize = New System.Drawing.Size(400, 300)
-        Me.PrintPreviewDialog1.Enabled = True
-        Me.PrintPreviewDialog1.Icon = CType(resources.GetObject("PrintPreviewDialog1.Icon"), System.Drawing.Icon)
-        Me.PrintPreviewDialog1.MainMenuStrip = Me.mnuStripYachtEntry
-        Me.PrintPreviewDialog1.Name = "PrintPreviewDialog1"
-        Me.PrintPreviewDialog1.Visible = False
+        Me.diaPrintPreview.AutoScrollMargin = New System.Drawing.Size(0, 0)
+        Me.diaPrintPreview.AutoScrollMinSize = New System.Drawing.Size(0, 0)
+        Me.diaPrintPreview.ClientSize = New System.Drawing.Size(400, 300)
+        Me.diaPrintPreview.Enabled = True
+        Me.diaPrintPreview.Icon = CType(resources.GetObject("diaPrintPreview.Icon"), System.Drawing.Icon)
+        Me.diaPrintPreview.MainMenuStrip = Me.mnuStripYachtEntry
+        Me.diaPrintPreview.Name = "PrintPreviewDialog1"
+        Me.diaPrintPreview.Visible = False
         '
         'frmYachtEntryMain
         '
@@ -444,8 +450,9 @@ Partial Class frmYachtEntryMain
     Friend WithEvents btnClear As Button
     Friend WithEvents btnExit As Button
     Friend WithEvents picYachtParty As PictureBox
-    Friend WithEvents PrintPreviewDialog1 As PrintPreviewDialog
+    Friend WithEvents diaPrintPreview As PrintPreviewDialog
     Friend WithEvents DebuggingToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ShowReportYachtsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ShowReportSummaryToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ttYachtEntry As ToolTip
 End Class

@@ -61,6 +61,21 @@ Public Class frmYachtEntryMain
         Return decReturnedCost
     End Function
 
+    Function ValidateInts(ByVal strValue As String, ByRef txtBox As System.Windows.Forms.TextBox) As Integer
+        'Passing a val as string because of user entry, we will try and validate here. 
+        'Then will return a proper integer for correct maths
+        'If Error it will clear the entry box and return focus to it.
+        Dim intValue As Integer = 0I
+        If (Not Integer.TryParse(strValue, intValue)) Then
+            MsgBox("Whole numbers only please", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Invalid Entry")
+            txtBox.Clear()
+            txtBox.Focus()
+        Else
+            intValue = CInt(strValue)
+        End If
+        Return intValue
+    End Function
+
     'End custom Functions
 
     'Begin custom (non Event created/form created Subs & Functions
@@ -213,5 +228,24 @@ Public Class frmYachtEntryMain
     Private Sub mnuExit_Click(sender As Object, e As EventArgs) Handles mnuExit.Click
         CloseForms()
 
+    End Sub
+
+    Private Sub btnOK_Click(sender As Object, e As EventArgs) Handles btnOK.Click
+        Dim strUserHoursEntered As String
+        Dim intUserHours As Integer
+        strUserHoursEntered = txtHoursChartered.Text
+        intUserHours = ValidateInts(strUserHoursEntered, txtHoursChartered)
+        If intUserHours = 0 Then
+            MsgBox("Zero is not a valid entry", MsgBoxStyle.OkOnly Or MsgBoxStyle.Exclamation, "Zero times X is Zero")
+        End If
+        ' use a try catch to divide by zero when you do the print forms and such 
+
+
+
+
+    End Sub
+
+    Private Sub mnuAddYachtType_Click(sender As Object, e As EventArgs) Handles mnuAddYachtType.Click
+        'pop up text entry?
     End Sub
 End Class
