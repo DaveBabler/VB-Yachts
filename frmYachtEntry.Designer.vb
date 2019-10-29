@@ -22,6 +22,7 @@ Partial Class frmYachtEntryMain
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmYachtEntryMain))
         Me.mnuStripYachtEntry = New System.Windows.Forms.MenuStrip()
         Me.mnuFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrintYachtTypes = New System.Windows.Forms.ToolStripMenuItem()
@@ -51,6 +52,7 @@ Partial Class frmYachtEntryMain
         Me.btnClear = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.picYachtParty = New System.Windows.Forms.PictureBox()
+        Me.PrintPreviewDialog1 = New System.Windows.Forms.PrintPreviewDialog()
         Me.mnuStripYachtEntry.SuspendLayout()
         Me.grpParty.SuspendLayout()
         Me.grpYachts.SuspendLayout()
@@ -250,7 +252,7 @@ Partial Class frmYachtEntryMain
         Me.grpYachts.Location = New System.Drawing.Point(15, 187)
         Me.grpYachts.Name = "grpYachts"
         Me.grpYachts.Size = New System.Drawing.Size(387, 251)
-        Me.grpYachts.TabIndex = 6
+        Me.grpYachts.TabIndex = 2
         Me.grpYachts.TabStop = False
         Me.grpYachts.Text = "Yachts"
         '
@@ -351,6 +353,17 @@ Partial Class frmYachtEntryMain
         Me.picYachtParty.TabIndex = 8
         Me.picYachtParty.TabStop = False
         '
+        'PrintPreviewDialog1
+        '
+        Me.PrintPreviewDialog1.AutoScrollMargin = New System.Drawing.Size(0, 0)
+        Me.PrintPreviewDialog1.AutoScrollMinSize = New System.Drawing.Size(0, 0)
+        Me.PrintPreviewDialog1.ClientSize = New System.Drawing.Size(400, 300)
+        Me.PrintPreviewDialog1.Enabled = True
+        Me.PrintPreviewDialog1.Icon = CType(resources.GetObject("PrintPreviewDialog1.Icon"), System.Drawing.Icon)
+        Me.PrintPreviewDialog1.MainMenuStrip = Me.mnuStripYachtEntry
+        Me.PrintPreviewDialog1.Name = "PrintPreviewDialog1"
+        Me.PrintPreviewDialog1.Visible = False
+        '
         'frmYachtEntryMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -409,4 +422,5 @@ Partial Class frmYachtEntryMain
     Friend WithEvents btnClear As Button
     Friend WithEvents Button2 As Button
     Friend WithEvents picYachtParty As PictureBox
+    Friend WithEvents PrintPreviewDialog1 As PrintPreviewDialog
 End Class
