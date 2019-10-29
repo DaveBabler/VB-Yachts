@@ -37,7 +37,7 @@ Partial Class reportYachts
         Me.TableLayoutPanel2.Controls.Add(Me.lblYachtReportHeader, 0, 0)
         Me.TableLayoutPanel2.Controls.Add(Me.lblYachtTypeReportOutput, 0, 1)
         Me.TableLayoutPanel2.Font = New System.Drawing.Font("Roboto", 12.0!, System.Drawing.FontStyle.Bold)
-        Me.TableLayoutPanel2.Location = New System.Drawing.Point(5, 3)
+        Me.TableLayoutPanel2.Location = New System.Drawing.Point(6, 3)
         Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
         Me.TableLayoutPanel2.RowCount = 3
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50.0!))

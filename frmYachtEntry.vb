@@ -102,6 +102,11 @@ Public Class frmYachtEntryMain
         txtResponsibleParty.Focus()
     End Sub
 
+    Sub UserErrorMessage(ByVal strMessage As String, ByVal strTitle As String)
+        ' a quick way of sending a popup error box instead of recoding the thing the whole time
+
+    End Sub
+
 
     Sub YachtTypeListPopulate()
         ' This sub will be used on form load to populate the original data set for the Yacht Types List because I simply do not want to reDim arrays
@@ -173,7 +178,9 @@ Public Class frmYachtEntryMain
             Console.WriteLine("For key = ""tif"", value = {0}.",
                 dctYachtSizePrice("tif"))
         Catch
+            Console.WriteLine("______________________________")
             Console.WriteLine("Key = ""tif"" is not found.")
+            Console.WriteLine("______________________________")
         End Try
 
         Try
@@ -234,6 +241,9 @@ Public Class frmYachtEntryMain
     Private Sub btnOK_Click(sender As Object, e As EventArgs) Handles btnOK.Click
         Dim strUserHoursEntered As String
         Dim intUserHours As Integer
+        Dim strYachtLength As String = lstAvailibleYachtLength.SelectedItem
+
+        Dim decIndividualRentalCost As Decimal = 0D
 
         If cboYachtType.SelectedIndex < 0 Then
             MsgBox("You forgot to select a model " & Environment.NewLine & " Please select a Yacht Type and try again.", MsgBoxStyle.OkOnly Or MsgBoxStyle.Exclamation, "Pick a Yacht")
@@ -245,6 +255,24 @@ Public Class frmYachtEntryMain
             MsgBox("Zero is not a valid entry", MsgBoxStyle.OkOnly Or MsgBoxStyle.Exclamation, "Zero times X is Zero")
         End If
         ' use a try catch to divide by zero when you do the print forms and such 
+
+        Try
+            decIndividualRentalCost = GetRentalPrice(strYachtLength, intUserHours)
+
+        Catch nullRef As NullReferenceException
+
+            Console.WriteLine("We have a null reference " & nullRef.ToString())
+        Catch nullArgEx As ArgumentNullException
+
+            Console.WriteLine("We have a null argument exception which is not a null reference? " & nullArgEx.ToString())
+        Catch argEx As ArgumentException
+
+            Console.WriteLine("We have an ArgumentException " & argEx.ToString())
+
+        Catch ex As Exception
+
+            Console.WriteLine("Generic Exception Alert! " & ex.ToString())
+        End Try
 
 
 
