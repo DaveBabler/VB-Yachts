@@ -16,21 +16,34 @@
 '                         Yacht Type Report will list the yacht types in the combo box with programmer name and title at top.
 
 Public Class frmYachtEntryMain
-    ' Going to need this key value pair object for testing things in console later and populating lists and such 
+    'Standard variable declarations
+    Dim intTotalCharteredBoats As Integer = 0
+    Dim intMeanHoursChartered 'use Math.Floor(a/b) to round up  we are using Mean instead of Average for precision
+    Dim decTotalRevenue As Decimal = 0D
+    Dim strYachtTypes As String() = {"C & C", "Catalina", "Coronado", "Excalibur", "Hans Christian", "Hobie", "Ranger", "Wavelength"}
+
+    'End standard class variable declarations
+
+    'Begin advanced varaible section
+
+    'Going to need this key value pair object for testing things in console later and populating lists and such 
     Dim pair As KeyValuePair(Of String, String)
+
     ' initially tried an array for this, changing array size on the fly is not fun using list instead
     Dim lstYachtTypes As New List(Of String)
     Dim arrlblProgrammerName As System.Windows.Forms.Label() = {reportYachts.lblProgrammerYachtForm, reportSummary.lblProgrammerSummaryForm}
 
-
-    ' Need a multidimensional array that can be resized on the fly, do not have access to C#'s jagged array, constantly having 
+    'Need a multidimensional array that can be resized on the fly, do not have access to C#'s jagged array, constantly having 
     ' to reDim the array would be...tedious.  We will use a dictionary
     Dim dctYachtSizePrice As New Dictionary(Of String, String)
     'initialized here, populated on form loading event
 
+    'End advanced class variable declarations
+
+    'Begin custom (non Event created/form created Subs & Functions
     Sub YachtTypeListPopulate()
         ' This sub will be used on form load to populate the original data set for the Yacht Types List because I simply do not want to reDim arrays
-        Dim strYachtTypes As String() = {"C & C", "Catalina", "Coronado", "Excalibur", "Hans Christian", "Hobie", "Ranger", "Wavelength"}
+
         For i = 0 To (strYachtTypes.Length - 1)
             lstYachtTypes.Add(strYachtTypes(i))
             Console.WriteLine(strYachtTypes(i))
@@ -72,6 +85,8 @@ Public Class frmYachtEntryMain
 
         Return decReturnedCost
     End Function
+
+    'End custom (non Event created/form created Subs & Functions
 
     Private Sub frmYachtEntryMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'This is the primary form that will be front facing and visual to users.
