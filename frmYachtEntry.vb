@@ -64,6 +64,16 @@ Public Class frmYachtEntryMain
     'End custom Functions
 
     'Begin custom (non Event created/form created Subs & Functions
+    Sub CloseForms()
+        'Closing the summary forms incase Print Preview opens them and keeps them open in memory
+        'Also closing them in the event a future programmer wants to keep them open, it will save them time.
+        reportSummary.Close()
+        reportYachts.Close()
+
+        'close this form
+        Me.Close()
+
+    End Sub
 
     Sub ClearFormData()
         ' This clears the temporary form data after entry and is user event driven thus will be called by appropriate events
@@ -193,5 +203,15 @@ Public Class frmYachtEntryMain
 
     Private Sub mnuClearForNext_Click(sender As Object, e As EventArgs) Handles mnuClearForNext.Click
         ClearFormData()
+    End Sub
+
+    Private Sub btnExit_Click(sender As Object, e As EventArgs) Handles btnExit.Click
+        CloseForms()
+
+    End Sub
+
+    Private Sub mnuExit_Click(sender As Object, e As EventArgs) Handles mnuExit.Click
+        CloseForms()
+
     End Sub
 End Class
