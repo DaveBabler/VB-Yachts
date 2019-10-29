@@ -16,5 +16,14 @@
 '                         Yacht Type Report will list the yacht types in the combo box with programmer name and title at top.
 
 Public Class frmYachtEntryMain
+    Dim strYachtTypes As String() = {"C & C", "Catalina", "Coronado", "Excalibur", "Hans Christian", "Hobie", "Ranger", "Wavelength"}
+    Dim strYachtSizeAndPrice As String(,) = {{"22", "95.00"}, {"24", "137.00"}, {"30", "160.00"}, {"32", "192.00"}, {"36", "250.00"}, {"38", "400.00"}, {"45", "550.00"}}
+    Private Sub frmYachtEntryMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        'populates the dropdown lists and the listbox
+        For Each yacht In strYachtTypes
+            cboYachtType.Items.Add(yacht)
+        Next
 
+
+    End Sub
 End Class
