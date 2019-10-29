@@ -250,7 +250,7 @@ Partial Class frmYachtEntryMain
         Me.grpYachts.Location = New System.Drawing.Point(15, 187)
         Me.grpYachts.Name = "grpYachts"
         Me.grpYachts.Size = New System.Drawing.Size(387, 251)
-        Me.grpYachts.TabIndex = 6
+        Me.grpYachts.TabIndex = 2
         Me.grpYachts.TabStop = False
         Me.grpYachts.Text = "Yachts"
         '
@@ -271,6 +271,7 @@ Partial Class frmYachtEntryMain
         Me.cboYachtType.BackColor = System.Drawing.Color.Gainsboro
         Me.cboYachtType.Font = New System.Drawing.Font("Roboto", 9.75!, System.Drawing.FontStyle.Bold)
         Me.cboYachtType.FormattingEnabled = True
+        Me.cboYachtType.Items.AddRange(New Object() {"C & C", "Catalina", "Coronado", "Excalibur", "Hans Christian", "Hobie", "Ranger", "Wavelength"})
         Me.cboYachtType.Location = New System.Drawing.Point(187, 44)
         Me.cboYachtType.Name = "cboYachtType"
         Me.cboYachtType.Size = New System.Drawing.Size(177, 25)
