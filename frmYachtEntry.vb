@@ -248,4 +248,10 @@ Public Class frmYachtEntryMain
     Private Sub mnuAddYachtType_Click(sender As Object, e As EventArgs) Handles mnuAddYachtType.Click
         'pop up text entry?
     End Sub
+
+    Private Sub mnuRemoveYachtType_Click(sender As Object, e As EventArgs) Handles mnuRemoveYachtType.Click
+        'load a modal with a list box of all yachts availible 
+        'have the user select and then click ok
+        'if cancel just close the modal (oh and do it as a modal)
+    End Sub
 End Class
