@@ -16,13 +16,79 @@
 '                         Yacht Type Report will list the yacht types in the combo box with programmer name and title at top.
 
 Public Class frmYachtEntryMain
-    Dim strYachtTypes As String() = {"C & C", "Catalina", "Coronado", "Excalibur", "Hans Christian", "Hobie", "Ranger", "Wavelength"}
-    Dim strYachtSizeAndPrice As String(,) = {{"22", "95.00"}, {"24", "137.00"}, {"30", "160.00"}, {"32", "192.00"}, {"36", "250.00"}, {"38", "400.00"}, {"45", "550.00"}}
+    ' Going to need this key value pair object for testing things in console later and populating lists and such 
+    Dim pair As KeyValuePair(Of String, String)
+    ' initially tried an array for this, changing array size on the fly is not fun using list instead
+    Dim lstYachtTypes As New List(Of String)
+
+    ' Need a multidimensional array that can be resized on the fly, do not have access to C#'s jagged array, constantly having 
+    ' to reDim the array would be...tedious.  We will use a dictionary
+    Dim dctYachtSizePrice As New Dictionary(Of String, String)
+    'initialized here, populated on form loading event
+
+    Sub YachtTypeListPopulate()
+        ' This sub will be used on form load to populate the original data set for the Yacht Types List because I simply do not want to reDim arrays
+        Dim strYachtTypes As String() = {"C & C", "Catalina", "Coronado", "Excalibur", "Hans Christian", "Hobie", "Ranger", "Wavelength"}
+        For i = 0 To (strYachtTypes.Length - 1)
+            lstYachtTypes.Add(strYachtTypes(i))
+            Console.WriteLine(strYachtTypes(i))
+            Console.WriteLine(lstYachtTypes.Item(i))
+        Next
+
+    End Sub
+
+    Sub YachtSizePriceDictionaryPopulate()
+        'populate the dictionary dctYachtSize Price
+        '(length, cost) will cast to appropriate numerics later, I just want this data stored and solid for display here
+        dctYachtSizePrice.Add("22", "95.00")
+        dctYachtSizePrice.Add("24", "137.00")
+        dctYachtSizePrice.Add("30", "160.00")
+        dctYachtSizePrice.Add("32", "192.00")
+        dctYachtSizePrice.Add("36", "250.00")
+        dctYachtSizePrice.Add("38", "400.00")
+        dctYachtSizePrice.Add("45", "550.00")
+        ' End population of dctYachtSizePrice
+        ' note, had there been time, I probably would have made a Sub that could be reused to populate a Dictionary same for the List
+    End Sub
+
     Private Sub frmYachtEntryMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        YachtTypeListPopulate()
+        YachtSizePriceDictionaryPopulate()
+
         'populates the dropdown lists and the listbox
-        For Each yacht In strYachtTypes
+        For Each yacht In lstYachtTypes
             cboYachtType.Items.Add(yacht)
         Next
+
+        For Each pair In dctYachtSizePrice
+            'in this case Key is the length
+            lstAvailibleYachtLength.Items.Add(pair.Key)
+        Next
+
+
+
+        ''''REMOVE BEFORE PUBLISHING
+        For Each pair In dctYachtSizePrice
+            Console.WriteLine("{0}, {1}", pair.Key, pair.Value)
+        Next
+
+
+        Try
+            Console.WriteLine("For key = ""tif"", value = {0}.",
+                dctYachtSizePrice("tif"))
+        Catch
+            Console.WriteLine("Key = ""tif"" is not found.")
+        End Try
+
+        Try
+            Console.WriteLine("For key = ""22"", value = {0}.",
+                dctYachtSizePrice("22"))
+        Catch
+            Console.WriteLine("Key = ""22"" is not found.")
+        End Try
+        ''''REMOVE BEFORE PUBLISHING
+        '''
+
 
 
     End Sub
