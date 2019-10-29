@@ -52,7 +52,7 @@ Public Class frmYachtEntryMain
         If dctYachtSizePrice.TryGetValue(strYachtLength, strPriceValue) Then
             decPriceValue = CType(strPriceValue, Decimal)
         Else
-            MsgBox("Value selected not found, try again", 0 Or 48, "Referenced Value Not Found")
+            UserErrorMessage("Value selected not found, try again.", "Refereced value error")
         End If
 
         ' Next multiply it by the hours to get the total cost and assign it to the return variable
@@ -67,7 +67,7 @@ Public Class frmYachtEntryMain
         'If Error it will clear the entry box and return focus to it.
         Dim intValue As Integer = 0I
         If (Not Integer.TryParse(strValue, intValue)) Then
-            MsgBox("Whole numbers only please", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Invalid Entry")
+            UserErrorMessage("Whole numbers only please", "Invalid Entry")
             txtBox.Clear()
             txtBox.Focus()
         Else
@@ -103,7 +103,8 @@ Public Class frmYachtEntryMain
     End Sub
 
     Sub UserErrorMessage(ByVal strMessage As String, ByVal strTitle As String)
-        ' a quick way of sending a popup error box instead of recoding the thing the whole time
+        ' a quick way of sending a popup error box instead of recoding the thing the whole time I am tired of it.
+        MsgBox(strMessage, MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, strTitle)
 
     End Sub
 
@@ -246,13 +247,14 @@ Public Class frmYachtEntryMain
         Dim decIndividualRentalCost As Decimal = 0D
 
         If cboYachtType.SelectedIndex < 0 Then
-            MsgBox("You forgot to select a model " & Environment.NewLine & " Please select a Yacht Type and try again.", MsgBoxStyle.OkOnly Or MsgBoxStyle.Exclamation, "Pick a Yacht")
+            UserErrorMessage("You forgot to select a model", "Pick a Yacht")
         End If
 
         strUserHoursEntered = txtHoursChartered.Text
         intUserHours = ValidateInts(strUserHoursEntered, txtHoursChartered)
         If intUserHours = 0 Then
-            MsgBox("Zero is not a valid entry", MsgBoxStyle.OkOnly Or MsgBoxStyle.Exclamation, "Zero times X is Zero")
+            UserErrorMessage("Zero is not a valid entry", "Zero times X is Zero")
+
         End If
         ' use a try catch to divide by zero when you do the print forms and such 
 
