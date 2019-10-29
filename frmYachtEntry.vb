@@ -51,6 +51,26 @@ Public Class frmYachtEntryMain
         ' note, had there been time, I probably would have made a Sub that could be reused to populate a Dictionary same for the List
     End Sub
 
+    Function GetRentalPrice(strYachtLength As String, intHoursChartered As Integer) As Decimal
+        Dim strPriceValue As String
+        Dim decPriceValue As Decimal
+        Dim decHoursChartered As Decimal = CType(intHoursChartered, Decimal)
+        Dim decReturnedCost As Decimal = 0.00  'VB was giving me errors about assigning null to a decimial o.O since when!? 
+
+        ' First look up the hourly cost for the yacht from the dictionary object
+
+        If dctYachtSizePrice.TryGetValue(strYachtLength, strPriceValue) Then
+            decPriceValue = CType(strPriceValue, Decimal)
+        Else
+            MsgBox("Value selected not found, try again", 0 Or 48, "Referenced Value Not Found")
+        End If
+
+        ' Next multiply it by the hours to get the total cost and assign it to the return variable
+        decReturnedCost = (decPriceValue * decHoursChartered)
+
+        Return decReturnedCost
+    End Function
+
     Private Sub frmYachtEntryMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         YachtTypeListPopulate()
         YachtSizePriceDictionaryPopulate()
@@ -86,9 +106,20 @@ Public Class frmYachtEntryMain
         Catch
             Console.WriteLine("Key = ""22"" is not found.")
         End Try
+
+
+        Dim value As String = ""
+        If dctYachtSizePrice.TryGetValue("45", value) Then
+            Console.WriteLine("For key = ""45"", value = {0}.", value)
+        Else
+            Console.WriteLine("Key = ""45"" is not found.")
+        End If
+
+        Dim TestPrice As Decimal = GetRentalPrice("38", 4)
+        Console.WriteLine("The fabulous low price of: {0:N2}", TestPrice)
+
         ''''REMOVE BEFORE PUBLISHING
         '''
-
 
 
     End Sub
