@@ -32,8 +32,7 @@ Partial Class reportYachts
         'TableLayoutPanel2
         '
         Me.TableLayoutPanel2.ColumnCount = 1
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel2.Controls.Add(Me.lblProgrammerYachtForm, 0, 2)
         Me.TableLayoutPanel2.Controls.Add(Me.lblYachtReportHeader, 0, 0)
         Me.TableLayoutPanel2.Controls.Add(Me.lblYachtTypeReportOutput, 0, 1)
@@ -41,10 +40,10 @@ Partial Class reportYachts
         Me.TableLayoutPanel2.Location = New System.Drawing.Point(5, 3)
         Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
         Me.TableLayoutPanel2.RowCount = 3
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.TableLayoutPanel2.Size = New System.Drawing.Size(312, 141)
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50.0!))
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 15.0!))
+        Me.TableLayoutPanel2.Size = New System.Drawing.Size(312, 84)
         Me.TableLayoutPanel2.TabIndex = 1
         '
         'lblYachtReportHeader
@@ -64,7 +63,7 @@ Partial Class reportYachts
         '
         Me.lblYachtTypeReportOutput.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.lblYachtTypeReportOutput.AutoSize = True
-        Me.lblYachtTypeReportOutput.Location = New System.Drawing.Point(61, 60)
+        Me.lblYachtTypeReportOutput.Location = New System.Drawing.Point(61, 50)
         Me.lblYachtTypeReportOutput.Name = "lblYachtTypeReportOutput"
         Me.lblYachtTypeReportOutput.Size = New System.Drawing.Size(190, 19)
         Me.lblYachtTypeReportOutput.TabIndex = 1
@@ -77,9 +76,9 @@ Partial Class reportYachts
         Me.lblProgrammerYachtForm.AutoSize = True
         Me.lblProgrammerYachtForm.Font = New System.Drawing.Font("Roboto", 10.0!, System.Drawing.FontStyle.Bold)
         Me.lblProgrammerYachtForm.ForeColor = System.Drawing.Color.FromArgb(CType(CType(204, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.lblProgrammerYachtForm.Location = New System.Drawing.Point(118, 124)
+        Me.lblProgrammerYachtForm.Location = New System.Drawing.Point(118, 69)
         Me.lblProgrammerYachtForm.Name = "lblProgrammerYachtForm"
-        Me.lblProgrammerYachtForm.Size = New System.Drawing.Size(76, 17)
+        Me.lblProgrammerYachtForm.Size = New System.Drawing.Size(76, 15)
         Me.lblProgrammerYachtForm.TabIndex = 4
         Me.lblProgrammerYachtForm.Text = "$88888.88"
         Me.lblProgrammerYachtForm.TextAlign = System.Drawing.ContentAlignment.BottomCenter
