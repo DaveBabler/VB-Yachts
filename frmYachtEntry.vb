@@ -88,6 +88,8 @@ Public Class frmYachtEntryMain
 
 
         ''''REMOVE BEFORE PUBLISHING
+        '''
+        '''Research on printing a hidden form https://docs.microsoft.com/en-us/dotnet/api/system.windows.forms.printpreviewcontrol?view=netframework-4.8
         For Each pair In dctYachtSizePrice
             Console.WriteLine("{0}, {1}", pair.Key, pair.Value)
         Next
