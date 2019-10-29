@@ -95,6 +95,18 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="reportSummary.Designer.vb">
+      <DependentUpon>reportSummary.vb</DependentUpon>
+    </Compile>
+    <Compile Include="reportSummary.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="reportYachts.Designer.vb">
+      <DependentUpon>reportYachts.vb</DependentUpon>
+    </Compile>
+    <Compile Include="reportYachts.vb">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="frmYachtEntry.resx">
@@ -105,6 +117,12 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="reportSummary.resx">
+      <DependentUpon>reportSummary.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="reportYachts.resx">
+      <DependentUpon>reportYachts.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
