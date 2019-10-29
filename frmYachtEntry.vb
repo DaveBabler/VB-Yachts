@@ -39,8 +39,44 @@ Public Class frmYachtEntryMain
     'initialized here, populated on form loading event
 
     'End advanced class variable declarations
+    'Begin custom Functions
+
+    Function GetRentalPrice(strYachtLength As String, intHoursChartered As Integer) As Decimal
+        Dim strPriceValue As String
+        Dim decPriceValue As Decimal
+        Dim decHoursChartered As Decimal = CType(intHoursChartered, Decimal)
+        Dim decReturnedCost As Decimal = 0.00  'VB was giving me errors about assigning null to a decimial o.O since when!? 
+
+        ' First look up the hourly cost for the yacht from the dictionary object
+
+        If dctYachtSizePrice.TryGetValue(strYachtLength, strPriceValue) Then
+            decPriceValue = CType(strPriceValue, Decimal)
+        Else
+            MsgBox("Value selected not found, try again", 0 Or 48, "Referenced Value Not Found")
+        End If
+
+        ' Next multiply it by the hours to get the total cost and assign it to the return variable
+        decReturnedCost = (decPriceValue * decHoursChartered)
+
+        Return decReturnedCost
+    End Function
+
+    'End custom Functions
 
     'Begin custom (non Event created/form created Subs & Functions
+
+    Sub ClearFormData()
+        ' This clears the temporary form data after entry and is user event driven thus will be called by appropriate events
+        lblCalculatedPriceOutput.Text = ""
+        lblCalculatedPriceOutput.Visible = False
+        txtHoursChartered.Clear()
+        lstAvailibleYachtLength.ClearSelected() 'unselects the selection in the box
+        cboYachtType.SelectedIndex = -1 'sets the combo box back to default
+        txtResponsibleParty.Clear()
+        txtResponsibleParty.Focus()
+    End Sub
+
+
     Sub YachtTypeListPopulate()
         ' This sub will be used on form load to populate the original data set for the Yacht Types List because I simply do not want to reDim arrays
 
@@ -66,27 +102,8 @@ Public Class frmYachtEntryMain
         ' note, had there been time, I probably would have made a Sub that could be reused to populate a Dictionary same for the List
     End Sub
 
-    Function GetRentalPrice(strYachtLength As String, intHoursChartered As Integer) As Decimal
-        Dim strPriceValue As String
-        Dim decPriceValue As Decimal
-        Dim decHoursChartered As Decimal = CType(intHoursChartered, Decimal)
-        Dim decReturnedCost As Decimal = 0.00  'VB was giving me errors about assigning null to a decimial o.O since when!? 
 
-        ' First look up the hourly cost for the yacht from the dictionary object
-
-        If dctYachtSizePrice.TryGetValue(strYachtLength, strPriceValue) Then
-            decPriceValue = CType(strPriceValue, Decimal)
-        Else
-            MsgBox("Value selected not found, try again", 0 Or 48, "Referenced Value Not Found")
-        End If
-
-        ' Next multiply it by the hours to get the total cost and assign it to the return variable
-        decReturnedCost = (decPriceValue * decHoursChartered)
-
-        Return decReturnedCost
-    End Function
-
-    'End custom (non Event created/form created Subs & Functions
+    'End custom (non Event created/form created Subs
 
     Private Sub frmYachtEntryMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'This is the primary form that will be front facing and visual to users.
@@ -169,4 +186,12 @@ Public Class frmYachtEntryMain
         reportSummary.Show()
     End Sub
     ''''End events REMOVE BEFORE PUBLISHING
+    '''
+    Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
+        ClearFormData()
+    End Sub
+
+    Private Sub mnuClearForNext_Click(sender As Object, e As EventArgs) Handles mnuClearForNext.Click
+        ClearFormData()
+    End Sub
 End Class
