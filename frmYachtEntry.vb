@@ -45,7 +45,7 @@ Public Class frmYachtEntryMain
         Dim strPriceValue As String
         Dim decPriceValue As Decimal
         Dim decHoursChartered As Decimal = CType(intHoursChartered, Decimal)
-        Dim decReturnedCost As Decimal = 0.00  'VB was giving me errors about assigning null to a decimial o.O since when!? 
+        Dim decReturnedCost As Decimal = 0.00D  'VB was giving me errors about assigning null to a decimial o.O since when!? 
 
         ' First look up the hourly cost for the yacht from the dictionary object
 
@@ -75,6 +75,7 @@ Public Class frmYachtEntryMain
         End If
         Return intValue
     End Function
+
 
     'End custom Functions
 
@@ -233,6 +234,11 @@ Public Class frmYachtEntryMain
     Private Sub btnOK_Click(sender As Object, e As EventArgs) Handles btnOK.Click
         Dim strUserHoursEntered As String
         Dim intUserHours As Integer
+
+        If cboYachtType.SelectedIndex < 0 Then
+            MsgBox("You forgot to select a model " & Environment.NewLine & " Please select a Yacht Type and try again.", MsgBoxStyle.OkOnly Or MsgBoxStyle.Exclamation, "Pick a Yacht")
+        End If
+
         strUserHoursEntered = txtHoursChartered.Text
         intUserHours = ValidateInts(strUserHoursEntered, txtHoursChartered)
         If intUserHours = 0 Then
