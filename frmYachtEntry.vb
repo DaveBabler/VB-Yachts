@@ -125,4 +125,8 @@ Public Class frmYachtEntryMain
 
 
     End Sub
+
+    Private Sub mnuPrintSummary_Click(sender As Object, e As EventArgs) Handles mnuPrintSummary.Click
+
+    End Sub
 End Class
