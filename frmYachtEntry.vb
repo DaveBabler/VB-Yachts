@@ -20,6 +20,8 @@ Public Class frmYachtEntryMain
     Dim pair As KeyValuePair(Of String, String)
     ' initially tried an array for this, changing array size on the fly is not fun using list instead
     Dim lstYachtTypes As New List(Of String)
+    Dim arrlblProgrammerName As System.Windows.Forms.Label() = {reportYachts.lblProgrammerYachtForm, reportSummary.lblProgrammerSummaryForm}
+
 
     ' Need a multidimensional array that can be resized on the fly, do not have access to C#'s jagged array, constantly having 
     ' to reDim the array would be...tedious.  We will use a dictionary
@@ -72,6 +74,11 @@ Public Class frmYachtEntryMain
     End Function
 
     Private Sub frmYachtEntryMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        'This is the primary form that will be front facing and visual to users.
+        'The rest of the forms will only show up upon print.
+        'Some logic for those forms may appear here, the rest will be user event driven instead of
+        'program load event.
+
         YachtTypeListPopulate()
         YachtSizePriceDictionaryPopulate()
 
@@ -84,6 +91,15 @@ Public Class frmYachtEntryMain
             'in this case Key is the length
             lstAvailibleYachtLength.Items.Add(pair.Key)
         Next
+
+        For Each programmerNameLabel In arrlblProgrammerName
+            programmerNameLabel.Text = "Program Code & Design by: Dave Babler"
+            programmerNameLabel.Visible = True
+        Next
+
+
+
+        ''''End legitimate program begin testing section
 
 
 
@@ -129,4 +145,13 @@ Public Class frmYachtEntryMain
     Private Sub mnuPrintSummary_Click(sender As Object, e As EventArgs) Handles mnuPrintSummary.Click
 
     End Sub
+    ''''REMOVE these events BEFORE PUBLISHING
+    Private Sub ShowReportYachtsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ShowReportYachtsToolStripMenuItem.Click
+        reportYachts.Show()
+    End Sub
+
+    Private Sub ShowReportSummaryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ShowReportSummaryToolStripMenuItem.Click
+        reportSummary.Show()
+    End Sub
+    ''''End events REMOVE BEFORE PUBLISHING
 End Class

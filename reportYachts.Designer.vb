@@ -23,9 +23,9 @@ Partial Class reportYachts
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
+        Me.lblProgrammerYachtForm = New System.Windows.Forms.Label()
         Me.lblYachtReportHeader = New System.Windows.Forms.Label()
         Me.lblYachtTypeReportOutput = New System.Windows.Forms.Label()
-        Me.lblProgrammerYachtForm = New System.Windows.Forms.Label()
         Me.TableLayoutPanel2.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -43,8 +43,22 @@ Partial Class reportYachts
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50.0!))
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 15.0!))
-        Me.TableLayoutPanel2.Size = New System.Drawing.Size(312, 84)
+        Me.TableLayoutPanel2.Size = New System.Drawing.Size(312, 97)
         Me.TableLayoutPanel2.TabIndex = 1
+        '
+        'lblProgrammerYachtForm
+        '
+        Me.lblProgrammerYachtForm.Anchor = System.Windows.Forms.AnchorStyles.Bottom
+        Me.lblProgrammerYachtForm.AutoSize = True
+        Me.lblProgrammerYachtForm.Font = New System.Drawing.Font("Roboto", 10.0!, System.Drawing.FontStyle.Bold)
+        Me.lblProgrammerYachtForm.ForeColor = System.Drawing.Color.FromArgb(CType(CType(204, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.lblProgrammerYachtForm.Location = New System.Drawing.Point(118, 80)
+        Me.lblProgrammerYachtForm.Name = "lblProgrammerYachtForm"
+        Me.lblProgrammerYachtForm.Size = New System.Drawing.Size(76, 17)
+        Me.lblProgrammerYachtForm.TabIndex = 4
+        Me.lblProgrammerYachtForm.Text = "$88888.88"
+        Me.lblProgrammerYachtForm.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.lblProgrammerYachtForm.Visible = False
         '
         'lblYachtReportHeader
         '
@@ -69,20 +83,6 @@ Partial Class reportYachts
         Me.lblYachtTypeReportOutput.TabIndex = 1
         Me.lblYachtTypeReportOutput.Text = "Yacht Types Will Go Here"
         Me.lblYachtTypeReportOutput.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lblProgrammerYachtForm
-        '
-        Me.lblProgrammerYachtForm.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        Me.lblProgrammerYachtForm.AutoSize = True
-        Me.lblProgrammerYachtForm.Font = New System.Drawing.Font("Roboto", 10.0!, System.Drawing.FontStyle.Bold)
-        Me.lblProgrammerYachtForm.ForeColor = System.Drawing.Color.FromArgb(CType(CType(204, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.lblProgrammerYachtForm.Location = New System.Drawing.Point(118, 69)
-        Me.lblProgrammerYachtForm.Name = "lblProgrammerYachtForm"
-        Me.lblProgrammerYachtForm.Size = New System.Drawing.Size(76, 15)
-        Me.lblProgrammerYachtForm.TabIndex = 4
-        Me.lblProgrammerYachtForm.Text = "$88888.88"
-        Me.lblProgrammerYachtForm.TextAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.lblProgrammerYachtForm.Visible = False
         '
         'reportYachts
         '
