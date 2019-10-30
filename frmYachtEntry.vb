@@ -117,6 +117,13 @@ Public Class frmYachtEntryMain
 
     End Sub
 
+    Sub PopulateYachtReport(ByVal strYachts As String())
+        reportYachts.lblYachtTypeReportOutput.Text = ""
+        For Each yacht In strYachts
+            reportYachts.lblYachtTypeReportOutput.Text += yacht & Environment.NewLine
+        Next
+    End Sub
+
     Sub UserErrorMessage(ByVal strMessage As String, ByVal strTitle As String)
         ' a quick way of sending a popup error box instead of recoding the thing the whole time I am tired of it.
         MsgBox(strMessage, MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, strTitle)
@@ -157,6 +164,7 @@ Public Class frmYachtEntryMain
         'The rest of the forms will only show up upon print.
         'Some logic for those forms may appear here, the rest will be user event driven instead of
         'program load event.
+        PopulateYachtReport(strYachtTypes)
         ClearTextBoxes()
         YachtTypeListPopulate()
         YachtSizePriceDictionaryPopulate()
@@ -172,7 +180,7 @@ Public Class frmYachtEntryMain
         Next
 
         For Each programmerNameLabel In arrlblProgrammerName
-            programmerNameLabel.Text = "Program Code & Design by: Dave Babler"
+            programmerNameLabel.Text = "Program Code && Design by: Dave Babler"
             programmerNameLabel.Visible = True
         Next
 
