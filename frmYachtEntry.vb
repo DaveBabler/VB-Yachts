@@ -251,21 +251,33 @@ Public Class frmYachtEntryMain
 
         Dim decIndividualRentalCost As Decimal
 
-        If cboYachtType.SelectedIndex < 0 Then
-            UserErrorMessage("You forgot to select a model", "Pick a Yacht")
-        End If
-
-        strUserHoursEntered = txtHoursChartered.Text
-        intUserHours = ValidateInts(strUserHoursEntered, txtHoursChartered)
-        If intUserHours = 0 Then
-            UserErrorMessage("Zero is not a valid entry", "Zero times X is Zero")
-
-        End If
-        ' use a try catch to divide by zero when you do the print forms and such 
-
         Try
+            If String.IsNullOrEmpty(txtResponsibleParty.Text) Then
+                UserErrorMessage("You must enter the responsible parties name to proceed", "Who is paying for this?")
+                txtResponsibleParty.Focus()
+            End If
+
+            If cboYachtType.SelectedIndex < 0 Then
+                UserErrorMessage("You forgot to select a model", "Pick a Yacht")
+            End If
+
+            strUserHoursEntered = txtHoursChartered.Text
+            intUserHours = ValidateInts(strUserHoursEntered, txtHoursChartered)
+            If intUserHours = 0 Then
+                UserErrorMessage("Zero is not a valid entry", "Zero times X is Zero")
+
+            End If
+            ' use a try catch to divide by zero when you do the print forms and such 
+
             decIndividualRentalCost = GetRentalPrice(strYachtLength, intUserHours)
             Console.WriteLine("DecIndCost = " & decIndividualRentalCost.ToString())
+
+            If decTotalRevenue > 0 And mnuPrintSummary.Enabled = False Then
+                'If the print summary has not yet been enabled, enable it. 
+                mnuPrintSummary.Enabled = True
+            End If
+
+
 
         Catch nullRef As NullReferenceException
             UserErrorMessage("You need to select a length by clicking the length of the Yacht you wish to rent!", "Choose yacht length!")
@@ -279,11 +291,18 @@ Public Class frmYachtEntryMain
 
         End Try
 
+        'If all that succeeds then it is time to add to the accumulators
+
+
 
         If decIndividualRentalCost <> 0 Then
             lblCalculatedPriceOutput.Text = decIndividualRentalCost.ToString("C")
             lblCalculatedPriceOutput.Visible = True
+            'only if we know the value isn't zero add to the accumulator, otherwise, why bother?
+            decTotalRevenue += decIndividualRentalCost
+
         End If
+
 
     End Sub
 
