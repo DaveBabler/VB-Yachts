@@ -22,6 +22,7 @@ Partial Class frmYachtEntryMain
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmYachtEntryMain))
         Me.mnuStripYachtEntry = New System.Windows.Forms.MenuStrip()
         Me.mnuFile = New System.Windows.Forms.ToolStripMenuItem()
@@ -36,6 +37,9 @@ Partial Class frmYachtEntryMain
         Me.mnuRemoveYachtType = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHelp = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuAbout = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DebuggingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ShowReportYachtsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ShowReportSummaryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.grpParty = New System.Windows.Forms.GroupBox()
         Me.txtResponsibleParty = New System.Windows.Forms.TextBox()
         Me.txtHoursChartered = New System.Windows.Forms.TextBox()
@@ -50,9 +54,10 @@ Partial Class frmYachtEntryMain
         Me.lblYachType = New System.Windows.Forms.Label()
         Me.btnOK = New System.Windows.Forms.Button()
         Me.btnClear = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
+        Me.btnExit = New System.Windows.Forms.Button()
         Me.picYachtParty = New System.Windows.Forms.PictureBox()
-        Me.PrintPreviewDialog1 = New System.Windows.Forms.PrintPreviewDialog()
+        Me.diaPrintPreview = New System.Windows.Forms.PrintPreviewDialog()
+        Me.ttYachtEntry = New System.Windows.Forms.ToolTip(Me.components)
         Me.mnuStripYachtEntry.SuspendLayout()
         Me.grpParty.SuspendLayout()
         Me.grpYachts.SuspendLayout()
@@ -62,7 +67,7 @@ Partial Class frmYachtEntryMain
         'mnuStripYachtEntry
         '
         Me.mnuStripYachtEntry.Font = New System.Drawing.Font("Tw Cen MT", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.mnuStripYachtEntry.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFile, Me.mnuEdit, Me.mnuHelp})
+        Me.mnuStripYachtEntry.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFile, Me.mnuEdit, Me.mnuHelp, Me.DebuggingToolStripMenuItem})
         Me.mnuStripYachtEntry.Location = New System.Drawing.Point(0, 0)
         Me.mnuStripYachtEntry.Name = "mnuStripYachtEntry"
         Me.mnuStripYachtEntry.Size = New System.Drawing.Size(662, 27)
@@ -86,6 +91,7 @@ Partial Class frmYachtEntryMain
         '
         'mnuPrintSummary
         '
+        Me.mnuPrintSummary.Enabled = False
         Me.mnuPrintSummary.Name = "mnuPrintSummary"
         Me.mnuPrintSummary.Size = New System.Drawing.Size(204, 24)
         Me.mnuPrintSummary.Text = "Print &Summary"
@@ -101,6 +107,7 @@ Partial Class frmYachtEntryMain
         Me.mnuExit.Name = "mnuExit"
         Me.mnuExit.Size = New System.Drawing.Size(204, 24)
         Me.mnuExit.Text = "&Exit"
+        Me.mnuExit.ToolTipText = "WARNING!" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "This completely closes the program."
         '
         'mnuEdit
         '
@@ -151,6 +158,25 @@ Partial Class frmYachtEntryMain
         Me.mnuAbout.Size = New System.Drawing.Size(113, 22)
         Me.mnuAbout.Text = "&About"
         '
+        'DebuggingToolStripMenuItem
+        '
+        Me.DebuggingToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ShowReportYachtsToolStripMenuItem, Me.ShowReportSummaryToolStripMenuItem})
+        Me.DebuggingToolStripMenuItem.Name = "DebuggingToolStripMenuItem"
+        Me.DebuggingToolStripMenuItem.Size = New System.Drawing.Size(92, 23)
+        Me.DebuggingToolStripMenuItem.Text = "Debugging"
+        '
+        'ShowReportYachtsToolStripMenuItem
+        '
+        Me.ShowReportYachtsToolStripMenuItem.Name = "ShowReportYachtsToolStripMenuItem"
+        Me.ShowReportYachtsToolStripMenuItem.Size = New System.Drawing.Size(221, 24)
+        Me.ShowReportYachtsToolStripMenuItem.Text = "Show Report Yachts"
+        '
+        'ShowReportSummaryToolStripMenuItem
+        '
+        Me.ShowReportSummaryToolStripMenuItem.Name = "ShowReportSummaryToolStripMenuItem"
+        Me.ShowReportSummaryToolStripMenuItem.Size = New System.Drawing.Size(221, 24)
+        Me.ShowReportSummaryToolStripMenuItem.Text = "Show Report Summary"
+        '
         'grpParty
         '
         Me.grpParty.BackColor = System.Drawing.Color.Transparent
@@ -198,7 +224,7 @@ Partial Class frmYachtEntryMain
         Me.lblCalculatedPriceOutput.ForeColor = System.Drawing.Color.FromArgb(CType(CType(204, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.lblCalculatedPriceOutput.Location = New System.Drawing.Point(279, 102)
         Me.lblCalculatedPriceOutput.Name = "lblCalculatedPriceOutput"
-        Me.lblCalculatedPriceOutput.Size = New System.Drawing.Size(86, 20)
+        Me.lblCalculatedPriceOutput.Size = New System.Drawing.Size(86, 19)
         Me.lblCalculatedPriceOutput.TabIndex = 3
         Me.lblCalculatedPriceOutput.Text = "$88888.88"
         Me.lblCalculatedPriceOutput.TextAlign = System.Drawing.ContentAlignment.BottomRight
@@ -211,7 +237,7 @@ Partial Class frmYachtEntryMain
         Me.lblCalculatedPrice.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(204, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.lblCalculatedPrice.Location = New System.Drawing.Point(16, 102)
         Me.lblCalculatedPrice.Name = "lblCalculatedPrice"
-        Me.lblCalculatedPrice.Size = New System.Drawing.Size(131, 20)
+        Me.lblCalculatedPrice.Size = New System.Drawing.Size(131, 19)
         Me.lblCalculatedPrice.TabIndex = 2
         Me.lblCalculatedPrice.Text = "Calculated Price:"
         Me.lblCalculatedPrice.TextAlign = System.Drawing.ContentAlignment.BottomLeft
@@ -223,7 +249,7 @@ Partial Class frmYachtEntryMain
         Me.lblHoursChartered.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(204, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.lblHoursChartered.Location = New System.Drawing.Point(16, 70)
         Me.lblHoursChartered.Name = "lblHoursChartered"
-        Me.lblHoursChartered.Size = New System.Drawing.Size(133, 20)
+        Me.lblHoursChartered.Size = New System.Drawing.Size(133, 19)
         Me.lblHoursChartered.TabIndex = 1
         Me.lblHoursChartered.Text = "Hours Chartered:"
         Me.lblHoursChartered.TextAlign = System.Drawing.ContentAlignment.BottomLeft
@@ -235,7 +261,7 @@ Partial Class frmYachtEntryMain
         Me.lblPartyName.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(204, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.lblPartyName.Location = New System.Drawing.Point(16, 38)
         Me.lblPartyName.Name = "lblPartyName"
-        Me.lblPartyName.Size = New System.Drawing.Size(144, 20)
+        Me.lblPartyName.Size = New System.Drawing.Size(144, 19)
         Me.lblPartyName.TabIndex = 0
         Me.lblPartyName.Text = "Responsible Party:"
         Me.lblPartyName.TextAlign = System.Drawing.ContentAlignment.BottomLeft
@@ -261,10 +287,10 @@ Partial Class frmYachtEntryMain
         Me.lstAvailibleYachtLength.BackColor = System.Drawing.Color.Gainsboro
         Me.lstAvailibleYachtLength.Font = New System.Drawing.Font("Roboto", 9.75!, System.Drawing.FontStyle.Bold)
         Me.lstAvailibleYachtLength.FormattingEnabled = True
-        Me.lstAvailibleYachtLength.ItemHeight = 17
+        Me.lstAvailibleYachtLength.ItemHeight = 15
         Me.lstAvailibleYachtLength.Location = New System.Drawing.Point(187, 95)
         Me.lstAvailibleYachtLength.Name = "lstAvailibleYachtLength"
-        Me.lstAvailibleYachtLength.Size = New System.Drawing.Size(178, 123)
+        Me.lstAvailibleYachtLength.Size = New System.Drawing.Size(178, 94)
         Me.lstAvailibleYachtLength.TabIndex = 4
         '
         'cboYachtType
@@ -275,7 +301,7 @@ Partial Class frmYachtEntryMain
         Me.cboYachtType.FormattingEnabled = True
         Me.cboYachtType.Location = New System.Drawing.Point(187, 44)
         Me.cboYachtType.Name = "cboYachtType"
-        Me.cboYachtType.Size = New System.Drawing.Size(177, 25)
+        Me.cboYachtType.Size = New System.Drawing.Size(177, 23)
         Me.cboYachtType.TabIndex = 3
         '
         'lblAvailibleLength
@@ -285,7 +311,7 @@ Partial Class frmYachtEntryMain
         Me.lblAvailibleLength.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(204, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.lblAvailibleLength.Location = New System.Drawing.Point(16, 95)
         Me.lblAvailibleLength.Name = "lblAvailibleLength"
-        Me.lblAvailibleLength.Size = New System.Drawing.Size(130, 20)
+        Me.lblAvailibleLength.Size = New System.Drawing.Size(130, 19)
         Me.lblAvailibleLength.TabIndex = 2
         Me.lblAvailibleLength.Text = "Availible Length:"
         Me.lblAvailibleLength.TextAlign = System.Drawing.ContentAlignment.BottomLeft
@@ -297,7 +323,7 @@ Partial Class frmYachtEntryMain
         Me.lblYachType.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(204, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.lblYachType.Location = New System.Drawing.Point(16, 44)
         Me.lblYachType.Name = "lblYachType"
-        Me.lblYachType.Size = New System.Drawing.Size(95, 20)
+        Me.lblYachType.Size = New System.Drawing.Size(94, 19)
         Me.lblYachType.TabIndex = 1
         Me.lblYachType.Text = "Yacht Type:"
         Me.lblYachType.TextAlign = System.Drawing.ContentAlignment.BottomLeft
@@ -313,6 +339,7 @@ Partial Class frmYachtEntryMain
         Me.btnOK.Size = New System.Drawing.Size(110, 32)
         Me.btnOK.TabIndex = 5
         Me.btnOK.Text = "&OK"
+        Me.ttYachtEntry.SetToolTip(Me.btnOK, "Tabulate results based on selection")
         Me.btnOK.UseVisualStyleBackColor = False
         '
         'btnClear
@@ -326,21 +353,23 @@ Partial Class frmYachtEntryMain
         Me.btnClear.Size = New System.Drawing.Size(110, 32)
         Me.btnClear.TabIndex = 6
         Me.btnClear.Text = "&Clear"
+        Me.ttYachtEntry.SetToolTip(Me.btnClear, "Clear current entry from form")
         Me.btnClear.UseVisualStyleBackColor = False
         '
-        'Button2
+        'btnExit
         '
-        Me.Button2.BackColor = System.Drawing.Color.Gainsboro
-        Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.Button2.Font = New System.Drawing.Font("Tw Cen MT", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(72, Byte), Integer))
-        Me.Button2.Location = New System.Drawing.Point(470, 180)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(110, 32)
-        Me.Button2.TabIndex = 7
-        Me.Button2.TabStop = False
-        Me.Button2.Text = "E&xit"
-        Me.Button2.UseVisualStyleBackColor = False
+        Me.btnExit.BackColor = System.Drawing.Color.Gainsboro
+        Me.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnExit.Font = New System.Drawing.Font("Tw Cen MT", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnExit.ForeColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(72, Byte), Integer))
+        Me.btnExit.Location = New System.Drawing.Point(470, 180)
+        Me.btnExit.Name = "btnExit"
+        Me.btnExit.Size = New System.Drawing.Size(110, 32)
+        Me.btnExit.TabIndex = 7
+        Me.btnExit.TabStop = False
+        Me.btnExit.Text = "E&xit"
+        Me.ttYachtEntry.SetToolTip(Me.btnExit, "WARNING!" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "This completely closes the program." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10))
+        Me.btnExit.UseVisualStyleBackColor = False
         '
         'picYachtParty
         '
@@ -353,16 +382,16 @@ Partial Class frmYachtEntryMain
         Me.picYachtParty.TabIndex = 8
         Me.picYachtParty.TabStop = False
         '
-        'PrintPreviewDialog1
+        'diaPrintPreview
         '
-        Me.PrintPreviewDialog1.AutoScrollMargin = New System.Drawing.Size(0, 0)
-        Me.PrintPreviewDialog1.AutoScrollMinSize = New System.Drawing.Size(0, 0)
-        Me.PrintPreviewDialog1.ClientSize = New System.Drawing.Size(400, 300)
-        Me.PrintPreviewDialog1.Enabled = True
-        Me.PrintPreviewDialog1.Icon = CType(resources.GetObject("PrintPreviewDialog1.Icon"), System.Drawing.Icon)
-        Me.PrintPreviewDialog1.MainMenuStrip = Me.mnuStripYachtEntry
-        Me.PrintPreviewDialog1.Name = "PrintPreviewDialog1"
-        Me.PrintPreviewDialog1.Visible = False
+        Me.diaPrintPreview.AutoScrollMargin = New System.Drawing.Size(0, 0)
+        Me.diaPrintPreview.AutoScrollMinSize = New System.Drawing.Size(0, 0)
+        Me.diaPrintPreview.ClientSize = New System.Drawing.Size(400, 300)
+        Me.diaPrintPreview.Enabled = True
+        Me.diaPrintPreview.Icon = CType(resources.GetObject("diaPrintPreview.Icon"), System.Drawing.Icon)
+        Me.diaPrintPreview.MainMenuStrip = Me.mnuStripYachtEntry
+        Me.diaPrintPreview.Name = "PrintPreviewDialog1"
+        Me.diaPrintPreview.Visible = False
         '
         'frmYachtEntryMain
         '
@@ -371,7 +400,7 @@ Partial Class frmYachtEntryMain
         Me.BackColor = System.Drawing.Color.Black
         Me.ClientSize = New System.Drawing.Size(662, 450)
         Me.Controls.Add(Me.picYachtParty)
-        Me.Controls.Add(Me.Button2)
+        Me.Controls.Add(Me.btnExit)
         Me.Controls.Add(Me.btnClear)
         Me.Controls.Add(Me.btnOK)
         Me.Controls.Add(Me.grpYachts)
@@ -420,7 +449,11 @@ Partial Class frmYachtEntryMain
     Friend WithEvents cboYachtType As ComboBox
     Friend WithEvents btnOK As Button
     Friend WithEvents btnClear As Button
-    Friend WithEvents Button2 As Button
+    Friend WithEvents btnExit As Button
     Friend WithEvents picYachtParty As PictureBox
-    Friend WithEvents PrintPreviewDialog1 As PrintPreviewDialog
+    Friend WithEvents diaPrintPreview As PrintPreviewDialog
+    Friend WithEvents DebuggingToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ShowReportYachtsToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ShowReportSummaryToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ttYachtEntry As ToolTip
 End Class

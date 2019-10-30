@@ -1,0 +1,41 @@
+﻿'Yachts.exe' (CLR v4.0.30319: DefaultDomain): Loaded 'C:\WINDOWS\Microsoft.Net\assembly\GAC_32\mscorlib\v4.0_4.0.0.0__b77a5c561934e089\mscorlib.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
+'Yachts.exe' (CLR v4.0.30319: DefaultDomain): Loaded 'C:\Users\dabab\Documents\Local Git Repositories\HCC\Yachts\VB-Yachts\bin\Debug\Yachts.exe'. Symbols loaded.
+'Yachts.exe' (CLR v4.0.30319: Yachts.exe): Loaded 'C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\Microsoft.VisualBasic\v4.0_10.0.0.0__b03f5f7f11d50a3a\Microsoft.VisualBasic.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
+'Yachts.exe' (CLR v4.0.30319: Yachts.exe): Loaded 'C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System.Windows.Forms\v4.0_4.0.0.0__b77a5c561934e089\System.Windows.Forms.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
+'Yachts.exe' (CLR v4.0.30319: Yachts.exe): Loaded 'C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System\v4.0_4.0.0.0__b77a5c561934e089\System.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
+'Yachts.exe' (CLR v4.0.30319: Yachts.exe): Loaded 'C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System.Drawing\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.Drawing.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
+'Yachts.exe' (CLR v4.0.30319: Yachts.exe): Loaded 'C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System.Configuration\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.Configuration.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
+'Yachts.exe' (CLR v4.0.30319: Yachts.exe): Loaded 'C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System.Core\v4.0_4.0.0.0__b77a5c561934e089\System.Core.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
+'Yachts.exe' (CLR v4.0.30319: Yachts.exe): Loaded 'C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System.Xml\v4.0_4.0.0.0__b77a5c561934e089\System.Xml.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
+'Yachts.exe' (CLR v4.0.30319: Yachts.exe): Loaded 'C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System.Runtime.Remoting\v4.0_4.0.0.0__b77a5c561934e089\System.Runtime.Remoting.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
+C & C
+C & C
+Catalina
+Catalina
+Coronado
+Coronado
+Excalibur
+Excalibur
+Hans Christian
+Hans Christian
+Hobie
+Hobie
+Ranger
+Ranger
+Wavelength
+Wavelength
+22, 95.00
+24, 137.00
+30, 160.00
+32, 192.00
+36, 250.00
+38, 400.00
+45, 550.00
+Exception thrown: 'System.Collections.Generic.KeyNotFoundException' in mscorlib.dll
+______________________________
+Key = "tif" is not found.
+______________________________
+For key = "22", value = 95.00.
+For key = "45", value = 550.00.
+The fabulous low price of: 1,600.00
+The program '[22032] Yachts.exe' has exited with code 0 (0x0).
