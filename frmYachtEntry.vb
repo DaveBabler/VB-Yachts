@@ -260,84 +260,77 @@ Public Class frmYachtEntryMain
         Dim strYachtLength As String = lstAvailibleYachtLength.SelectedItem
 
         Dim decIndividualRentalCost As Decimal
-
-        Try
-            If String.IsNullOrEmpty(txtResponsibleParty.Text) Then
-                UserErrorMessage("You must enter the responsible parties name to proceed", "Who is paying for this?")
-                txtResponsibleParty.Focus()
-            End If
-
-            If cboYachtType.SelectedIndex < 0 Then
-                UserErrorMessage("You forgot to select a model", "Pick a Yacht")
-            End If
-
-            strUserHoursEntered = txtHoursChartered.Text
-            intUserHours = ValidateInts(strUserHoursEntered, txtHoursChartered)
-            If intUserHours = 0 Then
-                UserErrorMessage("Zero is not a valid entry", "Zero times X is Zero")
-
-            End If
-            ' use a try catch to divide by zero when you do the print forms and such 
-
-            decIndividualRentalCost = GetRentalPrice(strYachtLength, intUserHours)
-            Console.WriteLine("DecIndCost = " & decIndividualRentalCost.ToString())
-
-            ' Begin accumulation collection
-            If decIndividualRentalCost <> 0 Then
-                lblCalculatedPriceOutput.Text = decIndividualRentalCost.ToString("C")
-                lblCalculatedPriceOutput.Visible = True
-                'only if we know the value isn't zero add to the accumulator, otherwise, why bother?
-                decTotalRevenue += decIndividualRentalCost
-                'only add to total chartered boats if the cost is greater than 0, 
-                'if the customer needs  a way to "comp" a boat rental for customer service this can be worked out in 
-                'other modules or future releases (same for total hours)
-                intTotalCharteredBoats += 1
-                intTotalHoursChartered += intUserHours
-
-                Try
-                    Dim intTestFloorMean As Integer = Math.Floor(intTotalHoursChartered / intTotalCharteredBoats)
-                    Dim intTestCeilingMean As Integer = Math.Ceiling(intTotalHoursChartered / intTotalCharteredBoats)
-                    Dim intTestConvert As Integer = CInt(intTotalHoursChartered / intTotalCharteredBoats)
-                    Dim intTestRound As Integer = Math.Round(intTotalHoursChartered / intTotalCharteredBoats)
+        If String.IsNullOrEmpty(txtResponsibleParty.Text) Then
+            UserErrorMessage("You must enter the responsible parties name to proceed", "Who is paying for this?")
+            txtResponsibleParty.Focus()
+        Else
+            'If we have a name proceed with the rest of the logic, otherwise just throw it away
+            Try
 
 
-                    Console.WriteLine("Floor = " & vbTab & vbTab & vbTab & intTestFloorMean)
-                    Console.WriteLine("Ceiling = " & vbTab & vbTab & vbTab & intTestCeilingMean)
-                    Console.WriteLine("Type convert = " & vbTab & vbTab & vbTab & intTestConvert)
-                    Console.WriteLine("Math Round= " & vbTab & vbTab & vbTab & intTestRound)
-                    Console.WriteLine("TotalCharteredBoats " & vbTab & vbTab & vbTab & intTotalCharteredBoats)
-                    Console.WriteLine("TotalHoursChartered= " & vbTab & vbTab & vbTab & intTotalHoursChartered)
-                    Console.WriteLine("TotalRevenue= " & vbTab & vbTab & vbTab & decTotalRevenue)
+                If cboYachtType.SelectedIndex < 0 Then
+                    UserErrorMessage("You forgot to select a model", "Pick a Yacht")
+                End If
+
+                strUserHoursEntered = txtHoursChartered.Text
+                intUserHours = ValidateInts(strUserHoursEntered, txtHoursChartered)
+                If intUserHours = 0 Then
+                    UserErrorMessage("Zero is not a valid entry", "Zero times X is Zero")
+
+                End If
+                ' use a try catch to divide by zero when you do the print forms and such 
+
+                decIndividualRentalCost = GetRentalPrice(strYachtLength, intUserHours)
+                Console.WriteLine("DecIndCost = " & decIndividualRentalCost.ToString())
+
+                ' Begin accumulation collection
+                If decIndividualRentalCost <> 0 Then
+                    lblCalculatedPriceOutput.Text = decIndividualRentalCost.ToString("C")
+                    lblCalculatedPriceOutput.Visible = True
+                    'only if we know the value isn't zero add to the accumulator, otherwise, why bother?
+                    decTotalRevenue += decIndividualRentalCost
+                    'only add to total chartered boats if the cost is greater than 0, 
+                    'if the customer needs  a way to "comp" a boat rental for customer service this can be worked out in 
+                    'other modules or future releases (same for total hours)
+                    intTotalCharteredBoats += 1
+                    intTotalHoursChartered += intUserHours
+
+                    Try
+
+                        intMeanHoursChartered = Math.Ceiling(intTotalHoursChartered / intTotalCharteredBoats)
+
+                        PopulateSummaryData(intTotalCharteredBoats, intMeanHoursChartered, decTotalRevenue)
 
 
+                    Catch divZero As DivideByZeroException
 
-                Catch divZero As DivideByZeroException
+                        MsgBox("Critical Divide By Zero Error, that shouldn't be possible." & Environment.NewLine _
+                               & "Please contact development team!", MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly,
+                                "Significant Exception Has Ocurred")
 
-                    MsgBox("Critical Divide By Zero Error, that shouldn't be possible." & Environment.NewLine _
-                           & "Please contact development team!", MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly,
-                            "Significant Exception Has Ocurred")
-
-                End Try
+                    End Try
 
 
-            End If
+                End If
 
 
 
 
 
 
-        Catch nullRef As NullReferenceException
-            UserErrorMessage("You need to select a length by clicking the length of the Yacht you wish to rent!", "Choose yacht length!")
-            'Console.WriteLine("We have a null reference " & nullRef.ToString())
-        Catch nullArgEx As ArgumentNullException
-            UserErrorMessage("You need to select a length by clicking the length of the Yacht you wish to rent!", "Choose yacht length!")
-            'Console.WriteLine("We have a null argument exception which is not a null reference? " & nullArgEx.ToString())
-        Catch argEx As ArgumentException
-            UserErrorMessage("You need to select a length by clicking the length of the Yacht you wish to rent!", "Choose yacht length!")
+            Catch nullRef As NullReferenceException
+                UserErrorMessage("You need to select a length by clicking the length of the Yacht you wish to rent!", "Choose yacht length!")
+                'Console.WriteLine("We have a null reference " & nullRef.ToString())
+            Catch nullArgEx As ArgumentNullException
+                UserErrorMessage("You need to select a length by clicking the length of the Yacht you wish to rent!", "Choose yacht length!")
+                'Console.WriteLine("We have a null argument exception which is not a null reference? " & nullArgEx.ToString())
+            Catch argEx As ArgumentException
+                UserErrorMessage("You need to select a length by clicking the length of the Yacht you wish to rent!", "Choose yacht length!")
 
 
-        End Try
+            End Try
+
+        End If
 
         'If all that succeeds then it is time to add to the accumulators
 
