@@ -21,7 +21,7 @@ Public Class frmYachtEntryMain
     Dim intTotalHoursChartered As Integer = 0
     Dim intMeanHoursChartered 'use Math.Floor(a/b) to round up  we are using Mean instead of Average for precision (full hours only)
     Dim decTotalRevenue As Decimal = 0D
-    Dim strYachtTypes As String() = {"C & C", "Catalina", "Coronado", "Excalibur", "Hans Christian", "Hobie", "Ranger", "Wavelength"}
+    Dim intCountYachtTypes As Integer = 0
 
     'End standard class variable declarations
 
@@ -117,10 +117,13 @@ Public Class frmYachtEntryMain
 
     End Sub
 
-    Sub PopulateYachtReport(ByVal strYachts As String())
+
+    Sub PopulateYachtReport(ByVal strYachts As List(Of String), ByRef intYachtCount As Integer)
+        ' Populates the array report and updates the count of the number of items in the Array
         reportYachts.lblYachtTypeReportOutput.Text = ""
-        For Each yacht In strYachts
-            reportYachts.lblYachtTypeReportOutput.Text += yacht & Environment.NewLine
+
+        For Each yacht As String In strYachts
+            reportYachts.lblYachtTypeReportOutput.Text += yacht.ToString() & Environment.NewLine
         Next
     End Sub
 
@@ -133,7 +136,7 @@ Public Class frmYachtEntryMain
 
     Sub YachtTypeListPopulate()
         ' This sub will be used on form load to populate the original data set for the Yacht Types List because I simply do not want to reDim arrays
-
+        Dim strYachtTypes As String() = {"C & C", "Catalina", "Coronado", "Excalibur", "Hans Christian", "Hobie", "Ranger", "Wavelength"}
         For i = 0 To (strYachtTypes.Length - 1)
             lstYachtTypes.Add(strYachtTypes(i))
             Console.WriteLine(strYachtTypes(i))
@@ -164,13 +167,14 @@ Public Class frmYachtEntryMain
         'The rest of the forms will only show up upon print.
         'Some logic for those forms may appear here, the rest will be user event driven instead of
         'program load event.
-        PopulateYachtReport(strYachtTypes)
+
         ClearTextBoxes()
         YachtTypeListPopulate()
         YachtSizePriceDictionaryPopulate()
+        PopulateYachtReport(lstYachtTypes, intCountYachtTypes)
 
         'populates the dropdown lists and the listbox
-        For Each yacht In lstYachtTypes
+        For Each yacht As String In lstYachtTypes
             cboYachtType.Items.Add(yacht)
         Next
 
