@@ -73,6 +73,12 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="frmEditYachtTypes.Designer.vb">
+      <DependentUpon>frmEditYachtTypes.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmEditYachtTypes.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmYachtEntry.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -109,6 +115,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="frmEditYachtTypes.resx">
+      <DependentUpon>frmEditYachtTypes.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmYachtEntry.resx">
       <DependentUpon>frmYachtEntry.vb</DependentUpon>
     </EmbeddedResource>
