@@ -18,7 +18,8 @@
 Public Class frmYachtEntryMain
     'Standard variable declarations
     Dim intTotalCharteredBoats As Integer = 0
-    Dim intMeanHoursChartered 'use Math.Floor(a/b) to round up  we are using Mean instead of Average for precision
+    Dim intTotalHoursChartered As Integer = 0
+    Dim intMeanHoursChartered 'use Math.Floor(a/b) to round up  we are using Mean instead of Average for precision (full hours only)
     Dim decTotalRevenue As Decimal = 0D
     Dim strYachtTypes As String() = {"C & C", "Catalina", "Coronado", "Excalibur", "Hans Christian", "Hobie", "Ranger", "Wavelength"}
 
@@ -289,18 +290,24 @@ Public Class frmYachtEntryMain
                 decTotalRevenue += decIndividualRentalCost
                 'only add to total chartered boats if the cost is greater than 0, 
                 'if the customer needs  a way to "comp" a boat rental for customer service this can be worked out in 
-                'other modules or future releases
+                'other modules or future releases (same for total hours)
                 intTotalCharteredBoats += 1
+                intTotalHoursChartered += intUserHours
+
                 Try
-                    Dim intTestFloorMean As Integer = Math.Floor(decTotalRevenue / intTotalCharteredBoats)
-                    Dim intTestCeilingMean As Integer = Math.Ceiling(decTotalRevenue / intTotalCharteredBoats)
-                    Dim intTestConvert As Integer = CInt(decTotalRevenue / intTotalCharteredBoats)
-                    Dim intTestRound As Integer = Math.Round(decTotalRevenue / intTotalCharteredBoats)
+                    Dim intTestFloorMean As Integer = Math.Floor(intTotalHoursChartered / intTotalCharteredBoats)
+                    Dim intTestCeilingMean As Integer = Math.Ceiling(intTotalHoursChartered / intTotalCharteredBoats)
+                    Dim intTestConvert As Integer = CInt(intTotalHoursChartered / intTotalCharteredBoats)
+                    Dim intTestRound As Integer = Math.Round(intTotalHoursChartered / intTotalCharteredBoats)
+
 
                     Console.WriteLine("Floor = " & vbTab & vbTab & vbTab & intTestFloorMean)
                     Console.WriteLine("Ceiling = " & vbTab & vbTab & vbTab & intTestCeilingMean)
                     Console.WriteLine("Type convert = " & vbTab & vbTab & vbTab & intTestConvert)
                     Console.WriteLine("Math Round= " & vbTab & vbTab & vbTab & intTestRound)
+                    Console.WriteLine("TotalCharteredBoats " & vbTab & vbTab & vbTab & intTotalCharteredBoats)
+                    Console.WriteLine("TotalHoursChartered= " & vbTab & vbTab & vbTab & intTotalHoursChartered)
+                    Console.WriteLine("TotalRevenue= " & vbTab & vbTab & vbTab & decTotalRevenue)
 
 
 
