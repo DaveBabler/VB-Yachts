@@ -107,6 +107,15 @@ Public Class frmYachtEntryMain
 
     End Sub
 
+
+    Sub PopulateSummaryData(ByVal intTotalChartered As Integer, ByVal intAvgHoursChartered As Integer, ByVal decTotalRevenue As Decimal)
+        'populates the summary data on the summary report for printing
+        reportSummary.lblAvgHoursCharteredOut.Text = intAvgHoursChartered.ToString("N0")
+        reportSummary.lblNumChartersOutput.Text = intTotalChartered.ToString("N0")
+        reportSummary.lblTotalRevenueOut.Text = decTotalRevenue.ToString("C")
+
+    End Sub
+
     Sub UserErrorMessage(ByVal strMessage As String, ByVal strTitle As String)
         ' a quick way of sending a popup error box instead of recoding the thing the whole time I am tired of it.
         MsgBox(strMessage, MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, strTitle)
@@ -272,10 +281,42 @@ Public Class frmYachtEntryMain
             decIndividualRentalCost = GetRentalPrice(strYachtLength, intUserHours)
             Console.WriteLine("DecIndCost = " & decIndividualRentalCost.ToString())
 
-            If decTotalRevenue > 0 And mnuPrintSummary.Enabled = False Then
-                'If the print summary has not yet been enabled, enable it. 
-                mnuPrintSummary.Enabled = True
+            ' Begin accumulation collection
+            If decIndividualRentalCost <> 0 Then
+                lblCalculatedPriceOutput.Text = decIndividualRentalCost.ToString("C")
+                lblCalculatedPriceOutput.Visible = True
+                'only if we know the value isn't zero add to the accumulator, otherwise, why bother?
+                decTotalRevenue += decIndividualRentalCost
+                'only add to total chartered boats if the cost is greater than 0, 
+                'if the customer needs  a way to "comp" a boat rental for customer service this can be worked out in 
+                'other modules or future releases
+                intTotalCharteredBoats += 1
+                Try
+                    Dim intTestFloorMean As Integer = Math.Floor(decTotalRevenue / intTotalCharteredBoats)
+                    Dim intTestCeilingMean As Integer = Math.Ceiling(decTotalRevenue / intTotalCharteredBoats)
+                    Dim intTestConvert As Integer = CInt(decTotalRevenue / intTotalCharteredBoats)
+                    Dim intTestRound As Integer = Math.Round(decTotalRevenue / intTotalCharteredBoats)
+
+                    Console.WriteLine("Floor = " & vbTab & vbTab & vbTab & intTestFloorMean)
+                    Console.WriteLine("Ceiling = " & vbTab & vbTab & vbTab & intTestCeilingMean)
+                    Console.WriteLine("Type convert = " & vbTab & vbTab & vbTab & intTestConvert)
+                    Console.WriteLine("Math Round= " & vbTab & vbTab & vbTab & intTestRound)
+
+
+
+                Catch divZero As DivideByZeroException
+
+                    MsgBox("Critical Divide By Zero Error, that shouldn't be possible." & Environment.NewLine _
+                           & "Please contact development team!", MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly,
+                            "Significant Exception Has Ocurred")
+
+                End Try
+
+
             End If
+
+
+
 
 
 
@@ -295,12 +336,12 @@ Public Class frmYachtEntryMain
 
 
 
-        If decIndividualRentalCost <> 0 Then
-            lblCalculatedPriceOutput.Text = decIndividualRentalCost.ToString("C")
-            lblCalculatedPriceOutput.Visible = True
-            'only if we know the value isn't zero add to the accumulator, otherwise, why bother?
-            decTotalRevenue += decIndividualRentalCost
 
+
+
+        If decTotalRevenue > 0 And mnuPrintSummary.Enabled = False Then
+            'If the print summary has not yet been enabled, and deserves to be enabled, enable it. 
+            mnuPrintSummary.Enabled = True
         End If
 
 
