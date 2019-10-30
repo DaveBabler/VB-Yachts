@@ -120,11 +120,14 @@ Public Class frmYachtEntryMain
 
     Sub PopulateYachtReport(ByVal strYachts As List(Of String), ByRef intYachtCount As Integer)
         ' Populates the array report and updates the count of the number of items in the Array
+        ' WARNING any time a yacht type is added or removed this Subprocedure must be called.
         reportYachts.lblYachtTypeReportOutput.Text = ""
 
         For Each yacht As String In strYachts
             reportYachts.lblYachtTypeReportOutput.Text += yacht.ToString() & Environment.NewLine
         Next
+        intYachtCount = strYachts.Count
+        reportYachts.lblCountYachtOutput.Text += intYachtCount.ToString("N0")
     End Sub
 
     Sub UserErrorMessage(ByVal strMessage As String, ByVal strTitle As String)
@@ -367,5 +370,9 @@ Public Class frmYachtEntryMain
         'load a modal with a list box of all yachts availible 
         'have the user select and then click ok
         'if cancel just close the modal (oh and do it as a modal)
+    End Sub
+
+    Private Sub mnuDisplayYachtCount_Click(sender As Object, e As EventArgs) Handles mnuDisplayYachtCount.Click
+        MsgBox("Total Count of Yachts is: " & intCountYachtTypes, vbApplicationModal Or vbOKOnly Or vbInformation, "Counted Yacht Types")
     End Sub
 End Class
