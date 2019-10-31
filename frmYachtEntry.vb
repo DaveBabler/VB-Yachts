@@ -178,18 +178,15 @@ Public Class frmYachtEntryMain
     End Sub
 
     Private Sub mnuPrintSummary_Click(sender As Object, e As EventArgs) Handles mnuPrintSummary.Click
-
-    End Sub
-    ''''REMOVE these events BEFORE PUBLISHING
-    Private Sub ShowReportYachtsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ShowReportYachtsToolStripMenuItem.Click
-        reportYachts.Show()
-    End Sub
-
-    Private Sub ShowReportSummaryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ShowReportSummaryToolStripMenuItem.Click
+        ' PrintPreviewControl.
+        ' Show to load the form, hide to conceal from user, print the form, then close the form
         reportSummary.Show()
+        reportSummary.Hide()
+        PrintForm1.PrintAction = Printing.PrintAction.PrintToPreview
+        PrintForm1.Print(reportSummary, PowerPacks.Printing.PrintForm.PrintOption.FullWindow)
+        reportSummary.Close()
     End Sub
-    ''''End events REMOVE BEFORE PUBLISHING
-    '''
+
     Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
         ClearFormData()
     End Sub
@@ -235,7 +232,7 @@ Public Class frmYachtEntryMain
                 ' use a try catch to divide by zero when you do the print forms and such 
 
                 decIndividualRentalCost = GetRentalPrice(strYachtLength, intUserHours)
-                Console.WriteLine("DecIndCost = " & decIndividualRentalCost.ToString())
+                'Console.WriteLine("DecIndCost = " & decIndividualRentalCost.ToString())
 
                 ' Begin accumulation collection
                 If decIndividualRentalCost <> 0 Then
@@ -274,10 +271,10 @@ Public Class frmYachtEntryMain
 
             Catch nullRef As NullReferenceException
                 UserErrorMessage("You need to select a length by clicking the length of the Yacht you wish to rent!", "Choose yacht length!")
-                'Console.WriteLine("We have a null reference " & nullRef.ToString())
+                ''Console.WriteLine("We have a null reference " & nullRef.ToString())
             Catch nullArgEx As ArgumentNullException
                 UserErrorMessage("You need to select a length by clicking the length of the Yacht you wish to rent!", "Choose yacht length!")
-                'Console.WriteLine("We have a null argument exception which is not a null reference? " & nullArgEx.ToString())
+                ''Console.WriteLine("We have a null argument exception which is not a null reference? " & nullArgEx.ToString())
             Catch argEx As ArgumentException
                 UserErrorMessage("You need to select a length by clicking the length of the Yacht you wish to rent!", "Choose yacht length!")
 
@@ -303,7 +300,7 @@ Public Class frmYachtEntryMain
 
     Private Sub mnuAddYachtType_Click(sender As Object, e As EventArgs) Handles mnuAddYachtType.Click
         'pop up text entry
-        Dim strNewYacht As String = InputBox("Please enter the new Yacht Type Here: ", vbOKCancel Or vbQuestion, "Add Yacht")
+        Dim strNewYacht As String = InputBox("Please enter the new Yacht Type Here: ", "Add Yacht")
         GlobalClass.lstYachtTypes.Add(strNewYacht)
         'Sort the list
         GlobalClass.lstYachtTypes.Sort()
@@ -320,6 +317,22 @@ Public Class frmYachtEntryMain
 
     Private Sub mnuDisplayYachtCount_Click(sender As Object, e As EventArgs) Handles mnuDisplayYachtCount.Click
         MsgBox("Total Count of Yachts is: " & GlobalClass.intCountYachtTypes, vbApplicationModal Or vbOKOnly Or vbInformation, "Counted Yacht Types")
+    End Sub
+
+    Private Sub mnuPrintYachtTypes_Click(sender As Object, e As EventArgs) Handles mnuPrintYachtTypes.Click
+        ' PrintPreviewControl.
+        ' Show to load the form, hide to conceal from user, print the form, then close the form
+        reportYachts.Show()
+        reportYachts.Hide()
+        PrintForm1.PrintAction = Printing.PrintAction.PrintToPreview
+        PrintForm1.Print(reportYachts, PowerPacks.Printing.PrintForm.PrintOption.FullWindow)
+        reportYachts.Close()
+
+    End Sub
+
+    Private Sub mnuAbout_Click(sender As Object, e As EventArgs) Handles mnuAbout.Click
+        frmAbout.ShowDialog()
+
     End Sub
 End Class
 Public Class GlobalClass
@@ -375,15 +388,15 @@ Public Class GlobalClass
             reportYachts.lblYachtTypeReportOutput.Text += yacht.ToString() & Environment.NewLine
         Next
         intYachtCount = strYachts.Count
-        reportYachts.lblCountYachtOutput.Text += intYachtCount.ToString("N0")
+        reportYachts.lblCountYachtOutput.Text = "Total Types of Yachts: " & intYachtCount.ToString("N0")
     End Sub
     Public Shared Sub YachtTypeListPopulate()
         ' This sub will be used on form load to populate the original data set for the Yacht Types List because I simply do not want to reDim arrays
         Dim strYachtTypes As String() = {"C & C", "Catalina", "Coronado", "Excalibur", "Hans Christian", "Hobie", "Ranger", "Wavelength"}
         For i = 0 To (strYachtTypes.Length - 1)
             lstYachtTypes.Add(strYachtTypes(i))
-            Console.WriteLine(strYachtTypes(i))
-            Console.WriteLine(lstYachtTypes.Item(i))
+            'Console.WriteLine(strYachtTypes(i))
+            'Console.WriteLine(lstYachtTypes.Item(i))
         Next
 
     End Sub
