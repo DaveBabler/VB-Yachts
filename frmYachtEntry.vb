@@ -302,7 +302,12 @@ Public Class frmYachtEntryMain
     End Sub
 
     Private Sub mnuAddYachtType_Click(sender As Object, e As EventArgs) Handles mnuAddYachtType.Click
-        'pop up text entry?
+        'pop up text entry
+        Dim strNewYacht As String = InputBox("Please enter the new Yacht Type Here: ", vbOKCancel Or vbQuestion, "Add Yacht")
+        GlobalClass.lstYachtTypes.Add(strNewYacht)
+        'Sort the list
+        GlobalClass.lstYachtTypes.Sort()
+        GlobalClass.ReloadControlsWithList(GlobalClass.lstYachtTypes)
     End Sub
 
     Private Sub mnuRemoveYachtType_Click(sender As Object, e As EventArgs) Handles mnuRemoveYachtType.Click
@@ -351,14 +356,14 @@ Public Class GlobalClass
         Next
     End Sub
 
-    Public Shared Sub RemoveListItem(ByRef lstItems As List(Of String), ByVal strToStrip As String)
-        'The code below is one way of doing it if you really need to worry about Indecies (or is it Indexes)
-        'Dim idxOfThing = GlobalClass.lstYachtTypes.IndexOf(strToStrip)
-        'GlobalClass.lstYachtTypes.RemoveAt(idxOfThing)
+    'Public Shared Sub RemoveListItem(ByRef lstItems As List(Of String), ByVal strToStrip As String)
+    '    'The code below is one way of doing it if you really need to worry about Indecies (or is it Indexes)
+    '    'Dim idxOfThing = GlobalClass.lstYachtTypes.IndexOf(strToStrip)
+    '    'GlobalClass.lstYachtTypes.RemoveAt(idxOfThing)
 
-        lstItems.Remove(strToStrip)
+    '    lstItems.Remove(strToStrip)
 
-    End Sub
+    'End Sub
     Public Shared Sub PopulateYachtReport(ByVal strYachts As List(Of String), ByRef intYachtCount As Integer)
         ' Populates the array report and updates the count of the number of items in the Array
         ' WARNING any time a yacht type is added or removed this Subprocedure must be called.
@@ -390,4 +395,5 @@ Public Class GlobalClass
 
 
     End Sub
+
 End Class
