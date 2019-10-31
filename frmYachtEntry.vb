@@ -181,6 +181,8 @@ Public Class frmYachtEntryMain
         ' PrintPreviewControl.
         ' Show to load the form, hide to conceal from user, print the form, then close the form
         reportSummary.Show()
+        'Adding this second option to populate summmary data should in theory allow for accumulated data to show even after "clear" is pressed
+        PopulateSummaryData(intTotalCharteredBoats, intMeanHoursChartered, decTotalRevenue)
         reportSummary.Hide()
         PrintForm1.PrintAction = Printing.PrintAction.PrintToPreview
         PrintForm1.Print(reportSummary, PowerPacks.Printing.PrintForm.PrintOption.FullWindow)
@@ -240,6 +242,7 @@ Public Class frmYachtEntryMain
                     lblCalculatedPriceOutput.Visible = True
                     'only if we know the value isn't zero add to the accumulator, otherwise, why bother?
                     decTotalRevenue += decIndividualRentalCost
+                    decIndividualRentalCost = 0 ' we need to immediately reset this to 0 on the back end to prevent errors on adding to accumulator
                     'only add to total chartered boats if the cost is greater than 0, 
                     'if the customer needs  a way to "comp" a boat rental for customer service this can be worked out in 
                     'other modules or future releases (same for total hours)
@@ -292,6 +295,8 @@ Public Class frmYachtEntryMain
 
         If decTotalRevenue > 0 And mnuPrintSummary.Enabled = False Then
             'If the print summary has not yet been enabled, and deserves to be enabled, enable it. 
+
+
             mnuPrintSummary.Enabled = True
         End If
 
