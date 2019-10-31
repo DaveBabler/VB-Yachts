@@ -24,12 +24,12 @@ Partial Class reportSummary
     Private Sub InitializeComponent()
         Me.lblSummaryReportHeader = New System.Windows.Forms.Label()
         Me.tlayoutSummary = New System.Windows.Forms.TableLayoutPanel()
-        Me.lblProgrammerSummaryForm = New System.Windows.Forms.Label()
-        Me.lblNumChartersLabel = New System.Windows.Forms.Label()
-        Me.lblAvgHoursCharteredLabel = New System.Windows.Forms.Label()
-        Me.lblTotalRevenueLabel = New System.Windows.Forms.Label()
-        Me.lblNumChartersOutput = New System.Windows.Forms.Label()
         Me.lblAvgHoursCharteredOut = New System.Windows.Forms.Label()
+        Me.lblNumChartersOutput = New System.Windows.Forms.Label()
+        Me.lblAvgHoursCharteredLabel = New System.Windows.Forms.Label()
+        Me.lblNumChartersLabel = New System.Windows.Forms.Label()
+        Me.lblProgrammerSummaryForm = New System.Windows.Forms.Label()
+        Me.lblTotalRevenueLabel = New System.Windows.Forms.Label()
         Me.lblTotalRevenueOut = New System.Windows.Forms.Label()
         Me.tlayoutSummary.SuspendLayout()
         Me.SuspendLayout()
@@ -74,6 +74,50 @@ Partial Class reportSummary
         Me.tlayoutSummary.Size = New System.Drawing.Size(320, 246)
         Me.tlayoutSummary.TabIndex = 2
         '
+        'lblAvgHoursCharteredOut
+        '
+        Me.lblAvgHoursCharteredOut.Anchor = System.Windows.Forms.AnchorStyles.Right
+        Me.lblAvgHoursCharteredOut.AutoSize = True
+        Me.lblAvgHoursCharteredOut.Location = New System.Drawing.Point(263, 137)
+        Me.lblAvgHoursCharteredOut.Name = "lblAvgHoursCharteredOut"
+        Me.lblAvgHoursCharteredOut.Size = New System.Drawing.Size(54, 19)
+        Me.lblAvgHoursCharteredOut.TabIndex = 8
+        Me.lblAvgHoursCharteredOut.Text = "88888"
+        Me.lblAvgHoursCharteredOut.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'lblNumChartersOutput
+        '
+        Me.lblNumChartersOutput.Anchor = System.Windows.Forms.AnchorStyles.Right
+        Me.lblNumChartersOutput.AutoSize = True
+        Me.lblNumChartersOutput.Location = New System.Drawing.Point(263, 88)
+        Me.lblNumChartersOutput.Name = "lblNumChartersOutput"
+        Me.lblNumChartersOutput.Size = New System.Drawing.Size(54, 19)
+        Me.lblNumChartersOutput.TabIndex = 7
+        Me.lblNumChartersOutput.Text = "88888"
+        Me.lblNumChartersOutput.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'lblAvgHoursCharteredLabel
+        '
+        Me.lblAvgHoursCharteredLabel.Anchor = System.Windows.Forms.AnchorStyles.Left
+        Me.lblAvgHoursCharteredLabel.AutoSize = True
+        Me.lblAvgHoursCharteredLabel.Location = New System.Drawing.Point(3, 137)
+        Me.lblAvgHoursCharteredLabel.Name = "lblAvgHoursCharteredLabel"
+        Me.lblAvgHoursCharteredLabel.Size = New System.Drawing.Size(198, 19)
+        Me.lblAvgHoursCharteredLabel.TabIndex = 5
+        Me.lblAvgHoursCharteredLabel.Text = "Average Hours Chartered:"
+        Me.lblAvgHoursCharteredLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'lblNumChartersLabel
+        '
+        Me.lblNumChartersLabel.Anchor = System.Windows.Forms.AnchorStyles.Left
+        Me.lblNumChartersLabel.AutoSize = True
+        Me.lblNumChartersLabel.Location = New System.Drawing.Point(3, 88)
+        Me.lblNumChartersLabel.Name = "lblNumChartersLabel"
+        Me.lblNumChartersLabel.Size = New System.Drawing.Size(157, 19)
+        Me.lblNumChartersLabel.TabIndex = 1
+        Me.lblNumChartersLabel.Text = "Number of Charters:"
+        Me.lblNumChartersLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
         'lblProgrammerSummaryForm
         '
         Me.lblProgrammerSummaryForm.Anchor = System.Windows.Forms.AnchorStyles.Bottom
@@ -87,29 +131,6 @@ Partial Class reportSummary
         Me.lblProgrammerSummaryForm.TabIndex = 4
         Me.lblProgrammerSummaryForm.Text = "Programmers Name Goes Here"
         Me.lblProgrammerSummaryForm.TextAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.lblProgrammerSummaryForm.Visible = False
-        '
-        'lblNumChartersLabel
-        '
-        Me.lblNumChartersLabel.Anchor = System.Windows.Forms.AnchorStyles.Left
-        Me.lblNumChartersLabel.AutoSize = True
-        Me.lblNumChartersLabel.Location = New System.Drawing.Point(3, 88)
-        Me.lblNumChartersLabel.Name = "lblNumChartersLabel"
-        Me.lblNumChartersLabel.Size = New System.Drawing.Size(157, 19)
-        Me.lblNumChartersLabel.TabIndex = 1
-        Me.lblNumChartersLabel.Text = "Number of Charters:"
-        Me.lblNumChartersLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'lblAvgHoursCharteredLabel
-        '
-        Me.lblAvgHoursCharteredLabel.Anchor = System.Windows.Forms.AnchorStyles.Left
-        Me.lblAvgHoursCharteredLabel.AutoSize = True
-        Me.lblAvgHoursCharteredLabel.Location = New System.Drawing.Point(3, 137)
-        Me.lblAvgHoursCharteredLabel.Name = "lblAvgHoursCharteredLabel"
-        Me.lblAvgHoursCharteredLabel.Size = New System.Drawing.Size(198, 19)
-        Me.lblAvgHoursCharteredLabel.TabIndex = 5
-        Me.lblAvgHoursCharteredLabel.Text = "Average Hours Chartered:"
-        Me.lblAvgHoursCharteredLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'lblTotalRevenueLabel
         '
@@ -121,28 +142,6 @@ Partial Class reportSummary
         Me.lblTotalRevenueLabel.TabIndex = 6
         Me.lblTotalRevenueLabel.Text = "Total Revenue: "
         Me.lblTotalRevenueLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'lblNumChartersOutput
-        '
-        Me.lblNumChartersOutput.Anchor = System.Windows.Forms.AnchorStyles.Right
-        Me.lblNumChartersOutput.AutoSize = True
-        Me.lblNumChartersOutput.Location = New System.Drawing.Point(263, 88)
-        Me.lblNumChartersOutput.Name = "lblNumChartersOutput"
-        Me.lblNumChartersOutput.Size = New System.Drawing.Size(54, 19)
-        Me.lblNumChartersOutput.TabIndex = 7
-        Me.lblNumChartersOutput.Text = "88888"
-        Me.lblNumChartersOutput.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'lblAvgHoursCharteredOut
-        '
-        Me.lblAvgHoursCharteredOut.Anchor = System.Windows.Forms.AnchorStyles.Right
-        Me.lblAvgHoursCharteredOut.AutoSize = True
-        Me.lblAvgHoursCharteredOut.Location = New System.Drawing.Point(263, 137)
-        Me.lblAvgHoursCharteredOut.Name = "lblAvgHoursCharteredOut"
-        Me.lblAvgHoursCharteredOut.Size = New System.Drawing.Size(54, 19)
-        Me.lblAvgHoursCharteredOut.TabIndex = 8
-        Me.lblAvgHoursCharteredOut.Text = "88888"
-        Me.lblAvgHoursCharteredOut.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'lblTotalRevenueOut
         '

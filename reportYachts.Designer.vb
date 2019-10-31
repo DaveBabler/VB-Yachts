@@ -57,9 +57,9 @@ Partial Class reportYachts
         Me.lblCountYachtOutput.AutoSize = True
         Me.lblCountYachtOutput.Font = New System.Drawing.Font("Roboto", 9.0!, System.Drawing.FontStyle.Bold)
         Me.lblCountYachtOutput.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(204, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.lblCountYachtOutput.Location = New System.Drawing.Point(92, 70)
+        Me.lblCountYachtOutput.Location = New System.Drawing.Point(92, 69)
         Me.lblCountYachtOutput.Name = "lblCountYachtOutput"
-        Me.lblCountYachtOutput.Size = New System.Drawing.Size(128, 15)
+        Me.lblCountYachtOutput.Size = New System.Drawing.Size(127, 14)
         Me.lblCountYachtOutput.TabIndex = 2
         Me.lblCountYachtOutput.Text = "Total Types of Yachts: "
         Me.lblCountYachtOutput.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -70,9 +70,9 @@ Partial Class reportYachts
         Me.lblYachtReportHeader.AutoSize = True
         Me.lblYachtReportHeader.Font = New System.Drawing.Font("Roboto", 21.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblYachtReportHeader.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(204, Byte), Integer))
-        Me.lblYachtReportHeader.Location = New System.Drawing.Point(6, 0)
+        Me.lblYachtReportHeader.Location = New System.Drawing.Point(8, 0)
         Me.lblYachtReportHeader.Name = "lblYachtReportHeader"
-        Me.lblYachtReportHeader.Size = New System.Drawing.Size(299, 36)
+        Me.lblYachtReportHeader.Size = New System.Drawing.Size(295, 35)
         Me.lblYachtReportHeader.TabIndex = 0
         Me.lblYachtReportHeader.Text = "Availible Yacht Types"
         Me.lblYachtReportHeader.TextAlign = System.Drawing.ContentAlignment.TopCenter
@@ -81,9 +81,9 @@ Partial Class reportYachts
         '
         Me.lblYachtTypeReportOutput.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.lblYachtTypeReportOutput.AutoSize = True
-        Me.lblYachtTypeReportOutput.Location = New System.Drawing.Point(60, 50)
+        Me.lblYachtTypeReportOutput.Location = New System.Drawing.Point(61, 50)
         Me.lblYachtTypeReportOutput.Name = "lblYachtTypeReportOutput"
-        Me.lblYachtTypeReportOutput.Size = New System.Drawing.Size(191, 20)
+        Me.lblYachtTypeReportOutput.Size = New System.Drawing.Size(190, 19)
         Me.lblYachtTypeReportOutput.TabIndex = 1
         Me.lblYachtTypeReportOutput.Text = "Yacht Types Will Go Here"
         Me.lblYachtTypeReportOutput.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -94,13 +94,12 @@ Partial Class reportYachts
         Me.lblProgrammerYachtForm.AutoSize = True
         Me.lblProgrammerYachtForm.Font = New System.Drawing.Font("Roboto", 10.0!, System.Drawing.FontStyle.Bold)
         Me.lblProgrammerYachtForm.ForeColor = System.Drawing.Color.FromArgb(CType(CType(204, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.lblProgrammerYachtForm.Location = New System.Drawing.Point(118, 92)
+        Me.lblProgrammerYachtForm.Location = New System.Drawing.Point(118, 93)
         Me.lblProgrammerYachtForm.Name = "lblProgrammerYachtForm"
-        Me.lblProgrammerYachtForm.Size = New System.Drawing.Size(76, 18)
+        Me.lblProgrammerYachtForm.Size = New System.Drawing.Size(76, 17)
         Me.lblProgrammerYachtForm.TabIndex = 4
         Me.lblProgrammerYachtForm.Text = "$88888.88"
         Me.lblProgrammerYachtForm.TextAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.lblProgrammerYachtForm.Visible = False
         '
         'reportYachts
         '
