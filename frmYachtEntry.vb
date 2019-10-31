@@ -27,11 +27,10 @@ Public Class frmYachtEntryMain
 
     'Begin advanced varaible section
 
+
     'Going to need this key value pair object for testing things in console later and populating lists and such 
     Dim pair As KeyValuePair(Of String, String)
 
-    ' initially tried an array for this, changing array size on the fly is not fun using list instead
-    Dim lstYachtTypes As New List(Of String)
     Dim arrlblProgrammerName As System.Windows.Forms.Label() = {reportYachts.lblProgrammerYachtForm, reportSummary.lblProgrammerSummaryForm}
 
     'Need a multidimensional array that can be resized on the fly, do not have access to C#'s jagged array, constantly having 
@@ -118,6 +117,8 @@ Public Class frmYachtEntryMain
     End Sub
 
 
+
+
     Sub PopulateYachtReport(ByVal strYachts As List(Of String), ByRef intYachtCount As Integer)
         ' Populates the array report and updates the count of the number of items in the Array
         ' WARNING any time a yacht type is added or removed this Subprocedure must be called.
@@ -141,9 +142,9 @@ Public Class frmYachtEntryMain
         ' This sub will be used on form load to populate the original data set for the Yacht Types List because I simply do not want to reDim arrays
         Dim strYachtTypes As String() = {"C & C", "Catalina", "Coronado", "Excalibur", "Hans Christian", "Hobie", "Ranger", "Wavelength"}
         For i = 0 To (strYachtTypes.Length - 1)
-            lstYachtTypes.Add(strYachtTypes(i))
+            GlobalClass.lstYachtTypes.Add(strYachtTypes(i))
             Console.WriteLine(strYachtTypes(i))
-            Console.WriteLine(lstYachtTypes.Item(i))
+            Console.WriteLine(GlobalClass.lstYachtTypes.Item(i))
         Next
 
     End Sub
@@ -174,10 +175,12 @@ Public Class frmYachtEntryMain
         ClearTextBoxes()
         YachtTypeListPopulate()
         YachtSizePriceDictionaryPopulate()
-        PopulateYachtReport(lstYachtTypes, intCountYachtTypes)
+        PopulateYachtReport(GlobalClass.lstYachtTypes, intCountYachtTypes)
+        GlobalClass.PopulateDomainWithList(GlobalClass.lstYachtTypes, frmEditYachtTypes.dmnYachts)
+        frmEditYachtTypes.Show()
 
         'populates the dropdown lists and the listbox
-        For Each yacht As String In lstYachtTypes
+        For Each yacht As String In GlobalClass.lstYachtTypes
             cboYachtType.Items.Add(yacht)
         Next
 
@@ -374,5 +377,36 @@ Public Class frmYachtEntryMain
 
     Private Sub mnuDisplayYachtCount_Click(sender As Object, e As EventArgs) Handles mnuDisplayYachtCount.Click
         MsgBox("Total Count of Yachts is: " & intCountYachtTypes, vbApplicationModal Or vbOKOnly Or vbInformation, "Counted Yacht Types")
+    End Sub
+End Class
+Public Class GlobalClass
+    ' This class stores Global Variables as is suggested by the name. (Self referencing code!)
+    ' initially tried an array for this, changing array size on the fly is not fun using list instead
+    ' also needed this to be in a couple different classes
+    Public Shared lstYachtTypes As New List(Of String)
+
+
+    Public Shared Sub PopulateDomainWithList(ByRef lstItems As List(Of String), ByRef dmnToManipulate As DomainUpDown)
+        'This populates an updown domain so that a selected item can be wholly removed from a list
+        'This is why we are passing ByRef
+        'Be advised forms where the list shows will require reloading upon successful execution of this Sub
+        'Babler has made this function Generic because he feels he will need it again...someday.
+
+        dmnToManipulate.Items.Clear()
+        dmnToManipulate.Text = ""
+
+        For Each strValue As String In lstYachtTypes
+            dmnToManipulate.Items.Add(strValue)
+        Next
+
+        dmnToManipulate.SelectedIndex = 0
+    End Sub
+    Public Shared Sub RemoveListItem(ByRef lstItems As List(Of String), ByVal strToStrip As String)
+        'The code below is one way of doing it if you really need to worry about Indecies (or is it Indexes)
+        'Dim idxOfThing = GlobalClass.lstYachtTypes.IndexOf(strToStrip)
+        'GlobalClass.lstYachtTypes.RemoveAt(idxOfThing)
+
+        lstItems.Remove(strToStrip)
+
     End Sub
 End Class
