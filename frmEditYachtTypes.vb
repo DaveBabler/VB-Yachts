@@ -2,6 +2,7 @@
     Private Sub btnOK_Click(sender As Object, e As EventArgs) Handles btnOK.Click
         Dim strToStrip As String = dmnYachts.SelectedItem.ToString()
         GlobalClass.lstYachtTypes.Remove(strToStrip)
+        GlobalClass.ReloadControlsWithList(GlobalClass.lstYachtTypes)
 
     End Sub
 

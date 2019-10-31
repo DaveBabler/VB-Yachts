@@ -21,7 +21,7 @@ Public Class frmYachtEntryMain
     Dim intTotalHoursChartered As Integer = 0
     Dim intMeanHoursChartered 'use Math.Floor(a/b) to round up  we are using Mean instead of Average for precision (full hours only)
     Dim decTotalRevenue As Decimal = 0D
-    Dim intCountYachtTypes As Integer = 0
+
 
     'End standard class variable declarations
 
@@ -119,17 +119,7 @@ Public Class frmYachtEntryMain
 
 
 
-    Sub PopulateYachtReport(ByVal strYachts As List(Of String), ByRef intYachtCount As Integer)
-        ' Populates the array report and updates the count of the number of items in the Array
-        ' WARNING any time a yacht type is added or removed this Subprocedure must be called.
-        reportYachts.lblYachtTypeReportOutput.Text = ""
 
-        For Each yacht As String In strYachts
-            reportYachts.lblYachtTypeReportOutput.Text += yacht.ToString() & Environment.NewLine
-        Next
-        intYachtCount = strYachts.Count
-        reportYachts.lblCountYachtOutput.Text += intYachtCount.ToString("N0")
-    End Sub
 
     Sub UserErrorMessage(ByVal strMessage As String, ByVal strTitle As String)
         ' a quick way of sending a popup error box instead of recoding the thing the whole time I am tired of it.
@@ -138,16 +128,6 @@ Public Class frmYachtEntryMain
     End Sub
 
 
-    Sub YachtTypeListPopulate()
-        ' This sub will be used on form load to populate the original data set for the Yacht Types List because I simply do not want to reDim arrays
-        Dim strYachtTypes As String() = {"C & C", "Catalina", "Coronado", "Excalibur", "Hans Christian", "Hobie", "Ranger", "Wavelength"}
-        For i = 0 To (strYachtTypes.Length - 1)
-            GlobalClass.lstYachtTypes.Add(strYachtTypes(i))
-            Console.WriteLine(strYachtTypes(i))
-            Console.WriteLine(GlobalClass.lstYachtTypes.Item(i))
-        Next
-
-    End Sub
 
     Sub YachtSizePriceDictionaryPopulate()
         'populate the dictionary dctYachtSize Price
@@ -171,18 +151,17 @@ Public Class frmYachtEntryMain
         'The rest of the forms will only show up upon print.
         'Some logic for those forms may appear here, the rest will be user event driven instead of
         'program load event.
-
+        frmEditYachtTypes.Visible = False
+        frmEditYachtTypes.Hide()
         ClearTextBoxes()
-        YachtTypeListPopulate()
+        GlobalClass.YachtTypeListPopulate()
         YachtSizePriceDictionaryPopulate()
-        PopulateYachtReport(GlobalClass.lstYachtTypes, intCountYachtTypes)
+        GlobalClass.PopulateYachtReport(GlobalClass.lstYachtTypes, GlobalClass.intCountYachtTypes)
         GlobalClass.PopulateDomainWithList(GlobalClass.lstYachtTypes, frmEditYachtTypes.dmnYachts)
         frmEditYachtTypes.Show()
-
+        GlobalClass.PopulateComboBox(GlobalClass.lstYachtTypes, cboYachtType)
         'populates the dropdown lists and the listbox
-        For Each yacht As String In GlobalClass.lstYachtTypes
-            cboYachtType.Items.Add(yacht)
-        Next
+
 
         For Each pair In dctYachtSizePrice
             'in this case Key is the length
@@ -193,50 +172,6 @@ Public Class frmYachtEntryMain
             programmerNameLabel.Text = "Program Code && Design by: Dave Babler"
             programmerNameLabel.Visible = True
         Next
-
-
-
-        ''''End legitimate program begin testing section
-
-
-
-        ''''REMOVE BEFORE PUBLISHING
-        '''
-        '''Research on printing a hidden form https://docs.microsoft.com/en-us/dotnet/api/system.windows.forms.printpreviewcontrol?view=netframework-4.8
-        For Each pair In dctYachtSizePrice
-            Console.WriteLine("{0}, {1}", pair.Key, pair.Value)
-        Next
-
-
-        Try
-            Console.WriteLine("For key = ""tif"", value = {0}.",
-                dctYachtSizePrice("tif"))
-        Catch
-            Console.WriteLine("______________________________")
-            Console.WriteLine("Key = ""tif"" is not found.")
-            Console.WriteLine("______________________________")
-        End Try
-
-        Try
-            Console.WriteLine("For key = ""22"", value = {0}.",
-                dctYachtSizePrice("22"))
-        Catch
-            Console.WriteLine("Key = ""22"" is not found.")
-        End Try
-
-
-        Dim value As String = ""
-        If dctYachtSizePrice.TryGetValue("45", value) Then
-            Console.WriteLine("For key = ""45"", value = {0}.", value)
-        Else
-            Console.WriteLine("Key = ""45"" is not found.")
-        End If
-
-        Dim TestPrice As Decimal = GetRentalPrice("38", 4)
-        Console.WriteLine("The fabulous low price of: {0:N2}", TestPrice)
-
-        ''''REMOVE BEFORE PUBLISHING
-        '''
 
 
     End Sub
@@ -373,10 +308,12 @@ Public Class frmYachtEntryMain
         'load a modal with a list box of all yachts availible 
         'have the user select and then click ok
         'if cancel just close the modal (oh and do it as a modal)
+        frmEditYachtTypes.ShowDialog()
+
     End Sub
 
     Private Sub mnuDisplayYachtCount_Click(sender As Object, e As EventArgs) Handles mnuDisplayYachtCount.Click
-        MsgBox("Total Count of Yachts is: " & intCountYachtTypes, vbApplicationModal Or vbOKOnly Or vbInformation, "Counted Yacht Types")
+        MsgBox("Total Count of Yachts is: " & GlobalClass.intCountYachtTypes, vbApplicationModal Or vbOKOnly Or vbInformation, "Counted Yacht Types")
     End Sub
 End Class
 Public Class GlobalClass
@@ -384,9 +321,10 @@ Public Class GlobalClass
     ' initially tried an array for this, changing array size on the fly is not fun using list instead
     ' also needed this to be in a couple different classes
     Public Shared lstYachtTypes As New List(Of String)
+    Public Shared intCountYachtTypes As Integer = 0
 
 
-    Public Shared Sub PopulateDomainWithList(ByRef lstItems As List(Of String), ByRef dmnToManipulate As DomainUpDown)
+    Public Shared Sub PopulateDomainWithList(ByVal lstItems As List(Of String), ByRef dmnToManipulate As DomainUpDown)
         'This populates an updown domain so that a selected item can be wholly removed from a list
         'This is why we are passing ByRef
         'Be advised forms where the list shows will require reloading upon successful execution of this Sub
@@ -401,12 +339,54 @@ Public Class GlobalClass
 
         dmnToManipulate.SelectedIndex = 0
     End Sub
+
+    Public Shared Sub PopulateComboBox(ByVal lstItems As List(Of String), ByRef cboBoxToPopulate As ComboBox)
+        'Clears then populates a combo box!
+        cboBoxToPopulate.Text = ""
+        cboBoxToPopulate.Items.Clear()
+
+        For Each strValue As String In lstItems
+            cboBoxToPopulate.Items.Add(strValue)
+        Next
+    End Sub
+
     Public Shared Sub RemoveListItem(ByRef lstItems As List(Of String), ByVal strToStrip As String)
         'The code below is one way of doing it if you really need to worry about Indecies (or is it Indexes)
         'Dim idxOfThing = GlobalClass.lstYachtTypes.IndexOf(strToStrip)
         'GlobalClass.lstYachtTypes.RemoveAt(idxOfThing)
 
         lstItems.Remove(strToStrip)
+
+    End Sub
+    Public Shared Sub PopulateYachtReport(ByVal strYachts As List(Of String), ByRef intYachtCount As Integer)
+        ' Populates the array report and updates the count of the number of items in the Array
+        ' WARNING any time a yacht type is added or removed this Subprocedure must be called.
+        reportYachts.lblYachtTypeReportOutput.Text = ""
+        'Reset the counter before manipulating it and passing it back
+        intYachtCount = 0
+
+        For Each yacht As String In strYachts
+            reportYachts.lblYachtTypeReportOutput.Text += yacht.ToString() & Environment.NewLine
+        Next
+        intYachtCount = strYachts.Count
+        reportYachts.lblCountYachtOutput.Text += intYachtCount.ToString("N0")
+    End Sub
+    Public Shared Sub YachtTypeListPopulate()
+        ' This sub will be used on form load to populate the original data set for the Yacht Types List because I simply do not want to reDim arrays
+        Dim strYachtTypes As String() = {"C & C", "Catalina", "Coronado", "Excalibur", "Hans Christian", "Hobie", "Ranger", "Wavelength"}
+        For i = 0 To (strYachtTypes.Length - 1)
+            lstYachtTypes.Add(strYachtTypes(i))
+            Console.WriteLine(strYachtTypes(i))
+            Console.WriteLine(lstYachtTypes.Item(i))
+        Next
+
+    End Sub
+
+    Public Shared Sub ReloadControlsWithList(ByVal lstToUse As List(Of String))
+        PopulateYachtReport(lstToUse, intCountYachtTypes)
+        PopulateComboBox(lstToUse, frmYachtEntryMain.cboYachtType)
+        PopulateDomainWithList(lstToUse, frmEditYachtTypes.dmnYachts)
+
 
     End Sub
 End Class

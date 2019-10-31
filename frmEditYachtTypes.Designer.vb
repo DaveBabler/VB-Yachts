@@ -122,6 +122,7 @@ Partial Class frmEditYachtTypes
         Me.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(204, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.Name = "frmEditYachtTypes"
         Me.Text = "frmEditYachtTypes"
+        Me.TopMost = True
         Me.tblloYachtRemoval.ResumeLayout(False)
         Me.tblloYachtRemoval.PerformLayout()
         Me.ResumeLayout(False)
