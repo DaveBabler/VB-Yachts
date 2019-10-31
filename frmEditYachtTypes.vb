@@ -3,6 +3,7 @@
         Dim strToStrip As String = dmnYachts.SelectedItem.ToString()
         GlobalClass.lstYachtTypes.Remove(strToStrip)
         GlobalClass.ReloadControlsWithList(GlobalClass.lstYachtTypes)
+        Me.Close()
 
     End Sub
 

@@ -152,13 +152,14 @@ Public Class frmYachtEntryMain
         'Some logic for those forms may appear here, the rest will be user event driven instead of
         'program load event.
         frmEditYachtTypes.Visible = False
-        frmEditYachtTypes.Hide()
+        frmEditYachtTypes.Dispose()
+        frmEditYachtTypes.Close()
         ClearTextBoxes()
         GlobalClass.YachtTypeListPopulate()
         YachtSizePriceDictionaryPopulate()
         GlobalClass.PopulateYachtReport(GlobalClass.lstYachtTypes, GlobalClass.intCountYachtTypes)
         GlobalClass.PopulateDomainWithList(GlobalClass.lstYachtTypes, frmEditYachtTypes.dmnYachts)
-        frmEditYachtTypes.Show()
+
         GlobalClass.PopulateComboBox(GlobalClass.lstYachtTypes, cboYachtType)
         'populates the dropdown lists and the listbox
 
