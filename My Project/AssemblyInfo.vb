@@ -1,4 +1,5 @@
-﻿Imports System
+﻿Imports System.Resources
+Imports System
 Imports System.Reflection
 Imports System.Runtime.InteropServices
 
@@ -13,7 +14,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyCompany("Dave Babler")>
 <Assembly: AssemblyProduct("Yachts")>
 <Assembly: AssemblyCopyright("Copyright ©  2019")>
-<Assembly: AssemblyTrademark("")>
+<Assembly: AssemblyTrademark("Dave Babler")>
 
 <Assembly: ComVisible(False)>
 
@@ -33,3 +34,4 @@ Imports System.Runtime.InteropServices
 
 <Assembly: AssemblyVersion("1.0.0.0")>
 <Assembly: AssemblyFileVersion("13.0.0.0")>
+<Assembly: NeutralResourcesLanguage("")>
