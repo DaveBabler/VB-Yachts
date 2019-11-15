@@ -1,5 +1,7 @@
 ﻿Public NotInheritable Class yachtsSplash
     Public Shared lstYachtTypesFromStream As New List(Of String)
+    Public Shared strYachtFromStream() As String
+    Private Const _strFileIn As String = "c:\Yachts.txt"
     'TODO: This form can easily be set as the splash screen for the application by going to the "Application" tab
     '  of the Project Designer ("Properties" under the "Project" menu).
 
@@ -30,26 +32,60 @@
 
         'Copyright info
         Copyright.Text = My.Application.Info.Copyright & vbCrLf & " Author: " & My.Application.Info.CompanyName
-        ReadTextFileIntoList(lstYachtTypesFromStream)
+        ReadTextFileIntoList(_strFileIn, lstYachtTypesFromStream)
         For Each strValue In lstYachtTypesFromStream
-            Console.WriteLine("We have this yacht {0}", lstYachtTypesFromStream)
+            Console.WriteLine("We have this yacht {0}", lstYachtTypesFromStream.ToString())
+        Next
+        ReadTextFileIntoArray(_strFileIn, strYachtFromStream)
+        For i As Integer = 0 To i < strYachtFromStream.Count()
+            Console.WriteLine(strYachtFromStream(i).ToString())
         Next
 
-
     End Sub
+
     '  http://vbcity.com/blogs/xtab/archive/2011/11/28/how-to-read-text-file-content-into-a-list-of-string.aspx
 
-    Private Sub ReadTextFileIntoList(ByRef lstToPopulate As List(Of String))
+
+    Private Sub ReadTextFileIntoList(ByVal strFileToRead As String, ByRef lstToPopulate As List(Of String))
+        'not working
         Dim objReader As IO.StreamReader
-        If IO.File.Exists("c:\Yachts.txt") = True Then
-            objReader = IO.File.OpenText("c:\Yachts.txt")
-            Do While objReader.Peek <> -1
-                lstToPopulate.Add(objReader.ReadLine().ToString())
+        Dim strLineRead As String
+        If IO.File.Exists(strFileToRead) = True Then
+            objReader = IO.File.OpenText(strFileToRead)
+            strLineRead = objReader.ReadLine()
+            Do While Not (strLineRead Is Nothing)
+                lstToPopulate.Add(strLineRead.Trim.ToString())
+                strLineRead = objReader.ReadLine()
             Loop
+            objReader.Close()
         Else
             MsgBox("Sorry but C:\Yachts.txt does not currently exist." & vbNewLine & "Make the file exist then reload program", MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly, "File not found")
+
+
         End If
+
     End Sub
 
+
+    Private Sub ReadTextFileIntoArray(ByVal strFileToRead As String, ByRef strArray As String())
+        Dim objReader As IO.StreamReader
+        Dim intCount As Integer = 0
+        If IO.File.Exists(strFileToRead) = True Then
+            objReader = IO.File.OpenText(strFileToRead)
+
+            Do While objReader.Peek <> -1
+                strArray(intCount) = objReader.ReadLine()
+                intCount += 1
+                ReDim Preserve strArray(intCount)
+
+            Loop
+            objReader.Close()
+        Else
+            MsgBox("Sorry but C:\Yachts.txt does not currently exist." & vbNewLine & "Make the file exist then reload program", MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly, "File not found")
+
+
+        End If
+
+    End Sub
 
 End Class
