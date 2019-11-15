@@ -25,6 +25,11 @@
 '                       Testing: add 2 New yacht types And remove one of the original 8
 '                       File I/O testing – missing file, empty file, standards; saving the data
 '                       Testing: spin through reservations –browse one at a time
+'<todo>
+'Read from file to populate yacht list
+'add comment field
+'add date field
+'then move on to saving to reservation records. 
 
 
 Public Class frmYachtEntryMain
@@ -351,6 +356,8 @@ Public Class frmYachtEntryMain
         frmAbout.ShowDialog()
 
     End Sub
+
+
 End Class
 Public Class GlobalClass
     ' This class stores Global Variables as is suggested by the name. (Self referencing code!)

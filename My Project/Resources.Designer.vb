@@ -22,7 +22,7 @@ Namespace My.Resources
     '''<summary>
     '''  A strongly-typed resource class, for looking up localized strings, etc.
     '''</summary>
-    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0"),  _
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0"),  _
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute(),  _
      Global.Microsoft.VisualBasic.HideModuleNameAttribute()>  _
@@ -217,6 +217,22 @@ Namespace My.Resources
             Get
                 Dim obj As Object = ResourceManager.GetObject("Yacht Party", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to C &amp; C
+        '''Catalina
+        '''Coronado
+        '''Excalibur
+        '''Hans Christian
+        '''Hobie
+        '''Ranger
+        '''Wavelength.
+        '''</summary>
+        Friend ReadOnly Property Yachts() As String
+            Get
+                Return ResourceManager.GetString("Yachts", resourceCulture)
             End Get
         End Property
         

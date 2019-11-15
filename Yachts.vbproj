@@ -223,5 +223,8 @@
   <ItemGroup>
     <None Include="Resources\yachtSplash.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Yachts.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
