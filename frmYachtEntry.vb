@@ -14,6 +14,18 @@
 '                         Ability to: add/remove a yacht type, list count of types, print a list/report of all types. 
 '                         Summary Report includes: # charters, total revenue, average hours chartered, and programmer name.
 '                         Yacht Type Report will list the yacht types in the combo box with programmer name and title at top.
+'                         ______________________________________________________________________________________________
+
+' Parameters for 2019-11-14
+'                         ______________________________________________________________________________________________
+
+'                       Modify Yachts A to replace with files: yacht types (load on start during splash, save when done); create reservation file adding date 
+'                       (use system date, not user entered) & comment field (50-chars) form and also to reservation records; append new reservations; add new form to view/display reservation file. 
+'                       Optional: produce report of reservations, log file.
+'                       Testing: add 2 New yacht types And remove one of the original 8
+'                       File I/O testing – missing file, empty file, standards; saving the data
+'                       Testing: spin through reservations –browse one at a time
+
 
 Public Class frmYachtEntryMain
     'Standard variable declarations
