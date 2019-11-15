@@ -39,3 +39,38 @@
 
         ''''REMOVE BEFORE PUBLISHING
         '''
+        Dim strLookup As String = "General"
+        For Each label In Me.Controls.OfType(Of Label).Where(Function(x) x.Name.Contains(strLookup))  'lambda expressions, which I only kinda sorta understand  
+            If label.Visible = False Then
+                label.Visible = True
+            End If
+        Next
+        ''this weird shit with lambda expressions here didn't quite work
+
+
+        ''this did though
+    Public Shared Sub CheckLabels(Container As Control, Value As String, ByRef blCurrentState As Boolean, ByRef blDesiredState As Boolean)
+        'This sub checks Controls to see if they contain a specific string in their assigned name
+        'Then if switches their visibility if their visibility is in an undesired state. 
+        'For example if the visibility is set to True and the desired state is False, it will flip.
+        'If the visibility is set to false and the desired state false it will do nothing!
+        'Recursively checks child elements as well.
+        'ATTENTION PROFESSOR THOMAS, I DO NOT KNOW HOW I FIGURED THIS OUT  AND I CANNOT RECREATE MY THOUGHT PROCESS BUT IT WORKS, WHY?
+        For Each C As Control In Container.Controls
+            If TypeOf C Is Label AndAlso CType(C, Label).Name.Contains(Value) Then
+                If C.Visible = blCurrentState Then
+                    C.Visible = blDesiredState
+                End If
+            ElseIf C.HasChildren Then
+                CheckLabels(C, Value, blCurrentState, blDesiredState)
+            End If
+
+            If TypeOf C Is TextBox AndAlso CType(C, TextBox).Name.Contains(Value) Then
+                If C.Visible = blCurrentState Then
+                    C.Visible = blDesiredState
+                ElseIf C.HasChildren Then
+                    CheckLabels(C, Value, blCurrentState, blDesiredState)
+                End If
+            End If
+        Next
+    End Sub

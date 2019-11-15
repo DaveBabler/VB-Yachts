@@ -35,4 +35,6 @@
     Private Sub DetailsLayoutPanel_Paint(sender As Object, e As PaintEventArgs) Handles DetailsLayoutPanel.Paint
 
     End Sub
+
+
 End Class
