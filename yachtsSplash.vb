@@ -1,5 +1,5 @@
 ﻿Public NotInheritable Class yachtsSplash
-
+    Public Shared lstYachtTypesFromStream As New List(Of String)
     'TODO: This form can easily be set as the splash screen for the application by going to the "Application" tab
     '  of the Project Designer ("Properties" under the "Project" menu).
 
@@ -30,10 +30,25 @@
 
         'Copyright info
         Copyright.Text = My.Application.Info.Copyright & vbCrLf & " Author: " & My.Application.Info.CompanyName
+        ReadTextFileIntoList(lstYachtTypesFromStream)
+        For Each strValue In lstYachtTypesFromStream
+            Console.WriteLine("We have this yacht {0}", lstYachtTypesFromStream)
+        Next
+
+
     End Sub
+    '  http://vbcity.com/blogs/xtab/archive/2011/11/28/how-to-read-text-file-content-into-a-list-of-string.aspx
 
-    Private Sub ReadTextFile()
-
+    Private Sub ReadTextFileIntoList(ByRef lstToPopulate As List(Of String))
+        Dim objReader As IO.StreamReader
+        If IO.File.Exists("c:\Yachts.txt") = True Then
+            objReader = IO.File.OpenText("c:\Yachts.txt")
+            Do While objReader.Peek <> -1
+                lstToPopulate.Add(objReader.ReadLine().ToString())
+            Loop
+        Else
+            MsgBox("Sorry but C:\Yachts.txt does not currently exist." & vbNewLine & "Make the file exist then reload program", MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly, "File not found")
+        End If
     End Sub
 
 
