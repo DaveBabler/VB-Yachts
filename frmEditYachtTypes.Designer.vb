@@ -58,9 +58,9 @@ Partial Class frmEditYachtTypes
         Me.lblYachtRemovalHeader.AutoSize = True
         Me.lblYachtRemovalHeader.Font = New System.Drawing.Font("Roboto", 21.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblYachtRemovalHeader.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(204, Byte), Integer))
-        Me.lblYachtRemovalHeader.Location = New System.Drawing.Point(14, 0)
+        Me.lblYachtRemovalHeader.Location = New System.Drawing.Point(15, 0)
         Me.lblYachtRemovalHeader.Name = "lblYachtRemovalHeader"
-        Me.lblYachtRemovalHeader.Size = New System.Drawing.Size(284, 36)
+        Me.lblYachtRemovalHeader.Size = New System.Drawing.Size(281, 35)
         Me.lblYachtRemovalHeader.TabIndex = 0
         Me.lblYachtRemovalHeader.Text = "Yacht Type Removal"
         Me.lblYachtRemovalHeader.TextAlign = System.Drawing.ContentAlignment.TopCenter
@@ -73,7 +73,7 @@ Partial Class frmEditYachtTypes
         Me.lblYachtRemovalInstructions.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(204, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.lblYachtRemovalInstructions.Location = New System.Drawing.Point(9, 50)
         Me.lblYachtRemovalInstructions.Name = "lblYachtRemovalInstructions"
-        Me.lblYachtRemovalInstructions.Size = New System.Drawing.Size(294, 72)
+        Me.lblYachtRemovalInstructions.Size = New System.Drawing.Size(294, 68)
         Me.lblYachtRemovalInstructions.TabIndex = 0
         Me.lblYachtRemovalInstructions.Text = "Scroll to pick a yacht type to remove." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Then choose OK to close this dialogue " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "a" &
     "nd remove the yacht type from the program." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Press 'Cancel' to go back." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)

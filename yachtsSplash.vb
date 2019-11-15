@@ -1,9 +1,10 @@
 ﻿Public NotInheritable Class yachtsSplash
     Public Shared lstYachtTypesFromStream As New List(Of String)
-    Public Shared strYachtFromStream() As String
+    Public Shared strYachtFromStream(1) As String
     Private Const _strFileIn As String = "c:\Yachts.txt"
     'TODO: This form can easily be set as the splash screen for the application by going to the "Application" tab
     '  of the Project Designer ("Properties" under the "Project" menu).
+    ' https://stackoverflow.com/questions/34881859/mystring-or-as-string
 
 
     Private Sub SplashScreen1_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
@@ -37,8 +38,8 @@
             Console.WriteLine("We have this yacht {0}", lstYachtTypesFromStream.ToString())
         Next
         ReadTextFileIntoArray(_strFileIn, strYachtFromStream)
-        For i As Integer = 0 To i < strYachtFromStream.Count()
-            Console.WriteLine(strYachtFromStream(i).ToString())
+        For Each strang In strYachtFromStream
+            Console.WriteLine(strang)
         Next
 
     End Sub
