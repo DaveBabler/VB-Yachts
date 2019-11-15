@@ -32,7 +32,7 @@
         Copyright.Text = My.Application.Info.Copyright & vbCrLf & " Author: " & My.Application.Info.CompanyName
     End Sub
 
-    Private Sub DetailsLayoutPanel_Paint(sender As Object, e As PaintEventArgs) Handles DetailsLayoutPanel.Paint
+    Private Sub ReadTextFile()
 
     End Sub
 
