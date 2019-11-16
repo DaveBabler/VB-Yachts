@@ -179,7 +179,7 @@ Public Class frmYachtEntryMain
 
         GlobalClass.PopulateComboBox(GlobalClass.lstYachtTypes, cboYachtType)
         'populates the dropdown lists and the listbox
-
+        lblRentalDateOut.Text = DateAndTime.DateString
 
         For Each pair In dctYachtSizePrice
             'in this case Key is the length

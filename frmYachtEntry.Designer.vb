@@ -190,7 +190,6 @@ Partial Class frmYachtEntryMain
         Me.lblRentalDateOut.TabIndex = 0
         Me.lblRentalDateOut.Text = "88/88/8888"
         Me.lblRentalDateOut.TextAlign = System.Drawing.ContentAlignment.BottomRight
-        Me.lblRentalDateOut.Visible = False
         '
         'lblDate
         '
