@@ -34,22 +34,10 @@
         'Copyright info
         Copyright.Text = My.Application.Info.Copyright & vbCrLf & " Author: " & My.Application.Info.CompanyName
         ReadTextFileIntoArray(_strFileIn, strYachtFromStream)
-        For Each strang In strYachtFromStream
-            If String.IsNullOrEmpty(strang) Then
-                Console.WriteLine("wE GOTS AN EMPTY LINE")
-            Else
-                Console.WriteLine("sTRANG BE {0}", strang)
-            End If
-
-        Next
-        For Each strang2 In strYachtFromStream
-
-
-            Console.WriteLine("sTRANG BE {0}", strang2)
-
-
-        Next
-        Console.WriteLine()
+        ReportBuilding.StrOfStrDicPopulateKeys(ReportBuilding.dicOutputReport, ReportBuilding.strOfReportKeys)
+        'For Each pair In ReportBuilding.dicOutputReport
+        '    Console.WriteLine("{0}, {1}", pair.Key, pair.Value)
+        'Next
 
     End Sub
 

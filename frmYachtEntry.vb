@@ -168,6 +168,11 @@ Public Class frmYachtEntryMain
         'The rest of the forms will only show up upon print.
         'Some logic for those forms may appear here, the rest will be user event driven instead of
         'program load event.
+
+
+
+
+
         frmEditYachtTypes.Visible = False
         frmEditYachtTypes.Dispose()
         frmEditYachtTypes.Close()
