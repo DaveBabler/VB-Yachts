@@ -65,23 +65,28 @@
         Dim objReader As IO.StreamReader
         Dim intCount As Integer = 0
         If IO.File.Exists(strFileToRead) = True Then
-            objReader = IO.File.OpenText(strFileToRead)
+            Dim strTextFileLength As String = IO.File.ReadAllText(strFileToRead)
+            If strTextFileLength.Length = 0 Then
+                MsgBox("Sorry but C:\Yachts.txt does currently contain data." & vbNewLine & "Make data exist in the file, then try again.", MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly, "File not found")
+            Else
+                objReader = IO.File.OpenText(strFileToRead)
 
-            Do While objReader.Peek <> -1
-                strArray(intCount) = objReader.ReadLine()
-                If strArray(intCount) Is Nothing Then
-                    Console.WriteLine("We are in nothing ")
-                Else
-                    intCount += 1
-                    'intCount -= 1
+                Do While objReader.Peek <> -1
+                    strArray(intCount) = objReader.ReadLine()
+                    If strArray(intCount) Is Nothing Then
+                        Console.WriteLine("We are in nothing ")
+                    Else
+                        intCount += 1
+                        'intCount -= 1
 
-                    'ReDim Preserve strArray(intCount)
-                End If
-                ReDim Preserve strArray(intCount)
-            Loop
-            objReader.Close()
-            'The array seems to pickup a Nothing Value no matter what logic I use. 
-            ReDim Preserve strArray(intCount - 1)
+                        'ReDim Preserve strArray(intCount)
+                    End If
+                    ReDim Preserve strArray(intCount)
+                Loop
+                objReader.Close()
+                'The array seems to pickup a Nothing Value no matter what logic I use. 
+                ReDim Preserve strArray(intCount - 1)
+            End If
         Else
             MsgBox("Sorry but C:\Yachts.txt does not currently exist." & vbNewLine & "Make the file exist then reload program", MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly, "File not found")
 
