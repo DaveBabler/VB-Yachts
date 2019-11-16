@@ -18,19 +18,30 @@
             End If
         Next i
     End Sub
-
+    ' https://social.msdn.microsoft.com/Forums/vstudio/en-US/772cfe62-3b36-4a9c-b5d0-b3faccaf8bdb/creating-variable-namesidentifier-dynamically
     Public Shared Sub PopulateYachtDictionary(ByRef dicYachtReport As Dictionary(Of String, String), ByVal decCalculatedCost As Decimal)
         'Ideally this would take an array and do comparisons but since I'm so late on this assignment
         'due to nearly breaking my wrist I'm making this Sub
         'This SUB WILL ONLY WORK WITH KNOWN KEYS
-        dicYachtReport("strComments") = frmYachtEntryMain.txtComments.ToString()
-        dicYachtReport("strName") = frmYachtEntryMain.txtResponsibleParty.ToString()
+        dicYachtReport("strComments") = frmYachtEntryMain.txtComments.Text.ToString()
+        dicYachtReport("strName") = frmYachtEntryMain.txtResponsibleParty.Text.ToString()
         dicYachtReport("strYachtType") = frmYachtEntryMain.cboYachtType.SelectedItem.ToString()
         dicYachtReport("strLengthOfYacht") = frmYachtEntryMain.lstAvailibleYachtLength.SelectedItem.ToString()
         dicYachtReport("strCostOfRental") = decCalculatedCost.ToString("C")
 
 
     End Sub
+
+    Public Shared Sub AddDictionaryToList(ByRef lstToAddTo As List(Of Dictionary(Of String, String)), ByVal dicToUse As Dictionary(Of String, String), ByRef intDicNumber As Integer, ByVal strDicName As String)
+        'populates a list based on passed Dictionary, it renames the dictionary on the fly to make sure nothing in the list has the same value twice
+        'Each time this is run some global loop counter is incremented
+        Dim dic As New Dictionary(Of String, String)
+
+        '''I don't know if this is needed  TRY adding the dictionary to a list then continue to populate the list after clearing the dictionary 
+        ''''if that works come back here and wipe this out.
+
+    End Sub
+
 
 
 
