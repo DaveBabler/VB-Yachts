@@ -1,6 +1,6 @@
 ﻿Public NotInheritable Class yachtsSplash
-    Public Shared lstYachtTypesFromStream As New List(Of String)
-    Public Shared strYachtFromStream(1) As String
+
+    Public Shared strYachtFromStream(0) As String
     Private Const _strFileIn As String = "c:\Yachts.txt"
     'TODO: This form can easily be set as the splash screen for the application by going to the "Application" tab
     '  of the Project Designer ("Properties" under the "Project" menu).
@@ -33,42 +33,35 @@
 
         'Copyright info
         Copyright.Text = My.Application.Info.Copyright & vbCrLf & " Author: " & My.Application.Info.CompanyName
-        ReadTextFileIntoList(_strFileIn, lstYachtTypesFromStream)
-        For Each strValue In lstYachtTypesFromStream
-            Console.WriteLine("We have this yacht {0}", lstYachtTypesFromStream.ToString())
-        Next
         ReadTextFileIntoArray(_strFileIn, strYachtFromStream)
         For Each strang In strYachtFromStream
-            Console.WriteLine(strang)
+            If String.IsNullOrEmpty(strang) Then
+                Console.WriteLine("wE GOTS AN EMPTY LINE")
+            Else
+                Console.WriteLine("sTRANG BE {0}", strang)
+            End If
+
         Next
+        For Each strang2 In strYachtFromStream
+
+
+            Console.WriteLine("sTRANG BE {0}", strang2)
+
+
+        Next
+        Console.WriteLine()
 
     End Sub
 
     '  http://vbcity.com/blogs/xtab/archive/2011/11/28/how-to-read-text-file-content-into-a-list-of-string.aspx
 
 
-    Private Sub ReadTextFileIntoList(ByVal strFileToRead As String, ByRef lstToPopulate As List(Of String))
-        'not working
-        Dim objReader As IO.StreamReader
-        Dim strLineRead As String
-        If IO.File.Exists(strFileToRead) = True Then
-            objReader = IO.File.OpenText(strFileToRead)
-            strLineRead = objReader.ReadLine()
-            Do While Not (strLineRead Is Nothing)
-                lstToPopulate.Add(strLineRead.Trim.ToString())
-                strLineRead = objReader.ReadLine()
-            Loop
-            objReader.Close()
-        Else
-            MsgBox("Sorry but C:\Yachts.txt does not currently exist." & vbNewLine & "Make the file exist then reload program", MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly, "File not found")
 
-
-        End If
-
-    End Sub
 
 
     Private Sub ReadTextFileIntoArray(ByVal strFileToRead As String, ByRef strArray As String())
+        'Note apparently you cannot directly read a text file into a Listof object!  ATTENTION LISA THOMAS  IF THIS IS INACCURATE PLEASE EMAIL ME!!!
+        ' I was forced to do it as an array first!
         Dim objReader As IO.StreamReader
         Dim intCount As Integer = 0
         If IO.File.Exists(strFileToRead) = True Then
@@ -76,11 +69,19 @@
 
             Do While objReader.Peek <> -1
                 strArray(intCount) = objReader.ReadLine()
-                intCount += 1
-                ReDim Preserve strArray(intCount)
+                If strArray(intCount) Is Nothing Then
+                    Console.WriteLine("We are in nothing ")
+                Else
+                    intCount += 1
+                    'intCount -= 1
 
+                    'ReDim Preserve strArray(intCount)
+                End If
+                ReDim Preserve strArray(intCount)
             Loop
             objReader.Close()
+            'The array seems to pickup a Nothing Value no matter what logic I use. 
+            ReDim Preserve strArray(intCount - 1)
         Else
             MsgBox("Sorry but C:\Yachts.txt does not currently exist." & vbNewLine & "Make the file exist then reload program", MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly, "File not found")
 

@@ -2,6 +2,7 @@
     ' This class stores Global Variables as is suggested by the name. (Self referencing code!)
     ' initially tried an array for this, changing array size on the fly is not fun using list instead
     ' also needed this to be in a couple different classes
+    ' Private strYachtTypes As String() = {"C & C", "Catalina", "Coronado", "Excalibur", "Hans Christian", "Hobie", "Ranger", "Wavelength"}  depreciated
     Public Shared lstYachtTypes As New List(Of String)
     Public Shared intCountYachtTypes As Integer = 0
 
@@ -28,6 +29,7 @@
         cboBoxToPopulate.Items.Clear()
 
         For Each strValue As String In lstItems
+            Console.WriteLine("String list  value " & strValue)
             cboBoxToPopulate.Items.Add(strValue)
         Next
     End Sub
@@ -53,11 +55,11 @@
         intYachtCount = strYachts.Count
         reportYachts.lblCountYachtOutput.Text = "Total Types of Yachts: " & intYachtCount.ToString("N0")
     End Sub
-    Public Shared Sub YachtTypeListPopulate()
+    Public Shared Sub YachtTypeListPopulate(strArrtoUse As String(), ByRef lstToPopulate As List(Of String))
         ' This sub will be used on form load to populate the original data set for the Yacht Types List because I simply do not want to reDim arrays
-        Dim strYachtTypes As String() = {"C & C", "Catalina", "Coronado", "Excalibur", "Hans Christian", "Hobie", "Ranger", "Wavelength"}
-        For i = 0 To (strYachtTypes.Length - 1)
-            lstYachtTypes.Add(strYachtTypes(i))
+
+        For i = 0 To (strArrtoUse.Length - 1)
+            lstYachtTypes.Add(strArrtoUse(i))
             'Console.WriteLine(strYachtTypes(i))
             'Console.WriteLine(lstYachtTypes.Item(i))
         Next

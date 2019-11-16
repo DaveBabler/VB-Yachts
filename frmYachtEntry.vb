@@ -172,7 +172,7 @@ Public Class frmYachtEntryMain
         frmEditYachtTypes.Dispose()
         frmEditYachtTypes.Close()
         ClearTextBoxes()
-        GlobalClass.YachtTypeListPopulate()
+        GlobalClass.YachtTypeListPopulate(yachtsSplash.strYachtFromStream, GlobalClass.lstYachtTypes)
         YachtSizePriceDictionaryPopulate()
         GlobalClass.PopulateYachtReport(GlobalClass.lstYachtTypes, GlobalClass.intCountYachtTypes)
         GlobalClass.PopulateDomainWithList(GlobalClass.lstYachtTypes, frmEditYachtTypes.dmnYachts)
