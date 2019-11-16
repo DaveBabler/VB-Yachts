@@ -234,6 +234,8 @@ Public Class frmYachtEntryMain
         Dim intUserHours As Integer
         Dim strYachtLength As String = lstAvailibleYachtLength.SelectedItem
 
+
+
         Dim decIndividualRentalCost As Decimal
         If String.IsNullOrEmpty(txtResponsibleParty.Text) Then
             UserErrorMessage("You must enter the responsible parties name to proceed", "Who is paying for this?")

@@ -34,10 +34,10 @@
         'Copyright info
         Copyright.Text = My.Application.Info.Copyright & vbCrLf & " Author: " & My.Application.Info.CompanyName
         ReadTextFileIntoArray(_strFileIn, strYachtFromStream)
-        ReportBuilding.StrOfStrDicPopulateKeys(ReportBuilding.dicOutputReport, ReportBuilding.strOfReportKeys)
-        'For Each pair In ReportBuilding.dicOutputReport
-        '    Console.WriteLine("{0}, {1}", pair.Key, pair.Value)
-        'Next
+        ReportBuilding.StrOfStrDicPopulateKeys(ReportBuilding.dicOutputReport, ReportBuilding.strOfReportKeys, True)
+        For Each pair In ReportBuilding.dicOutputReport
+            Console.WriteLine("{0}, {1}", pair.Key, pair.Value)
+        Next
 
     End Sub
 
