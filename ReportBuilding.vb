@@ -32,6 +32,24 @@
 
     End Sub
 
+    Public Shared Sub DictionaryClearValsKeepKeys(ByVal dicToClearVals As Dictionary(Of String, String), strArrayToUse As String())
+
+        'This does exactly what it says it clears the dictionary 
+        ' the compiler may wipe the  pair As KeyValuePair(Of String, String) and change to just pair but it is helpful to know 
+
+
+        For i = 0 To strArrayToUse.Count - 1
+
+                If dicToClearVals.ContainsKey(strArrayToUse(i)) Then
+                    dicToClearVals(strArrayToUse(i)) = False
+                End If
+
+            Next i
+
+
+    End Sub
+
+
     Public Shared Sub AddDictionaryToList(ByRef lstToAddTo As List(Of Dictionary(Of String, String)), ByVal dicToUse As Dictionary(Of String, String), ByRef intDicNumber As Integer, ByVal strDicName As String)
         'populates a list based on passed Dictionary, it renames the dictionary on the fly to make sure nothing in the list has the same value twice
         'Each time this is run some global loop counter is incremented

@@ -266,6 +266,8 @@ Public Class frmYachtEntryMain
                     lblCalculatedPriceOutput.Visible = True
                     'only if we know the value isn't zero add to the accumulator, otherwise, why bother?
                     decTotalRevenue += decIndividualRentalCost
+                    'Add to report builder here so we don't have to recalculate cost
+                    ReportBuilding.PopulateYachtDictionary(ReportBuilding.dicOutputReport, decIndividualRentalCost)
                     decIndividualRentalCost = 0 ' we need to immediately reset this to 0 on the back end to prevent errors on adding to accumulator
                     'only add to total chartered boats if the cost is greater than 0, 
                     'if the customer needs  a way to "comp" a boat rental for customer service this can be worked out in 
@@ -288,10 +290,20 @@ Public Class frmYachtEntryMain
 
                     End Try
 
-                    ReportBuilding.PopulateYachtDictionary(ReportBuilding.dicOutputReport, decIndividualRentalCost)
+
                     For Each pair In ReportBuilding.dicOutputReport
                         Console.WriteLine("{0}, {1}", pair.Key, pair.Value)
                     Next
+                    ReportBuilding.lstRecordsFromFile.Add(ReportBuilding.dicOutputReport)
+                    'For Each item In ReportBuilding.lstRecordsFromFile
+                    '    Console.WriteLine(item.ToString())
+                    'Next
+
+                    ReportBuilding.DictionaryClearValsKeepKeys(ReportBuilding.dicOutputReport, ReportBuilding.strOfReportKeys)
+                    For Each pair In ReportBuilding.dicOutputReport
+                        Console.WriteLine("{0}, {1}", pair.Key, pair.Value)
+                    Next
+
 
 
                 End If

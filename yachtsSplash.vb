@@ -1,13 +1,20 @@
 ﻿Public NotInheritable Class yachtsSplash
 
     Public Shared strYachtFromStream(0) As String
-    Private Const _strFileIn As String = "c:\Yachts.txt"
+    Public ReadOnly _strFolderPath = Environment.CurrentDirectory()
+
+    Public ReadOnly _strFileIn As String = _strFolderPath & "\Text\Yachts.txt"
+    Public ReadOnly _strSaveFileOut As String = _strFolderPath & "\Text\YachtLog.txt"
+
     'TODO: This form can easily be set as the splash screen for the application by going to the "Application" tab
     '  of the Project Designer ("Properties" under the "Project" menu).
     ' https://stackoverflow.com/questions/34881859/mystring-or-as-string
 
 
     Private Sub SplashScreen1_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+
+        Console.WriteLine("Here is the path " & _strFolderPath.ToString())
+        Console.WriteLine("Here is the other path " & _strFileIn.ToString())
         'Set up the dialog text at runtime according to the application's assembly information.  
 
         'TODO: Customize the application's assembly information in the "Application" pane of the project 

@@ -55,6 +55,7 @@
         intYachtCount = strYachts.Count
         reportYachts.lblCountYachtOutput.Text = "Total Types of Yachts: " & intYachtCount.ToString("N0")
     End Sub
+
     Public Shared Sub YachtTypeListPopulate(strArrtoUse As String(), ByRef lstToPopulate As List(Of String))
         ' This sub will be used on form load to populate the original data set for the Yacht Types List because I simply do not want to reDim arrays
 
