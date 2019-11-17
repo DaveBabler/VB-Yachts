@@ -118,18 +118,19 @@
                 objReader = IO.File.OpenText(strFileToRead)
 
                 Do While objReader.Peek <> -1
-                    strFromFile = objReader.ReadLine()
+                    strFromFile = objReader.ReadLine().Trim(" ").ToString()
+                    strFromFile = ReportBuilding.LineBreakRemover(strFromFile)
                     Console.WriteLine("We are currently in ReadTextFileIntoObject with a ReadLine of {0}", strFromFile)
 
                     If strFromFile Is Nothing Then
                         '  Console.WriteLine("We are in nothing ")
-                    ElseIf strFileToRead.Contains(strDelimiter) Then
+                    ElseIf String.Compare(strFromFile, strDelimiter) = 0 Then
                         ' either do nothing or add to the list? 
                         MsgBox("We are in the delimiter!!!!", MsgBoxStyle.OkOnly)
                         lstOfData.Add(incArray)
                     Else
                         For i = 0 To incArray.Count - 1
-                            incArray(i) = strFileToRead & Environment.NewLine()
+                            incArray(i) = strFromFile & Environment.NewLine()
                         Next
 
                         'ReDim Preserve strArray(intCount)
@@ -155,6 +156,9 @@
         Dim objReader As IO.StreamReader
         Dim incArray(intArrayDimension) As String
         Dim strFromFile As String
+        If String.Compare(strDelimiter, "----------") = 0 Then
+            MsgBox("FUCKING WHY DO YOU HATE ME!!!!", MsgBoxStyle.OkOnly)
+        End If
 
         If IO.File.Exists(strFileToRead) = True Then
             Dim strTextFileLength As String = IO.File.ReadAllText(strFileToRead)
@@ -164,18 +168,23 @@
                 objReader = IO.File.OpenText(strFileToRead)
 
                 Do While objReader.Peek <> -1
-                    strFromFile = objReader.ReadLine()
-                    Console.WriteLine("We are currently in ReadTextFileIntoObject with a ReadLine of {0}", strFromFile)
+                    strFromFile = objReader.ReadLine().Trim(" ").ToString()
+                    strFromFile = ReportBuilding.LineBreakRemover(strFromFile)
+
 
                     If strFromFile Is Nothing Then
                         '  Console.WriteLine("We are in nothing ")
-                    ElseIf strFileToRead.Contains(strDelimiter) Then
+                    ElseIf String.Compare(strFromFile, strDelimiter) = 0 Then
                         ' either do nothing or add to the list? 
-                        MsgBox("We are in the delimiter!!!!", MsgBoxStyle.OkOnly)
+
                         lstOfData.Add(incArray)
                     Else
                         For i = 0 To incArray.Count - 1
-                            incArray(i) = strFileToRead & Environment.NewLine()
+                            incArray(i) = strFromFile & Environment.NewLine()
+
+                        Next
+                        For i = 0 To incArray.Count - 1
+                            Console.WriteLine("We are currently in ReadTextFileIntoObject with a incArray({1}) of {0}", incArray(i), i.ToString())
                         Next
 
                         'ReDim Preserve strArray(intCount)
@@ -194,5 +203,15 @@
         End If
 
     End Sub
+
+    Public Shared Function LineBreakRemover(strToFix As String) As String
+
+        If Len(strToFix) <> 0 Then
+            If Right$(strToFix, 2) = vbCrLf Or Right$(strToFix, 2) = vbNewLine Then
+                strToFix = Left$(strToFix, Len(strToFix) - 2)
+            End If
+        End If
+        Return strToFix
+    End Function
 
 End Class
