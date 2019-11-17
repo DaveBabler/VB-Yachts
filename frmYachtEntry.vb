@@ -291,18 +291,16 @@ Public Class frmYachtEntryMain
                     End Try
 
 
-                    For Each pair In ReportBuilding.dicOutputReport
-                        Console.WriteLine("{0}, {1}", pair.Key, pair.Value)
-                    Next
-                    ReportBuilding.lstRecordsFromFile.Add(ReportBuilding.dicOutputReport)
-                    'For Each item In ReportBuilding.lstRecordsFromFile
-                    '    Console.WriteLine(item.ToString())
+                    'For Each pair In ReportBuilding.dicOutputReport
+                    '    Console.WriteLine("{0}, {1}", pair.Key, pair.Value)
                     'Next
 
+                    ReportBuilding.OutPutDictionaryToLog(ReportBuilding.dicOutputReport, yachtsSplash._strSaveFileOut, ReportBuilding.strLineDelimiter)
+
                     ReportBuilding.DictionaryClearValsKeepKeys(ReportBuilding.dicOutputReport, ReportBuilding.strOfReportKeys)
-                    For Each pair In ReportBuilding.dicOutputReport
-                        Console.WriteLine("{0}, {1}", pair.Key, pair.Value)
-                    Next
+                    'For Each pair In ReportBuilding.dicOutputReport
+                    '    Console.WriteLine("{0}, {1}", pair.Key, pair.Value)
+                    'Next
 
 
 
@@ -381,5 +379,13 @@ Public Class frmYachtEntryMain
 
     End Sub
 
+    Private Sub btnTester_Click(sender As Object, e As EventArgs) Handles btnTester.Click
+        ReportBuilding.TestRead(yachtsSplash._strSaveFileOut, ReportBuilding.lstRecordsFromFile, ReportBuilding.strLineDelimiter, 5)
 
+        For Each item In ReportBuilding.lstRecordsFromFile
+            For i = 0 To item.Count - 1
+                Console.WriteLine("Current value should be for item {0} value {1}", item.ToString(), item(i).ToString())
+            Next
+        Next
+    End Sub
 End Class

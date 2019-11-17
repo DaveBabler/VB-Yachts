@@ -11,7 +11,7 @@
 
             ' Set the display time to 5000 milliseconds (5 seconds). 
 
-            Me.MinimumSplashScreenDisplayTime = 6000
+            Me.MinimumSplashScreenDisplayTime = 1
 
             Return MyBase.OnInitialize(commandLineArgs)
 

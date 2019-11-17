@@ -3,7 +3,8 @@
     Public Shared strLineDelimiter As String = "----------" 'for determining when a record ends or begins
     Public Shared strOfReportKeys() As String = {"dtCurrentDate", "strComments", "strName", "strYachtType", "strLengthOfYacht", "strCostOfRental"}
     Public Shared dicOutputReport As New Dictionary(Of String, String)
-    Public Shared lstRecordsFromFile As List(Of Dictionary(Of String, String)) 'records read from the file will go here
+    Public Shared lstRecordsFromFile As New List(Of String()) 'records read from the file will go here
+
     Public Shared Sub StrOfStrDicPopulateKeys(ByRef dicStrStr As Dictionary(Of String, String), strArrayToUse As String(), boolTodaysDate As Boolean)
         'First Clears a dictionary, then
         'Populates a dictionary of keys for use 
@@ -35,7 +36,7 @@
     Public Shared Sub DictionaryClearValsKeepKeys(ByVal dicToClearVals As Dictionary(Of String, String), strArrayToUse As String())
 
         'This does exactly what it says it clears the dictionary 
-        ' the compiler may wipe the  pair As KeyValuePair(Of String, String) and change to just pair but it is helpful to know 
+
 
 
         For i = 0 To strArrayToUse.Count - 1
@@ -48,19 +49,150 @@
 
 
     End Sub
-
-
-    Public Shared Sub AddDictionaryToList(ByRef lstToAddTo As List(Of Dictionary(Of String, String)), ByVal dicToUse As Dictionary(Of String, String), ByRef intDicNumber As Integer, ByVal strDicName As String)
-        'populates a list based on passed Dictionary, it renames the dictionary on the fly to make sure nothing in the list has the same value twice
-        'Each time this is run some global loop counter is incremented
-        Dim dic As New Dictionary(Of String, String)
-
-        '''I don't know if this is needed  TRY adding the dictionary to a list then continue to populate the list after clearing the dictionary 
-        ''''if that works come back here and wipe this out.
+    Public Shared Sub OutPutDictionaryToLog(ByRef dicOfData As Dictionary(Of String, String), ByVal strLocationOfSaveFile As String, ByRef strDelimiter As String)
+        Dim objWriter As New System.IO.StreamWriter(strLocationOfSaveFile, True)
+        If IO.File.Exists(strLocationOfSaveFile) = True Then
+            ' the compiler may wipe the  pair As KeyValuePair(Of String, String) and change to just pair but it is helpful to know 
+            For Each pair In dicOfData
+                objWriter.WriteLine(pair.Value.ToString())
+            Next pair
+            objWriter.WriteLineAsync(strDelimiter)  'make the program wait to add the delimiter I have no clue if this acts like AJAX but I saw Async and decided to use it
+            objWriter.Close()
+        Else
+            MsgBox("I cannot find the file " & Environment.NewLine() & strLocationOfSaveFile & Environment.NewLine() & "Please verify its existance and reload program",
+                  vbOKOnly Or vbExclamation, "Where is my file!")
+        End If
 
     End Sub
 
 
 
+    Public Shared Sub ReadTextFileIntoObject(ByVal strFileToRead As String, ByRef strArray As String())
+        'Note apparently you cannot directly read a text file into a Listof object!  ATTENTION LISA THOMAS  IF THIS IS INACCURATE PLEASE EMAIL ME!!!
+        ' I was forced to do it as an array first!
+        Dim objReader As IO.StreamReader
+        Dim intCount As Integer = 0
+        If IO.File.Exists(strFileToRead) = True Then
+            Dim strTextFileLength As String = IO.File.ReadAllText(strFileToRead)
+            If strTextFileLength.Length = 0 Then
+                MsgBox("Sorry but C:\Yachts.txt does currently contain data." & vbNewLine & "Make data exist in the file, then try again.", MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly, "File not found")
+            Else
+                objReader = IO.File.OpenText(strFileToRead)
+
+                Do While objReader.Peek <> -1
+                    strArray(intCount) = objReader.ReadLine()
+                    If strArray(intCount) Is Nothing Then
+                        'Console.WriteLine("We are in nothing ")
+                    Else
+                        intCount += 1
+                        'intCount -= 1
+
+                        'ReDim Preserve strArray(intCount)
+                    End If
+                    ReDim Preserve strArray(intCount)
+                Loop
+                objReader.Close()
+                'The array seems to pickup a Nothing Value no matter what logic I use. 
+                ReDim Preserve strArray(intCount - 1)
+            End If
+        Else
+            MsgBox("Sorry but C:\Yachts.txt does not currently exist." & vbNewLine & "Make the file exist then reload program", MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly, "File not found")
+
+
+        End If
+
+    End Sub
+
+    Public Shared Sub ReadTextFileIntoObject(ByVal strFileToRead As String, ByRef lstOfData As List(Of String()), ByVal strDelimiter As String, ByVal intArrayDimension As Integer)
+        'Note apparently you cannot directly read a text file into a Listof object!  ATTENTION LISA THOMAS  IF THIS IS INACCURATE PLEASE EMAIL ME!!!
+        ' I was forced to do it as an array first!
+        Dim objReader As IO.StreamReader
+        Dim incArray(intArrayDimension) As String
+        Dim strFromFile As String
+
+        If IO.File.Exists(strFileToRead) = True Then
+            Dim strTextFileLength As String = IO.File.ReadAllText(strFileToRead)
+            If strTextFileLength.Length = 0 Then
+                MsgBox("Sorry but " & strFileToRead & " does currently contain data." & vbNewLine & "Make data exist in the file, then try again.", MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly, "File not found")
+            Else
+                objReader = IO.File.OpenText(strFileToRead)
+
+                Do While objReader.Peek <> -1
+                    strFromFile = objReader.ReadLine()
+                    Console.WriteLine("We are currently in ReadTextFileIntoObject with a ReadLine of {0}", strFromFile)
+
+                    If strFromFile Is Nothing Then
+                        '  Console.WriteLine("We are in nothing ")
+                    ElseIf strFileToRead.Contains(strDelimiter) Then
+                        ' either do nothing or add to the list? 
+                        MsgBox("We are in the delimiter!!!!", MsgBoxStyle.OkOnly)
+                        lstOfData.Add(incArray)
+                    Else
+                        For i = 0 To incArray.Count - 1
+                            incArray(i) = strFileToRead & Environment.NewLine()
+                        Next
+
+                        'ReDim Preserve strArray(intCount)
+                    End If
+                    incArray.Clear(incArray, 0, incArray.Length)
+
+                Loop
+                objReader.Close()
+                'The array seems to pickup a Nothing Value no matter what logic I use. 
+
+            End If
+        Else
+            MsgBox("Sorry but  " & strFileToRead & "  does not currently exist." & vbNewLine & "Make the file exist then reload program", MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly, "File not found")
+
+
+        End If
+
+    End Sub
+
+    Public Shared Sub TestRead(ByVal strFileToRead As String, ByRef lstOfData As List(Of String()), ByVal strDelimiter As String, ByVal intArrayDimension As Integer)
+        'Note apparently you cannot directly read a text file into a Listof object!  ATTENTION LISA THOMAS  IF THIS IS INACCURATE PLEASE EMAIL ME!!!
+        ' I was forced to do it as an array first!
+        Dim objReader As IO.StreamReader
+        Dim incArray(intArrayDimension) As String
+        Dim strFromFile As String
+
+        If IO.File.Exists(strFileToRead) = True Then
+            Dim strTextFileLength As String = IO.File.ReadAllText(strFileToRead)
+            If strTextFileLength.Length = 0 Then
+                MsgBox("Sorry but " & strFileToRead & " does currently contain data." & vbNewLine & "Make data exist in the file, then try again.", MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly, "File not found")
+            Else
+                objReader = IO.File.OpenText(strFileToRead)
+
+                Do While objReader.Peek <> -1
+                    strFromFile = objReader.ReadLine()
+                    Console.WriteLine("We are currently in ReadTextFileIntoObject with a ReadLine of {0}", strFromFile)
+
+                    If strFromFile Is Nothing Then
+                        '  Console.WriteLine("We are in nothing ")
+                    ElseIf strFileToRead.Contains(strDelimiter) Then
+                        ' either do nothing or add to the list? 
+                        MsgBox("We are in the delimiter!!!!", MsgBoxStyle.OkOnly)
+                        lstOfData.Add(incArray)
+                    Else
+                        For i = 0 To incArray.Count - 1
+                            incArray(i) = strFileToRead & Environment.NewLine()
+                        Next
+
+                        'ReDim Preserve strArray(intCount)
+                    End If
+                    incArray.Clear(incArray, 0, incArray.Length)
+
+                Loop
+                objReader.Close()
+                'The array seems to pickup a Nothing Value no matter what logic I use. 
+
+            End If
+        Else
+            MsgBox("Sorry but  " & strFileToRead & "  does not currently exist." & vbNewLine & "Make the file exist then reload program", MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly, "File not found")
+
+
+        End If
+
+    End Sub
 
 End Class

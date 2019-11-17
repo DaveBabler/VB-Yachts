@@ -13,8 +13,8 @@
 
     Private Sub SplashScreen1_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
-        Console.WriteLine("Here is the path " & _strFolderPath.ToString())
-        Console.WriteLine("Here is the other path " & _strFileIn.ToString())
+        'Console.WriteLine("Here is the path " & _strFolderPath.ToString())
+        'Console.WriteLine("Here is the other path " & _strFileIn.ToString())
         'Set up the dialog text at runtime according to the application's assembly information.  
 
         'TODO: Customize the application's assembly information in the "Application" pane of the project 
@@ -40,11 +40,11 @@
 
         'Copyright info
         Copyright.Text = My.Application.Info.Copyright & vbCrLf & " Author: " & My.Application.Info.CompanyName
-        ReadTextFileIntoArray(_strFileIn, strYachtFromStream)
+        ReportBuilding.ReadTextFileIntoObject(_strFileIn, strYachtFromStream)
         ReportBuilding.StrOfStrDicPopulateKeys(ReportBuilding.dicOutputReport, ReportBuilding.strOfReportKeys, True)
-        For Each pair In ReportBuilding.dicOutputReport
-            Console.WriteLine("{0}, {1}", pair.Key, pair.Value)
-        Next
+        'For Each pair In ReportBuilding.dicOutputReport
+        '    Console.WriteLine("{0}, {1}", pair.Key, pair.Value)
+        'Next
 
     End Sub
 
@@ -53,41 +53,5 @@
 
 
 
-
-    Private Sub ReadTextFileIntoArray(ByVal strFileToRead As String, ByRef strArray As String())
-        'Note apparently you cannot directly read a text file into a Listof object!  ATTENTION LISA THOMAS  IF THIS IS INACCURATE PLEASE EMAIL ME!!!
-        ' I was forced to do it as an array first!
-        Dim objReader As IO.StreamReader
-        Dim intCount As Integer = 0
-        If IO.File.Exists(strFileToRead) = True Then
-            Dim strTextFileLength As String = IO.File.ReadAllText(strFileToRead)
-            If strTextFileLength.Length = 0 Then
-                MsgBox("Sorry but C:\Yachts.txt does currently contain data." & vbNewLine & "Make data exist in the file, then try again.", MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly, "File not found")
-            Else
-                objReader = IO.File.OpenText(strFileToRead)
-
-                Do While objReader.Peek <> -1
-                    strArray(intCount) = objReader.ReadLine()
-                    If strArray(intCount) Is Nothing Then
-                        Console.WriteLine("We are in nothing ")
-                    Else
-                        intCount += 1
-                        'intCount -= 1
-
-                        'ReDim Preserve strArray(intCount)
-                    End If
-                    ReDim Preserve strArray(intCount)
-                Loop
-                objReader.Close()
-                'The array seems to pickup a Nothing Value no matter what logic I use. 
-                ReDim Preserve strArray(intCount - 1)
-            End If
-        Else
-            MsgBox("Sorry but C:\Yachts.txt does not currently exist." & vbNewLine & "Make the file exist then reload program", MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly, "File not found")
-
-
-        End If
-
-    End Sub
 
 End Class
