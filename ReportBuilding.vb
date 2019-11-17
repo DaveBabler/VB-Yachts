@@ -3,7 +3,9 @@
     Public Shared strLineDelimiter As String = "----------" 'for determining when a record ends or begins
     Public Shared strOfReportKeys() As String = {"dtCurrentDate", "strComments", "strName", "strYachtType", "strLengthOfYacht", "strCostOfRental"}
     Public Shared dicOutputReport As New Dictionary(Of String, String)
-    Public Shared lstRecordsFromFile As New List(Of String()) 'records read from the file will go here
+    Public Shared lstRecordsFromFile As New List(Of List(Of String)) 'records read from the file will go here
+    Public Shared lstRecordUnit As New List(Of String)
+    Public Shared lstTEST As New List(Of String)
 
     Public Shared Sub StrOfStrDicPopulateKeys(ByRef dicStrStr As Dictionary(Of String, String), strArrayToUse As String(), boolTodaysDate As Boolean)
         'First Clears a dictionary, then
@@ -150,12 +152,13 @@
 
     End Sub
 
-    Public Shared Sub TestRead(ByVal strFileToRead As String, ByRef lstOfData As List(Of String()), ByVal strDelimiter As String, ByVal intArrayDimension As Integer)
+    Public Shared Sub TestRead(ByVal strFileToRead As String, ByRef lstOfData As List(Of String), ByVal strDelimiter As String)
         'Note apparently you cannot directly read a text file into a Listof object!  ATTENTION LISA THOMAS  IF THIS IS INACCURATE PLEASE EMAIL ME!!!
         ' I was forced to do it as an array first!
         Dim objReader As IO.StreamReader
-        Dim incArray(intArrayDimension) As String
+
         Dim strFromFile As String
+        Dim lcv As Integer = 0
         If String.Compare(strDelimiter, "----------") = 0 Then
             MsgBox("FUCKING WHY DO YOU HATE ME!!!!", MsgBoxStyle.OkOnly)
         End If
@@ -170,29 +173,25 @@
                 Do While objReader.Peek <> -1
                     strFromFile = objReader.ReadLine().Trim(" ").ToString()
                     strFromFile = ReportBuilding.LineBreakRemover(strFromFile)
-
-
+                    Console.WriteLine("At Line: {0}, we have a value of {1}", lcv, strFromFile)
+                    lcv += 1
                     If strFromFile Is Nothing Then
                         '  Console.WriteLine("We are in nothing ")
-                    ElseIf String.Compare(strFromFile, strDelimiter) = 0 Then
-                        ' either do nothing or add to the list? 
+                        'ElseIf String.Compare(strFromFile, strDelimiter) = 0 Then
+                        '    ' either do nothing or add to the list? 
+                        '    lcv = 0
 
-                        lstOfData.Add(incArray)
+
                     Else
-                        For i = 0 To incArray.Count - 1
-                            incArray(i) = strFromFile & Environment.NewLine()
-
-                        Next
-                        For i = 0 To incArray.Count - 1
-                            Console.WriteLine("We are currently in ReadTextFileIntoObject with a incArray({1}) of {0}", incArray(i), i.ToString())
-                        Next
-
-                        'ReDim Preserve strArray(intCount)
+                        lstOfData.Add(strFromFile)
                     End If
-                    incArray.Clear(incArray, 0, incArray.Length)
+
+
+
 
                 Loop
                 objReader.Close()
+                lcv = 0
                 'The array seems to pickup a Nothing Value no matter what logic I use. 
 
             End If
@@ -213,5 +212,18 @@
         End If
         Return strToFix
     End Function
+
+
+    Public Shared Sub BreakListIntoSubLists(ByRef lstStarter As List(Of String), strDelim As String)
+        Dim lstHolder As New List(Of String)
+
+        For i = 0 To lstStarter.Count - 1
+            Console.WriteLine(lstStarter.Item(i))
+            If String.Compare(lstStarter.Item(i).ToString(), strDelim) = 0 Then
+                Console.WriteLine("We have match!")
+            End If
+        Next i
+    End Sub
+
 
 End Class

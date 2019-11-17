@@ -380,12 +380,19 @@ Public Class frmYachtEntryMain
     End Sub
 
     Private Sub btnTester_Click(sender As Object, e As EventArgs) Handles btnTester.Click
-        ReportBuilding.TestRead(yachtsSplash._strSaveFileOut, ReportBuilding.lstRecordsFromFile, ReportBuilding.strLineDelimiter, 5)
+        ReportBuilding.TestRead(yachtsSplash._strSaveFileOut, ReportBuilding.lstTEST, ReportBuilding.strLineDelimiter)
 
-        For Each item In ReportBuilding.lstRecordsFromFile
-            For i = 0 To item.Count - 1
-                Console.WriteLine("Current value should be for item {0} value {1}", item.ToString(), item(i).ToString())
-            Next
+        For Each item In ReportBuilding.lstTEST
+
+            Console.WriteLine("Item? {0}", item.ToString())
+            If String.Compare(item.ToString(), ReportBuilding.strLineDelimiter) = 0 Then
+                Console.WriteLine("We have match!")
+            End If
+
         Next
+
+        ReportBuilding.BreakListIntoSubLists(ReportBuilding.lstTEST, ReportBuilding.strLineDelimiter)
     End Sub
+
+
 End Class
