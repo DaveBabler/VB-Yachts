@@ -199,17 +199,6 @@ Public Class frmYachtEntryMain
 
     End Sub
 
-    Private Sub mnuPrintSummary_Click(sender As Object, e As EventArgs) Handles mnuPrintSummary.Click
-        ' PrintPreviewControl.
-        ' Show to load the form, hide to conceal from user, print the form, then close the form
-        reportSummary.Show()
-        'Adding this second option to populate summmary data should in theory allow for accumulated data to show even after "clear" is pressed
-        PopulateSummaryData(intTotalCharteredBoats, intMeanHoursChartered, decTotalRevenue)
-        reportSummary.Hide()
-        PrintForm1.PrintAction = Printing.PrintAction.PrintToPreview
-        PrintForm1.Print(reportSummary, PowerPacks.Printing.PrintForm.PrintOption.FullWindow)
-        reportSummary.Close()
-    End Sub
 
     Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
         ClearFormData()
@@ -333,10 +322,15 @@ Public Class frmYachtEntryMain
 
 
         If decTotalRevenue > 0 And mnuPrintSummary.Enabled = False Then
-            'If the print summary has not yet been enabled, and deserves to be enabled, enable it. 
+            'If the print summary has not yet been enabled, and deserves to be enabled, enable it.
+            'Same for the non graphical version
 
 
             mnuPrintSummary.Enabled = True
+
+            If mnuNonGraphicsSummary.Enabled = False Then
+                mnuNonGraphicsSummary.Enabled = True
+            End If
         End If
 
 
@@ -363,16 +357,7 @@ Public Class frmYachtEntryMain
         MsgBox("Total Count of Yachts is: " & GlobalClass.intCountYachtTypes, vbApplicationModal Or vbOKOnly Or vbInformation, "Counted Yacht Types")
     End Sub
 
-    Private Sub mnuPrintYachtTypes_Click(sender As Object, e As EventArgs) Handles mnuPrintYachtTypes.Click
-        ' PrintPreviewControl.
-        ' Show to load the form, hide to conceal from user, print the form, then close the form
-        reportYachts.Show()
-        reportYachts.Hide()
-        PrintForm1.PrintAction = Printing.PrintAction.PrintToPreview
-        PrintForm1.Print(reportYachts, PowerPacks.Printing.PrintForm.PrintOption.FullWindow)
-        reportYachts.Close()
 
-    End Sub
 
     Private Sub mnuAbout_Click(sender As Object, e As EventArgs) Handles mnuAbout.Click
         frmAbout.ShowDialog()
@@ -390,4 +375,49 @@ Public Class frmYachtEntryMain
         ReportBuilding.BreakListIntoSubLists(ReportBuilding.lstRecordsFromFile, ReportBuilding.lstRecordUnit, ReportBuilding.strLineDelimiter)
         StoredDataInFile.Show()
     End Sub
+
+    Private Sub mnuPrintYachtTypes_Click(sender As Object, e As EventArgs) Handles mnuPrintYachtTypes.Click
+        ' PrintPreviewControl.
+        ' Show to load the form, hide to conceal from user, print the form, then close the form
+        reportYachts.Show()
+        reportYachts.Hide()
+        PrintForm1.PrintAction = Printing.PrintAction.PrintToPreview
+        PrintForm1.Print(reportYachts, PowerPacks.Printing.PrintForm.PrintOption.FullWindow)
+        reportYachts.Close()
+    End Sub
+
+    Private Sub mnuPrintSummary_Click(sender As Object, e As EventArgs) Handles mnuPrintSummary.Click
+        ' PrintPreviewControl.
+        ' Show to load the form, hide to conceal from user, print the form, then close the form
+        reportSummary.Show()
+        'Adding this second option to populate summmary data should in theory allow for accumulated data to show even after "clear" is pressed
+        PopulateSummaryData(intTotalCharteredBoats, intMeanHoursChartered, decTotalRevenue)
+        reportSummary.Hide()
+        PrintForm1.PrintAction = Printing.PrintAction.PrintToPreview
+        PrintForm1.Print(reportSummary, PowerPacks.Printing.PrintForm.PrintOption.FullWindow)
+        reportSummary.Close()
+    End Sub
+
+    Private Sub PrintDocument1_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles PrintDocument1.PrintPage
+        PlainPrinting.PrintYachtTypes(e)
+
+    End Sub
+
+
+
+    Private Sub mnuNonGraphicsSummary_Click(sender As Object, e As EventArgs) Handles mnuNonGraphicsSummary.Click
+        PrintPreviewDialog1.Document = PrintDocument2
+        PrintPreviewDialog1.ShowDialog()
+    End Sub
+
+    Private Sub PrintDocument2_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles PrintDocument2.PrintPage
+        PlainPrinting.PrintSummary(e, intTotalCharteredBoats, intMeanHoursChartered, decTotalRevenue)
+    End Sub
+
+    Private Sub mnuNonGraphicsReport_Click(sender As Object, e As EventArgs) Handles mnuNonGraphicsReport.Click
+        PrintPreviewDialog1.Document = PrintDocument1
+        PrintPreviewDialog1.ShowDialog()
+    End Sub
+
+
 End Class

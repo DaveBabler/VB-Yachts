@@ -26,8 +26,11 @@ Partial Class frmYachtEntryMain
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmYachtEntryMain))
         Me.mnuStripYachtEntry = New System.Windows.Forms.MenuStrip()
         Me.mnuFile = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPrint = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrintYachtTypes = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrintSummary = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuNonGraphicsReport = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuNonGraphicsSummary = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDisplayYachtCount = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuExit = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuEdit = New System.Windows.Forms.ToolStripMenuItem()
@@ -61,6 +64,9 @@ Partial Class frmYachtEntryMain
         Me.picYachtParty = New System.Windows.Forms.PictureBox()
         Me.ttYachtEntry = New System.Windows.Forms.ToolTip(Me.components)
         Me.PrintForm1 = New Microsoft.VisualBasic.PowerPacks.Printing.PrintForm(Me.components)
+        Me.PrintDocument1 = New System.Drawing.Printing.PrintDocument()
+        Me.PrintPreviewDialog1 = New System.Windows.Forms.PrintPreviewDialog()
+        Me.PrintDocument2 = New System.Drawing.Printing.PrintDocument()
         Me.mnuStripYachtEntry.SuspendLayout()
         Me.grpParty.SuspendLayout()
         Me.grpYachts.SuspendLayout()
@@ -79,25 +85,44 @@ Partial Class frmYachtEntryMain
         '
         'mnuFile
         '
-        Me.mnuFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrintYachtTypes, Me.mnuPrintSummary, Me.mnuDisplayYachtCount, Me.mnuExit})
+        Me.mnuFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrint, Me.mnuDisplayYachtCount, Me.mnuExit})
         Me.mnuFile.ForeColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(72, Byte), Integer))
         Me.mnuFile.Name = "mnuFile"
         Me.mnuFile.Size = New System.Drawing.Size(42, 23)
         Me.mnuFile.Text = "&File"
         '
+        'mnuPrint
+        '
+        Me.mnuPrint.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrintYachtTypes, Me.mnuPrintSummary, Me.mnuNonGraphicsReport, Me.mnuNonGraphicsSummary})
+        Me.mnuPrint.Name = "mnuPrint"
+        Me.mnuPrint.Size = New System.Drawing.Size(204, 24)
+        Me.mnuPrint.Text = "&Print"
+        '
         'mnuPrintYachtTypes
         '
-        Me.mnuPrintYachtTypes.Font = New System.Drawing.Font("Tw Cen MT", 11.0!)
         Me.mnuPrintYachtTypes.Name = "mnuPrintYachtTypes"
-        Me.mnuPrintYachtTypes.Size = New System.Drawing.Size(204, 24)
+        Me.mnuPrintYachtTypes.Size = New System.Drawing.Size(258, 24)
         Me.mnuPrintYachtTypes.Text = "Print &Yacht Types"
         '
         'mnuPrintSummary
         '
         Me.mnuPrintSummary.Enabled = False
         Me.mnuPrintSummary.Name = "mnuPrintSummary"
-        Me.mnuPrintSummary.Size = New System.Drawing.Size(204, 24)
+        Me.mnuPrintSummary.Size = New System.Drawing.Size(258, 24)
         Me.mnuPrintSummary.Text = "Print &Summary"
+        '
+        'mnuNonGraphicsReport
+        '
+        Me.mnuNonGraphicsReport.Name = "mnuNonGraphicsReport"
+        Me.mnuNonGraphicsReport.Size = New System.Drawing.Size(258, 24)
+        Me.mnuNonGraphicsReport.Text = "Print &Non Graphics Report"
+        '
+        'mnuNonGraphicsSummary
+        '
+        Me.mnuNonGraphicsSummary.Enabled = False
+        Me.mnuNonGraphicsSummary.Name = "mnuNonGraphicsSummary"
+        Me.mnuNonGraphicsSummary.Size = New System.Drawing.Size(258, 24)
+        Me.mnuNonGraphicsSummary.Text = "&Print Non Graphics Summary"
         '
         'mnuDisplayYachtCount
         '
@@ -441,6 +466,24 @@ Partial Class frmYachtEntryMain
         Me.PrintForm1.PrinterSettings = CType(resources.GetObject("PrintForm1.PrinterSettings"), System.Drawing.Printing.PrinterSettings)
         Me.PrintForm1.PrintFileName = Nothing
         '
+        'PrintDocument1
+        '
+        Me.PrintDocument1.DocumentName = "YachtsReport"
+        '
+        'PrintPreviewDialog1
+        '
+        Me.PrintPreviewDialog1.AutoScrollMargin = New System.Drawing.Size(0, 0)
+        Me.PrintPreviewDialog1.AutoScrollMinSize = New System.Drawing.Size(0, 0)
+        Me.PrintPreviewDialog1.ClientSize = New System.Drawing.Size(400, 300)
+        Me.PrintPreviewDialog1.Enabled = True
+        Me.PrintPreviewDialog1.Icon = CType(resources.GetObject("PrintPreviewDialog1.Icon"), System.Drawing.Icon)
+        Me.PrintPreviewDialog1.Name = "PrintPreviewDialog1"
+        Me.PrintPreviewDialog1.Visible = False
+        '
+        'PrintDocument2
+        '
+        Me.PrintDocument2.DocumentName = "YachtSummary"
+        '
         'frmYachtEntryMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -472,8 +515,6 @@ Partial Class frmYachtEntryMain
 
     Friend WithEvents mnuStripYachtEntry As MenuStrip
     Friend WithEvents mnuFile As ToolStripMenuItem
-    Friend WithEvents mnuPrintYachtTypes As ToolStripMenuItem
-    Friend WithEvents mnuPrintSummary As ToolStripMenuItem
     Friend WithEvents mnuDisplayYachtCount As ToolStripMenuItem
     Friend WithEvents mnuExit As ToolStripMenuItem
     Friend WithEvents mnuEdit As ToolStripMenuItem
@@ -507,4 +548,12 @@ Partial Class frmYachtEntryMain
     Friend WithEvents lblComments As Label
     Friend WithEvents ReportsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ViewStoredDataToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents mnuPrint As ToolStripMenuItem
+    Friend WithEvents mnuPrintYachtTypes As ToolStripMenuItem
+    Friend WithEvents mnuPrintSummary As ToolStripMenuItem
+    Friend WithEvents mnuNonGraphicsReport As ToolStripMenuItem
+    Friend WithEvents PrintDocument1 As Printing.PrintDocument
+    Friend WithEvents PrintPreviewDialog1 As PrintPreviewDialog
+    Friend WithEvents mnuNonGraphicsSummary As ToolStripMenuItem
+    Friend WithEvents PrintDocument2 As Printing.PrintDocument
 End Class
