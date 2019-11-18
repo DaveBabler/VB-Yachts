@@ -141,6 +141,12 @@
     <Compile Include="reportYachts.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="StoredDataInFile.Designer.vb">
+      <DependentUpon>StoredDataInFile.vb</DependentUpon>
+    </Compile>
+    <Compile Include="StoredDataInFile.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="yachtsSplash.Designer.vb">
       <DependentUpon>yachtsSplash.vb</DependentUpon>
     </Compile>
@@ -169,6 +175,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="reportYachts.resx">
       <DependentUpon>reportYachts.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StoredDataInFile.resx">
+      <DependentUpon>StoredDataInFile.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="yachtsSplash.resx">
       <DependentUpon>yachtsSplash.vb</DependentUpon>

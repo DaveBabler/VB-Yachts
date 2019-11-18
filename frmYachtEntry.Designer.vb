@@ -60,6 +60,8 @@ Partial Class frmYachtEntryMain
         Me.ttYachtEntry = New System.Windows.Forms.ToolTip(Me.components)
         Me.PrintForm1 = New Microsoft.VisualBasic.PowerPacks.Printing.PrintForm(Me.components)
         Me.btnTester = New System.Windows.Forms.Button()
+        Me.ReportsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ViewStoredDataToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuStripYachtEntry.SuspendLayout()
         Me.grpParty.SuspendLayout()
         Me.grpYachts.SuspendLayout()
@@ -69,7 +71,7 @@ Partial Class frmYachtEntryMain
         'mnuStripYachtEntry
         '
         Me.mnuStripYachtEntry.Font = New System.Drawing.Font("Tw Cen MT", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.mnuStripYachtEntry.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFile, Me.mnuEdit, Me.mnuHelp})
+        Me.mnuStripYachtEntry.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFile, Me.mnuEdit, Me.ReportsToolStripMenuItem, Me.mnuHelp})
         Me.mnuStripYachtEntry.Location = New System.Drawing.Point(0, 0)
         Me.mnuStripYachtEntry.Name = "mnuStripYachtEntry"
         Me.mnuStripYachtEntry.Size = New System.Drawing.Size(741, 27)
@@ -435,6 +437,20 @@ Partial Class frmYachtEntryMain
         Me.btnTester.Text = "TestList"
         Me.btnTester.UseVisualStyleBackColor = True
         '
+        'ReportsToolStripMenuItem
+        '
+        Me.ReportsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ViewStoredDataToolStripMenuItem})
+        Me.ReportsToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(72, Byte), Integer))
+        Me.ReportsToolStripMenuItem.Name = "ReportsToolStripMenuItem"
+        Me.ReportsToolStripMenuItem.Size = New System.Drawing.Size(68, 23)
+        Me.ReportsToolStripMenuItem.Text = "&Reports"
+        '
+        'ViewStoredDataToolStripMenuItem
+        '
+        Me.ViewStoredDataToolStripMenuItem.Name = "ViewStoredDataToolStripMenuItem"
+        Me.ViewStoredDataToolStripMenuItem.Size = New System.Drawing.Size(192, 24)
+        Me.ViewStoredDataToolStripMenuItem.Text = "&View Stored Data"
+        '
         'frmYachtEntryMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -501,4 +517,6 @@ Partial Class frmYachtEntryMain
     Friend WithEvents txtComments As TextBox
     Friend WithEvents lblComments As Label
     Friend WithEvents btnTester As Button
+    Friend WithEvents ReportsToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ViewStoredDataToolStripMenuItem As ToolStripMenuItem
 End Class
