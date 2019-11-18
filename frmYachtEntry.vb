@@ -391,7 +391,7 @@ Public Class frmYachtEntryMain
 
         Next
 
-        ReportBuilding.BreakListIntoSubLists(ReportBuilding.lstTEST, ReportBuilding.strLineDelimiter)
+        ReportBuilding.BreakListIntoSubLists(ReportBuilding.lstRecordsFromFile, ReportBuilding.lstTEST, ReportBuilding.strLineDelimiter)
     End Sub
 
 

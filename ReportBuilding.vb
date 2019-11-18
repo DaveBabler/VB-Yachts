@@ -3,7 +3,7 @@
     Public Shared strLineDelimiter As String = "----------" 'for determining when a record ends or begins
     Public Shared strOfReportKeys() As String = {"dtCurrentDate", "strComments", "strName", "strYachtType", "strLengthOfYacht", "strCostOfRental"}
     Public Shared dicOutputReport As New Dictionary(Of String, String)
-    Public Shared lstRecordsFromFile As New List(Of List(Of String)) 'records read from the file will go here
+    Public Shared lstRecordsFromFile As New List(Of String()) 'records read from the file will go here
     Public Shared lstRecordUnit As New List(Of String)
     Public Shared lstTEST As New List(Of String)
 
@@ -214,15 +214,41 @@
     End Function
 
 
-    Public Shared Sub BreakListIntoSubLists(ByRef lstStarter As List(Of String), strDelim As String)
-        Dim lstHolder As New List(Of String)
+    Public Shared Sub BreakListIntoSubLists(ByRef lstContainer As List(Of String()), ByRef lstStarter As List(Of String), strDelim As String)
+        Dim lstHolder(5) As String
+        Dim x As Integer = 0 'a pseudo loop control variable
+        Dim intListControl As Integer = 0
 
         For i = 0 To lstStarter.Count - 1
+
             Console.WriteLine(lstStarter.Item(i))
-            If String.Compare(lstStarter.Item(i).ToString(), strDelim) = 0 Then
-                Console.WriteLine("We have match!")
+            If String.Compare(lstStarter.Item(i).ToString(), strDelim) <> 0 Then
+                lstHolder(x) = ""
+
+                lstHolder(x) = (lstStarter.Item(i).ToString())
+                x += 1
+
+
+            Else
+                lstContainer.Insert(intListControl, lstHolder)
+                intListControl += 1
+                x = 0
+                ReDim lstHolder(5)
+
+
             End If
+
         Next i
+
+        'For i = 0 To lstContainer.Count - 1
+
+        '    For q = 0 To lstContainer(i).Count - 1
+        '        Console.WriteLine("i is {0}, q is {1}, and lstContainer(i)(q) is {2}", i.ToString(), q.ToString(), lstContainer(i)(q).ToString())
+        '    Next q
+        'Next i
+
+
+
     End Sub
 
 
