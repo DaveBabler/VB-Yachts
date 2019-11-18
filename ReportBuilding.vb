@@ -5,7 +5,7 @@
     Public Shared dicOutputReport As New Dictionary(Of String, String)
     Public Shared lstRecordsFromFile As New List(Of String()) 'records read from the file will go here
     Public Shared lstRecordUnit As New List(Of String)
-    Public Shared lstTEST As New List(Of String)
+    ' Public Shared lstTEST As New List(Of String)
 
     Public Shared Sub StrOfStrDicPopulateKeys(ByRef dicStrStr As Dictionary(Of String, String), strArrayToUse As String(), boolTodaysDate As Boolean)
         'First Clears a dictionary, then
@@ -152,16 +152,14 @@
 
     End Sub
 
-    Public Shared Sub TestRead(ByVal strFileToRead As String, ByRef lstOfData As List(Of String), ByVal strDelimiter As String)
+    Public Shared Sub ReadTextFileIntoObject(ByVal strFileToRead As String, ByRef lstOfData As List(Of String), ByVal strDelimiter As String)
         'Note apparently you cannot directly read a text file into a Listof object!  ATTENTION LISA THOMAS  IF THIS IS INACCURATE PLEASE EMAIL ME!!!
         ' I was forced to do it as an array first!
         Dim objReader As IO.StreamReader
 
         Dim strFromFile As String
         Dim lcv As Integer = 0
-        If String.Compare(strDelimiter, "----------") = 0 Then
-            MsgBox("FUCKING WHY DO YOU HATE ME!!!!", MsgBoxStyle.OkOnly)
-        End If
+
 
         If IO.File.Exists(strFileToRead) = True Then
             Dim strTextFileLength As String = IO.File.ReadAllText(strFileToRead)

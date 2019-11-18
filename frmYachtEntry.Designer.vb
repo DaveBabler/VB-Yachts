@@ -35,6 +35,8 @@ Partial Class frmYachtEntryMain
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuAddYachtType = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuRemoveYachtType = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ReportsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ViewStoredDataToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHelp = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuAbout = New System.Windows.Forms.ToolStripMenuItem()
         Me.grpParty = New System.Windows.Forms.GroupBox()
@@ -59,9 +61,6 @@ Partial Class frmYachtEntryMain
         Me.picYachtParty = New System.Windows.Forms.PictureBox()
         Me.ttYachtEntry = New System.Windows.Forms.ToolTip(Me.components)
         Me.PrintForm1 = New Microsoft.VisualBasic.PowerPacks.Printing.PrintForm(Me.components)
-        Me.btnTester = New System.Windows.Forms.Button()
-        Me.ReportsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ViewStoredDataToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuStripYachtEntry.SuspendLayout()
         Me.grpParty.SuspendLayout()
         Me.grpYachts.SuspendLayout()
@@ -147,6 +146,20 @@ Partial Class frmYachtEntryMain
         Me.mnuRemoveYachtType.Size = New System.Drawing.Size(191, 22)
         Me.mnuRemoveYachtType.Text = "&Remove Yact Type"
         '
+        'ReportsToolStripMenuItem
+        '
+        Me.ReportsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ViewStoredDataToolStripMenuItem})
+        Me.ReportsToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(72, Byte), Integer))
+        Me.ReportsToolStripMenuItem.Name = "ReportsToolStripMenuItem"
+        Me.ReportsToolStripMenuItem.Size = New System.Drawing.Size(68, 23)
+        Me.ReportsToolStripMenuItem.Text = "&Reports"
+        '
+        'ViewStoredDataToolStripMenuItem
+        '
+        Me.ViewStoredDataToolStripMenuItem.Name = "ViewStoredDataToolStripMenuItem"
+        Me.ViewStoredDataToolStripMenuItem.Size = New System.Drawing.Size(192, 24)
+        Me.ViewStoredDataToolStripMenuItem.Text = "&View Stored Data"
+        '
         'mnuHelp
         '
         Me.mnuHelp.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuAbout})
@@ -159,7 +172,7 @@ Partial Class frmYachtEntryMain
         '
         Me.mnuAbout.Font = New System.Drawing.Font("Tw Cen MT", 11.0!)
         Me.mnuAbout.Name = "mnuAbout"
-        Me.mnuAbout.Size = New System.Drawing.Size(180, 22)
+        Me.mnuAbout.Size = New System.Drawing.Size(113, 22)
         Me.mnuAbout.Text = "&About"
         '
         'grpParty
@@ -428,36 +441,12 @@ Partial Class frmYachtEntryMain
         Me.PrintForm1.PrinterSettings = CType(resources.GetObject("PrintForm1.PrinterSettings"), System.Drawing.Printing.PrinterSettings)
         Me.PrintForm1.PrintFileName = Nothing
         '
-        'btnTester
-        '
-        Me.btnTester.Location = New System.Drawing.Point(425, 44)
-        Me.btnTester.Name = "btnTester"
-        Me.btnTester.Size = New System.Drawing.Size(75, 23)
-        Me.btnTester.TabIndex = 9
-        Me.btnTester.Text = "TestList"
-        Me.btnTester.UseVisualStyleBackColor = True
-        '
-        'ReportsToolStripMenuItem
-        '
-        Me.ReportsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ViewStoredDataToolStripMenuItem})
-        Me.ReportsToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(72, Byte), Integer))
-        Me.ReportsToolStripMenuItem.Name = "ReportsToolStripMenuItem"
-        Me.ReportsToolStripMenuItem.Size = New System.Drawing.Size(68, 23)
-        Me.ReportsToolStripMenuItem.Text = "&Reports"
-        '
-        'ViewStoredDataToolStripMenuItem
-        '
-        Me.ViewStoredDataToolStripMenuItem.Name = "ViewStoredDataToolStripMenuItem"
-        Me.ViewStoredDataToolStripMenuItem.Size = New System.Drawing.Size(192, 24)
-        Me.ViewStoredDataToolStripMenuItem.Text = "&View Stored Data"
-        '
         'frmYachtEntryMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.Black
         Me.ClientSize = New System.Drawing.Size(741, 590)
-        Me.Controls.Add(Me.btnTester)
         Me.Controls.Add(Me.picYachtParty)
         Me.Controls.Add(Me.btnExit)
         Me.Controls.Add(Me.btnClear)
@@ -516,7 +505,6 @@ Partial Class frmYachtEntryMain
     Friend WithEvents lblDate As Label
     Friend WithEvents txtComments As TextBox
     Friend WithEvents lblComments As Label
-    Friend WithEvents btnTester As Button
     Friend WithEvents ReportsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ViewStoredDataToolStripMenuItem As ToolStripMenuItem
 End Class

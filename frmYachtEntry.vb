@@ -379,20 +379,15 @@ Public Class frmYachtEntryMain
 
     End Sub
 
-    Private Sub btnTester_Click(sender As Object, e As EventArgs) Handles btnTester.Click
-        ReportBuilding.TestRead(yachtsSplash._strSaveFileOut, ReportBuilding.lstTEST, ReportBuilding.strLineDelimiter)
 
-        For Each item In ReportBuilding.lstTEST
 
-            Console.WriteLine("Item? {0}", item.ToString())
-            If String.Compare(item.ToString(), ReportBuilding.strLineDelimiter) = 0 Then
-                Console.WriteLine("We have match!")
-            End If
 
-        Next
+    Private Sub ViewStoredDataToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ViewStoredDataToolStripMenuItem.Click
 
-        ReportBuilding.BreakListIntoSubLists(ReportBuilding.lstRecordsFromFile, ReportBuilding.lstTEST, ReportBuilding.strLineDelimiter)
+        ReportBuilding.ReadTextFileIntoObject(yachtsSplash._strSaveFileOut, ReportBuilding.lstRecordUnit, ReportBuilding.strLineDelimiter)
+
+
+        ReportBuilding.BreakListIntoSubLists(ReportBuilding.lstRecordsFromFile, ReportBuilding.lstRecordUnit, ReportBuilding.strLineDelimiter)
+        StoredDataInFile.Show()
     End Sub
-
-
 End Class
